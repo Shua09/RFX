@@ -1,0 +1,43 @@
+# This file contains the dependencies for your project.
+# It is used to install the required packages using pip.
+# Example: pip install -r requirements.txt
+
+# Web Framework
+Flask>=2.3.0
+Flask-Session>=0.5.0
+Flask-CORS>=4.0.0
+
+# Database
+SQLAlchemy>=2.0.0
+pyodbc>=4.0.39
+
+# Machine Learning & AI
+sentence-transformers>=2.2.0
+langchain-ibm>=0.1.0
+numpy>=1.24.0
+scikit-learn>=1.3.0
+
+# Document Processing
+PyPDF2>=3.0.1
+python-docx>=0.8.11
+
+# Configuration & Environment
+python-dotenv>=1.0.0
+
+# Data Processing
+pandas>=2.0.0
+
+# Additional Utilities
+requests>=2.31.0
+matplotlib>=3.7.0
+seaborn>=0.12.0
+
+# Type Annotations
+pydantic>=2.0.0
+
+# Additional dependencies that may be needed
+# Uncomment if required:
+# gunicorn>=21.0.0  # For production deployment
+# pytest>=7.4.0    # For testing
+# black>=23.0.0     # For code formatting
+# flake8>=6.0.0     # For linting

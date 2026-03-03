@@ -1,0 +1,264 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "Procurement Assistant API",
+        "version": "1.0.0",
+        "description": "Conversational AI assistant for procurement and RFQ management"
+    },
+    "servers": [
+        {
+            "url": "https://delca.noahapplication.com/RFX",
+            "description": "Production server"
+        }
+    ],
+    "paths": {
+        "/api/procurement/chat": {
+            "post": {
+                "summary": "Process conversational procurement messages",
+                "description": "Single endpoint that handles all procurement conversations",
+                "operationId": "processChatMessage",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "required": ["message"],
+                                "properties": {
+                                    "message": {
+                                        "type": "string",
+                                        "description": "Natural language message from the user"
+                                    },
+                                    "session_id": {
+                                        "type": "string",
+                                        "description": "Session ID for continuing conversations. If not provided, a new session will be created."
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Message processed successfully",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "status": {
+                                            "type": "string",
+                                            "enum": ["success", "error"],
+                                            "description": "Operation status"
+                                        },
+                                        "session_id": {
+                                            "type": "string",
+                                            "description": "Session ID to use for all subsequent messages in this conversation. Store this value and send it with every follow-up request."
+                                        },
+                                        "message": {
+                                            "type": "string",
+                                            "description": "Natural language response to display to the user"
+                                        },
+                                        "state": {
+                                            "type": "string",
+                                            "enum": ["initial", "awaiting_confirmation", "modifying", "confirmed"],
+                                            "description": "Current conversation state"
+                                        },
+                                        "json_data": {
+                                            "type": "object",
+                                            "nullable": true,
+                                            "description": "Structured procurement data",
+                                            "properties": {
+                                                "items": {
+                                                    "type": "array",
+                                                    "items": {
+                                                        "type": "object",
+                                                        "properties": {
+                                                            "brand": {
+                                                                "type": "string"
+                                                            },
+                                                            "category": {
+                                                                "type": "string"
+                                                            },
+                                                            "quantity": {
+                                                                "type": "integer"
+                                                            },
+                                                            "unit": {
+                                                                "type": "string"
+                                                            }
+                                                        }
+                                                    }
+                                                },
+                                                "budget_total": {
+                                                    "type": "number",
+                                                    "nullable": true
+                                                },
+                                                "currency": {
+                                                    "type": "string",
+                                                    "nullable": true
+                                                },
+                                                "priority": {
+                                                    "type": "string",
+                                                    "nullable": true
+                                                },
+                                                "delivery_location": {
+                                                    "type": "string",
+                                                    "nullable": true
+                                                },
+                                                "delivery_date": {
+                                                    "type": "string",
+                                                    "nullable": true
+                                                },
+                                                "required_date": {
+                                                    "type": "string",
+                                                    "nullable": true
+                                                },
+                                                "delivery_deadline": {
+                                                    "type": "string",
+                                                    "nullable": true
+                                                },
+                                                "rfq_id": {
+                                                    "type": "string",
+                                                    "nullable": true
+                                                }
+                                            }
+                                        },
+                                        "display_summary": {
+                                            "type": "object",
+                                            "nullable": true,
+                                            "description": "Formatted summary for display",
+                                            "properties": {
+                                                "currency": {
+                                                    "type": "string",
+                                                    "nullable": true
+                                                },
+                                                "has_delivery": {
+                                                    "type": "boolean"
+                                                },
+                                                "has_payment": {
+                                                    "type": "boolean"
+                                                },
+                                                "item_count": {
+                                                    "type": "integer"
+                                                },
+                                                "summary": {
+                                                    "type": "string"
+                                                },
+                                                "total_items": {
+                                                    "type": "integer"
+                                                },
+                                                "total_value": {
+                                                    "type": "number",
+                                                    "nullable": true
+                                                }
+                                            }
+                                        },
+                                        "changes": {
+                                            "type": "array",
+                                            "description": "List of changes made during modification",
+                                            "items": {
+                                                "type": "string"
+                                            }
+                                        },
+                                        "rfq_id": {
+                                            "type": "string",
+                                            "description": "RFQ ID when request is confirmed"
+                                        },
+                                        "next_step": {
+                                            "type": "string",
+                                            "description": "Next step indicator",
+                                            "enum": ["generate_rfq"]
+                                        }
+                                    },
+                                    "required": ["status", "session_id", "message"]
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Bad request - missing message field",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "status": {
+                                            "type": "string",
+                                            "enum": ["error"]
+                                        },
+                                        "session_id": {
+                                            "type": "string",
+                                            "nullable": true
+                                        },
+                                        "message": {
+                                            "type": "string"
+                                        }
+                                    },
+                                    "required": ["status", "message"]
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized - Bearer token is missing or invalid",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "status": {
+                                            "type": "string",
+                                            "enum": ["error"]
+                                        },
+                                        "message": {
+                                            "type": "string"
+                                        }
+                                    },
+                                    "required": ["status", "message"]
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Internal server error",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "status": {
+                                            "type": "string",
+                                            "enum": ["error"]
+                                        },
+                                        "message": {
+                                            "type": "string"
+                                        }
+                                    },
+                                    "required": ["status", "message"]
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ]
+            }
+        }
+    },
+    "security": [
+        {
+            "BearerAuth": []
+        }
+    ],
+    "components": {
+        "securitySchemes": {
+            "BearerAuth": {
+                "type": "http",
+                "scheme": "bearer"
+            }
+        }
+    }
+}
