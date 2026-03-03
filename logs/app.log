@@ -1,0 +1,1801 @@
+2026-02-26 15:08:45,624 - werkzeug - INFO - 127.0.0.1 - - [26/Feb/2026 15:08:45] "GET /RFQ/admin/bid/17 HTTP/1.1" 200 -
+2026-02-26 15:08:46,652 - werkzeug - INFO - 127.0.0.1 - - [26/Feb/2026 15:08:46] "GET /RFQ/admin/api/bid/17 HTTP/1.1" 200 -
+2026-02-26 15:08:47,044 - werkzeug - INFO - 127.0.0.1 - - [26/Feb/2026 15:08:47] "GET /RFQ/admin/api/bid/17/evaluation-report HTTP/1.1" 200 -
+2026-02-26 15:08:56,533 - ibm_watson_machine_learning.client - INFO - Client successfully initialized
+2026-02-26 15:09:04,683 - ibm_watson_machine_learning.wml_resource - INFO - Successfully finished generate for url: 'https://eu-gb.ml.cloud.ibm.com/ml/v1/text/generation?version=2025-06-25'
+2026-02-26 15:09:04,684 - src.common.llm_service - INFO - LLM Output - Model: ibm/granite-3-8b-instruct, Response: 
+
+```json
+{
+  "1. Price competitiveness analysis": {
+    "price_score": 50.0,
+    "value_for_money": "Low",
+    "analysis": "The supplier's total quoted price of PHP 20.00 is significantly lower than the RFQ budget of PHP 500,000.00. However, the price score of 50.0/100 indicates that there is room for improvement in terms of competitiveness. The low value for money suggests that the supplier may not offer the best quality or service at this price point."
+  },
+  "2. Delivery timeline assessment": {
+    "delivery_readiness": 66.67,
+    "delivery_time": "4 days",
+    "analysis": "The supplier's delivery readiness score is 66.67/100, indicating a moderate ability to meet delivery deadlines. The quoted delivery time for the offered product is 4 days."
+  },
+  "3. Quantity fulfillment capability": {
+    "quantity_fulfillment": 6.67,
+    "analysis": "The supplier's quantity fulfillment capability score is 6.67/100, suggesting a very low ability to fulfill the required quantities. The supplier only offered 1 unit of the requested 750 units for Desiccated Coconut."
+  },
+  "4. Potential for negotiation/discounts": {
+    "discount_readiness": 30.0,
+    "analysis": "The supplier's discount readiness score is 30.0/100, indicating a low potential for negotiation or discounts. The supplier did not offer any discounts or additional value-added services."
+  },
+  "5. Overall risk assessment": {
+    "risk_score": 40.0,
+    "analysis": "The overall risk assessment score is 40.0/100, reflecting a moderate risk level. The low quantity fulfillment capability and low potential for negotiation/discounts contribute to the moderate risk assessment."
+  },
+  "6. Top 3 strengths": [
+    "Low total quoted price",
+    "Moderate delivery readiness",
+    "No major issues with offered products"
+  ],
+  "7. Top 3 weaknesses": [
+    "Very low quantity fulfillment capability",
+    "Low potential for negotiation/discounts",
+    "Low value for money"
+  ],
+  "8. Negotiation tips": [
+    "Negotiate for a higher quantity fulfillment",
+    "Request for additional value-added services or discounts",
+    "Clarify the supplier's ability to meet the required delivery deadlines"
+  ]
+}
+```
+2026-02-26 15:09:04,685 - src.features.admin_portal.services.ai_bid_evaluation_service - INFO - Successfully generated AI evaluation for Test Coconut Suppliers Inc
+2026-02-26 15:09:05,183 - werkzeug - INFO - 127.0.0.1 - - [26/Feb/2026 15:09:05] "POST /RFQ/admin/api/bid/17/evaluate HTTP/1.1" 200 -
+2026-02-26 15:09:05,596 - werkzeug - INFO - 127.0.0.1 - - [26/Feb/2026 15:09:05] "GET /RFQ/admin/api/bid/17 HTTP/1.1" 200 -
+2026-02-26 15:09:05,994 - werkzeug - INFO - 127.0.0.1 - - [26/Feb/2026 15:09:05] "GET /RFQ/admin/api/bid/17/evaluation-report HTTP/1.1" 200 -
+2026-02-26 15:11:11,338 - werkzeug - INFO -  * Detected change in 'D:\\Shared Files\\RFQ\\src\\features\\admin_portal\\services\\ai_bid_evaluation_service.py', reloading
+2026-02-26 15:11:11,872 - werkzeug - INFO -  * Restarting with stat
+2026-02-26 15:11:15,518 - root - INFO - Logging Configuration Initialized
+2026-02-26 15:11:50,698 - root - INFO - Logging Configuration Initialized
+2026-02-26 15:11:50,743 - src.core.blueprint_registry - INFO - All blueprints are registered successfully
+2026-02-26 15:11:50,745 - src.common.startup - INFO - Starting the Application Startup Validation...
+2026-02-26 15:11:50,745 - src.common.startup - INFO - Base Route: /RFQ
+2026-02-26 15:11:50,745 - src.common.startup - INFO - Unicode support: Enabled
+2026-02-26 15:11:51,811 - src.common.db - INFO - Database Connection Successful
+2026-02-26 15:11:51,812 - src.common.startup - INFO - [PASS] Database Connection
+2026-02-26 15:11:51,830 - werkzeug - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5000
+ * Running on http://192.168.3.85:5000
+2026-02-26 15:11:51,831 - werkzeug - INFO - [33mPress CTRL+C to quit[0m
+2026-02-26 15:11:51,832 - werkzeug - INFO -  * Restarting with stat
+2026-02-26 15:11:55,363 - root - INFO - Logging Configuration Initialized
+2026-02-26 15:11:55,414 - src.core.blueprint_registry - INFO - All blueprints are registered successfully
+2026-02-26 15:11:55,414 - src.common.startup - INFO - Starting the Application Startup Validation...
+2026-02-26 15:11:55,415 - src.common.startup - INFO - Base Route: /RFQ
+2026-02-26 15:11:55,415 - src.common.startup - INFO - Unicode support: Enabled
+2026-02-26 15:11:56,758 - src.common.db - INFO - Database Connection Successful
+2026-02-26 15:11:56,759 - src.common.startup - INFO - [PASS] Database Connection
+2026-02-26 15:11:56,785 - werkzeug - WARNING -  * Debugger is active!
+2026-02-26 15:11:56,795 - werkzeug - INFO -  * Debugger PIN: 122-096-730
+2026-02-26 15:12:05,250 - ibm_watson_machine_learning.client - INFO - Client successfully initialized
+2026-02-26 15:12:13,337 - ibm_watson_machine_learning.wml_resource - INFO - Successfully finished generate for url: 'https://eu-gb.ml.cloud.ibm.com/ml/v1/text/generation?version=2025-06-25'
+2026-02-26 15:12:13,339 - src.common.llm_service - INFO - LLM Output - Model: ibm/granite-3-8b-instruct, Response: 
+
+```json
+{
+  "price_analysis": {
+    "price_score": 50.0,
+    "value_for_money": "Low",
+    "price_competitiveness": "Low",
+    "price_competitiveness_analysis": "The quoted price of PHP 20.00 is significantly lower than the RFQ budget of PHP 500,000.00, indicating a low price competitiveness. However, the price score of 50.0/100 suggests that there is room for improvement in terms of offering a more competitive price."
+  },
+  "delivery_analysis": {
+    "delivery_readiness": 66.67,
+    "delivery_timeline_capability": "Moderate",
+    "delivery_timeline_analysis": "The supplier's delivery readiness score of 66.67/100 indicates a moderate capability to meet delivery deadlines. The quoted delivery time for the offered product is 4 days, which is relatively short and may pose challenges in meeting the required date if not properly managed."
+  },
+  "quantity_analysis": {
+    "quantity_fulfillment": 6.67,
+    "quantity_fulfillment_capability": "Low",
+    "quantity_fulfillment_analysis": "The supplier's quantity fulfillment score of 6.67/100 indicates a low capability to fulfill the required quantities. The supplier only offered 1 unit of the requested 750 units, which is a significant discrepancy."
+  },
+  "discount_potential": {
+    "discount_readiness": 30.0,
+    "discount_opportunities": "Limited",
+    "discount_analysis": "The supplier's discount readiness score of 30.0/100 suggests limited potential for negotiation or discounts. The quoted price is already significantly lower than the RFQ budget, leaving little room for further discounts."
+  },
+  "risk_assessment": {
+    "overall_risk": "High",
+    "risk_factors": ["Low price competitiveness", "Low quantity fulfillment capability", "Limited discount potential"],
+    "risk_mitigation_strategies": "Consider engaging in discussions with the supplier to address the low quantity fulfillment and limited discount potential. Explore alternative suppliers to mitigate the high overall risk."
+  },
+  "strengths": ["Low quoted price"],
+  "weaknesses": ["Low price competitiveness", "Low quantity fulfillment capability", "Limited discount potential", "Moderate delivery timeline capability"],
+  "negotiation_tips": ["Discuss the possibility of increasing the quantity offered", "Explore the potential for additional discounts or value-added services"]
+}
+```
+2026-02-26 15:12:13,339 - src.features.admin_portal.services.ai_bid_evaluation_service - INFO - Successfully generated AI evaluation for Test Coconut Suppliers Inc
+2026-02-26 15:12:13,817 - werkzeug - INFO - 127.0.0.1 - - [26/Feb/2026 15:12:13] "POST /RFQ/admin/api/bid/17/evaluate HTTP/1.1" 200 -
+2026-02-26 15:12:14,218 - werkzeug - INFO - 127.0.0.1 - - [26/Feb/2026 15:12:14] "GET /RFQ/admin/api/bid/17 HTTP/1.1" 200 -
+2026-02-26 15:12:14,624 - werkzeug - INFO - 127.0.0.1 - - [26/Feb/2026 15:12:14] "GET /RFQ/admin/api/bid/17/evaluation-report HTTP/1.1" 200 -
+2026-02-26 15:15:42,854 - werkzeug - INFO -  * Detected change in 'D:\\Shared Files\\RFQ\\src\\features\\admin_portal\\services\\ai_bid_evaluation_service.py', reloading
+2026-02-26 15:15:43,444 - werkzeug - INFO -  * Restarting with stat
+2026-02-26 15:15:47,304 - root - INFO - Logging Configuration Initialized
+2026-02-26 15:19:06,456 - root - INFO - Logging Configuration Initialized
+2026-02-26 15:19:06,506 - src.core.blueprint_registry - INFO - All blueprints are registered successfully
+2026-02-26 15:19:06,507 - src.common.startup - INFO - Starting the Application Startup Validation...
+2026-02-26 15:19:06,507 - src.common.startup - INFO - Base Route: /RFQ
+2026-02-26 15:19:06,507 - src.common.startup - INFO - Unicode support: Enabled
+2026-02-26 15:19:07,534 - src.common.db - INFO - Database Connection Successful
+2026-02-26 15:19:07,534 - src.common.startup - INFO - [PASS] Database Connection
+2026-02-26 15:19:07,551 - werkzeug - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5000
+ * Running on http://192.168.3.85:5000
+2026-02-26 15:19:07,552 - werkzeug - INFO - [33mPress CTRL+C to quit[0m
+2026-02-26 15:19:07,554 - werkzeug - INFO -  * Restarting with stat
+2026-02-26 15:19:11,562 - root - INFO - Logging Configuration Initialized
+2026-02-26 15:19:11,657 - src.core.blueprint_registry - INFO - All blueprints are registered successfully
+2026-02-26 15:19:11,663 - src.common.startup - INFO - Starting the Application Startup Validation...
+2026-02-26 15:19:11,664 - src.common.startup - INFO - Base Route: /RFQ
+2026-02-26 15:19:11,666 - src.common.startup - INFO - Unicode support: Enabled
+2026-02-26 15:19:12,849 - src.common.db - INFO - Database Connection Successful
+2026-02-26 15:19:12,850 - src.common.startup - INFO - [PASS] Database Connection
+2026-02-26 15:19:12,865 - werkzeug - WARNING -  * Debugger is active!
+2026-02-26 15:19:12,869 - werkzeug - INFO -  * Debugger PIN: 122-096-730
+2026-02-26 15:19:12,917 - werkzeug - INFO - 127.0.0.1 - - [26/Feb/2026 15:19:12] "GET /RFQ/admin/rfq/RFQ-20260225-0018 HTTP/1.1" 200 -
+2026-02-26 15:19:13,766 - werkzeug - INFO - 127.0.0.1 - - [26/Feb/2026 15:19:13] "GET /RFQ/admin/api/rfq/RFQ-20260225-0018 HTTP/1.1" 200 -
+2026-02-26 15:19:14,082 - werkzeug - INFO - 127.0.0.1 - - [26/Feb/2026 15:19:14] "GET /RFQ/admin/api/bid/17/evaluation-report HTTP/1.1" 200 -
+2026-02-26 15:19:27,753 - ibm_watson_machine_learning.client - INFO - Client successfully initialized
+2026-02-26 15:19:38,301 - ibm_watson_machine_learning.wml_resource - INFO - Successfully finished generate for url: 'https://eu-gb.ml.cloud.ibm.com/ml/v1/text/generation?version=2025-06-25'
+2026-02-26 15:19:38,302 - src.common.llm_service - INFO - LLM Output - Model: ibm/granite-3-8b-instruct, Response: 
+
+{
+  "price_analysis": {
+    "price_score": 50.0,
+    "value_for_money": "Low",
+    "price_competitiveness": "Low",
+    "price_competitiveness_analysis": "The quoted price of PHP 20.00 is significantly lower than the RFQ budget of PHP 500,000.00, indicating a low price score of 50.0/100. However, the value for money is low due to the limited scope of products offered."
+  },
+  "delivery_analysis": {
+    "delivery_readiness": 66.67,
+    "delivery_timeline_capability": "Moderate",
+    "delivery_timeline_analysis": "The supplier has a moderate delivery readiness score of 66.67/100. They have offered a delivery time of 4 days for the single product line, which is within the expected range."
+  },
+  "quantity_analysis": {
+    "quantity_fulfillment": 6.67,
+    "quantity_fulfillment_capability": "Low",
+    "quantity_fulfillment_analysis": "The supplier's quantity fulfillment capability is low, with a score of 6.67/100. They have only offered 1 unit of the requested 750 units for Desiccated Coconut, and no units for Coconut Oil or Coconut Seedlings."
+  },
+  "discount_potential": {
+    "discount_readiness": 30.0,
+    "discount_opportunities": "Limited",
+    "discount_analysis": "The supplier has a low discount readiness score of 30.0/100, indicating limited potential for negotiation or discounts."
+  },
+  "risk_assessment": {
+    "overall_risk": "High",
+    "risk_factors": ["Low quantity fulfillment", "Limited product offerings", "Low discount potential"],
+    "risk_mitigation_strategies": "Engage in detailed discussions with the supplier to understand their constraints and explore potential solutions. Consider sourcing from alternative suppliers to ensure quantity and product requirements are met."
+  },
+  "strengths": ["Low quoted price"],
+  "weaknesses": ["Low value for money", "Low quantity fulfillment", "Limited product offerings", "Low discount potential"],
+  "negotiation_tips": ["Focus on increasing the quantity of products offered", "Explore potential for additional discounts or value-added services"]
+}
+2026-02-26 15:19:38,303 - src.features.admin_portal.services.ai_bid_evaluation_service - INFO - Successfully generated AI evaluation for Test Coconut Suppliers Inc
+2026-02-26 15:19:38,677 - werkzeug - INFO - 127.0.0.1 - - [26/Feb/2026 15:19:38] "POST /RFQ/admin/api/bid/17/evaluate HTTP/1.1" 200 -
+2026-02-26 15:19:39,054 - werkzeug - INFO - 127.0.0.1 - - [26/Feb/2026 15:19:39] "GET /RFQ/admin/api/rfq/RFQ-20260225-0018 HTTP/1.1" 200 -
+2026-02-26 15:19:39,642 - werkzeug - INFO - 127.0.0.1 - - [26/Feb/2026 15:19:39] "GET /RFQ/admin/api/bid/17/evaluation-report HTTP/1.1" 200 -
+2026-02-26 15:19:43,242 - werkzeug - INFO - 127.0.0.1 - - [26/Feb/2026 15:19:43] "GET /RFQ/admin/bid/17 HTTP/1.1" 200 -
+2026-02-26 15:19:43,583 - werkzeug - INFO - 127.0.0.1 - - [26/Feb/2026 15:19:43] "GET /RFQ/admin/api/bid/17 HTTP/1.1" 200 -
+2026-02-26 15:19:43,880 - werkzeug - INFO - 127.0.0.1 - - [26/Feb/2026 15:19:43] "GET /RFQ/admin/api/bid/17/evaluation-report HTTP/1.1" 200 -
+2026-02-26 15:21:16,268 - werkzeug - INFO - 127.0.0.1 - - [26/Feb/2026 15:21:16] "[33mGET /RFQ/admin/bids HTTP/1.1[0m" 404 -
+2026-02-26 15:21:23,635 - werkzeug - INFO - 127.0.0.1 - - [26/Feb/2026 15:21:23] "[33mGET /RFQ/admin/bids HTTP/1.1[0m" 404 -
+2026-02-26 15:22:11,830 - werkzeug - INFO -  * Detected change in 'D:\\Shared Files\\RFQ\\src\\features\\admin_portal\\routes\\admin_routes.py', reloading
+2026-02-26 15:22:12,318 - werkzeug - INFO -  * Restarting with stat
+2026-02-26 15:22:16,049 - root - INFO - Logging Configuration Initialized
+2026-02-26 15:22:16,129 - src.core.blueprint_registry - INFO - All blueprints are registered successfully
+2026-02-26 15:22:16,130 - src.common.startup - INFO - Starting the Application Startup Validation...
+2026-02-26 15:22:16,131 - src.common.startup - INFO - Base Route: /RFQ
+2026-02-26 15:22:16,132 - src.common.startup - INFO - Unicode support: Enabled
+2026-02-26 15:22:17,430 - src.common.db - INFO - Database Connection Successful
+2026-02-26 15:22:17,431 - src.common.startup - INFO - [PASS] Database Connection
+2026-02-26 15:22:17,447 - werkzeug - WARNING -  * Debugger is active!
+2026-02-26 15:22:17,456 - werkzeug - INFO -  * Debugger PIN: 122-096-730
+2026-02-26 15:22:17,496 - werkzeug - INFO - 127.0.0.1 - - [26/Feb/2026 15:22:17] "[35m[1mGET /RFQ/admin/bids HTTP/1.1[0m" 500 -
+2026-02-26 15:22:17,620 - werkzeug - INFO - 127.0.0.1 - - [26/Feb/2026 15:22:17] "GET /RFQ/admin/bids?__debugger__=yes&cmd=resource&f=style.css HTTP/1.1" 200 -
+2026-02-26 15:22:17,621 - werkzeug - INFO - 127.0.0.1 - - [26/Feb/2026 15:22:17] "GET /RFQ/admin/bids?__debugger__=yes&cmd=resource&f=debugger.js HTTP/1.1" 200 -
+2026-02-26 15:22:17,651 - werkzeug - INFO - 127.0.0.1 - - [26/Feb/2026 15:22:17] "GET /RFQ/admin/bids?__debugger__=yes&cmd=resource&f=console.png HTTP/1.1" 200 -
+2026-02-26 15:22:17,667 - werkzeug - INFO - 127.0.0.1 - - [26/Feb/2026 15:22:17] "GET /RFQ/admin/bids?__debugger__=yes&cmd=resource&f=console.png&s=VHbN2dQbcyaM8iDdYSIH HTTP/1.1" 200 -
+2026-02-26 15:22:27,578 - werkzeug - INFO -  * Detected change in 'D:\\Shared Files\\RFQ\\src\\features\\admin_portal\\routes\\admin_routes.py', reloading
+2026-02-26 15:22:28,154 - werkzeug - INFO -  * Restarting with stat
+2026-02-26 15:22:32,193 - root - INFO - Logging Configuration Initialized
+2026-02-26 15:22:32,260 - src.core.blueprint_registry - INFO - All blueprints are registered successfully
+2026-02-26 15:22:32,262 - src.common.startup - INFO - Starting the Application Startup Validation...
+2026-02-26 15:22:32,263 - src.common.startup - INFO - Base Route: /RFQ
+2026-02-26 15:22:32,263 - src.common.startup - INFO - Unicode support: Enabled
+2026-02-26 15:22:33,584 - src.common.db - INFO - Database Connection Successful
+2026-02-26 15:22:33,585 - src.common.startup - INFO - [PASS] Database Connection
+2026-02-26 15:22:33,597 - werkzeug - WARNING -  * Debugger is active!
+2026-02-26 15:22:33,601 - werkzeug - INFO -  * Debugger PIN: 122-096-730
+2026-02-26 15:22:33,626 - werkzeug - INFO - 127.0.0.1 - - [26/Feb/2026 15:22:33] "GET /RFQ/admin/bids HTTP/1.1" 200 -
+2026-02-26 15:22:33,715 - werkzeug - INFO - 127.0.0.1 - - [26/Feb/2026 15:22:33] "[33mGET /admin/api/rfqs HTTP/1.1[0m" 404 -
+2026-02-26 15:23:10,195 - werkzeug - INFO - 127.0.0.1 - - [26/Feb/2026 15:23:10] "GET /RFQ/admin/bids HTTP/1.1" 200 -
+2026-02-26 15:23:11,102 - werkzeug - INFO - 127.0.0.1 - - [26/Feb/2026 15:23:11] "GET /RFQ/admin/api/rfqs HTTP/1.1" 200 -
+2026-02-26 15:23:19,509 - werkzeug - INFO - 127.0.0.1 - - [26/Feb/2026 15:23:19] "GET /RFQ/admin/bids HTTP/1.1" 200 -
+2026-02-26 15:23:19,860 - werkzeug - INFO - 127.0.0.1 - - [26/Feb/2026 15:23:19] "GET /RFQ/admin/api/rfqs HTTP/1.1" 200 -
+2026-02-26 15:23:44,384 - werkzeug - INFO - 127.0.0.1 - - [26/Feb/2026 15:23:44] "GET /RFQ/admin/bids HTTP/1.1" 200 -
+2026-02-26 15:23:44,722 - werkzeug - INFO - 127.0.0.1 - - [26/Feb/2026 15:23:44] "GET /RFQ/admin/api/rfqs HTTP/1.1" 200 -
+2026-02-26 15:23:53,023 - werkzeug - INFO - 127.0.0.1 - - [26/Feb/2026 15:23:53] "[35m[1mGET /RFQ/admin/rfqs HTTP/1.1[0m" 500 -
+2026-02-26 15:23:53,155 - werkzeug - INFO - 127.0.0.1 - - [26/Feb/2026 15:23:53] "[36mGET /RFQ/admin/rfqs?__debugger__=yes&cmd=resource&f=debugger.js HTTP/1.1[0m" 304 -
+2026-02-26 15:23:53,160 - werkzeug - INFO - 127.0.0.1 - - [26/Feb/2026 15:23:53] "[36mGET /RFQ/admin/rfqs?__debugger__=yes&cmd=resource&f=style.css HTTP/1.1[0m" 304 -
+2026-02-26 15:23:53,187 - werkzeug - INFO - 127.0.0.1 - - [26/Feb/2026 15:23:53] "GET /RFQ/admin/rfqs?__debugger__=yes&cmd=resource&f=console.png&s=cWMyctgJvPY3LUZGxTU0 HTTP/1.1" 200 -
+2026-02-26 15:27:59,791 - werkzeug - INFO - 127.0.0.1 - - [26/Feb/2026 15:27:59] "GET /RFQ/admin/rfqs HTTP/1.1" 200 -
+2026-02-26 15:27:59,847 - werkzeug - INFO - 127.0.0.1 - - [26/Feb/2026 15:27:59] "[33mGET /static/images/faite-bg-v2.png HTTP/1.1[0m" 404 -
+2026-02-26 15:28:00,362 - werkzeug - INFO - 127.0.0.1 - - [26/Feb/2026 15:28:00] "GET /RFQ/admin/api/rfqs HTTP/1.1" 200 -
+2026-02-26 15:28:04,306 - werkzeug - INFO - 127.0.0.1 - - [26/Feb/2026 15:28:04] "GET /RFQ/admin/ HTTP/1.1" 200 -
+2026-02-26 15:28:04,806 - werkzeug - INFO - 127.0.0.1 - - [26/Feb/2026 15:28:04] "GET /RFQ/admin/api/dashboard/stats HTTP/1.1" 200 -
+2026-02-26 15:28:05,591 - werkzeug - INFO - 127.0.0.1 - - [26/Feb/2026 15:28:05] "GET /RFQ/admin/rfqs HTTP/1.1" 200 -
+2026-02-26 15:28:05,885 - werkzeug - INFO - 127.0.0.1 - - [26/Feb/2026 15:28:05] "GET /RFQ/admin/api/rfqs HTTP/1.1" 200 -
+2026-02-26 15:28:07,103 - werkzeug - INFO - 127.0.0.1 - - [26/Feb/2026 15:28:07] "GET /RFQ/admin/bids HTTP/1.1" 200 -
+2026-02-26 15:28:07,397 - werkzeug - INFO - 127.0.0.1 - - [26/Feb/2026 15:28:07] "GET /RFQ/admin/api/rfqs HTTP/1.1" 200 -
+2026-02-26 15:28:08,805 - werkzeug - INFO - 127.0.0.1 - - [26/Feb/2026 15:28:08] "GET /RFQ/admin/rfqs HTTP/1.1" 200 -
+2026-02-26 15:28:09,107 - werkzeug - INFO - 127.0.0.1 - - [26/Feb/2026 15:28:09] "GET /RFQ/admin/api/rfqs HTTP/1.1" 200 -
+2026-02-26 15:28:09,358 - werkzeug - INFO - 127.0.0.1 - - [26/Feb/2026 15:28:09] "GET /RFQ/admin/bids HTTP/1.1" 200 -
+2026-02-26 15:28:09,652 - werkzeug - INFO - 127.0.0.1 - - [26/Feb/2026 15:28:09] "GET /RFQ/admin/api/rfqs HTTP/1.1" 200 -
+2026-02-26 15:28:10,349 - werkzeug - INFO - 127.0.0.1 - - [26/Feb/2026 15:28:10] "GET /RFQ/admin/rfqs HTTP/1.1" 200 -
+2026-02-26 15:28:10,645 - werkzeug - INFO - 127.0.0.1 - - [26/Feb/2026 15:28:10] "GET /RFQ/admin/api/rfqs HTTP/1.1" 200 -
+2026-02-26 15:28:11,343 - werkzeug - INFO - 127.0.0.1 - - [26/Feb/2026 15:28:11] "GET /RFQ/admin/bids HTTP/1.1" 200 -
+2026-02-26 15:28:11,640 - werkzeug - INFO - 127.0.0.1 - - [26/Feb/2026 15:28:11] "GET /RFQ/admin/api/rfqs HTTP/1.1" 200 -
+2026-02-26 15:28:12,154 - werkzeug - INFO - 127.0.0.1 - - [26/Feb/2026 15:28:12] "GET /RFQ/admin/rfqs HTTP/1.1" 200 -
+2026-02-26 15:28:12,440 - werkzeug - INFO - 127.0.0.1 - - [26/Feb/2026 15:28:12] "GET /RFQ/admin/api/rfqs HTTP/1.1" 200 -
+2026-02-26 15:28:13,044 - werkzeug - INFO - 127.0.0.1 - - [26/Feb/2026 15:28:13] "GET /RFQ/admin/bids HTTP/1.1" 200 -
+2026-02-26 15:28:13,334 - werkzeug - INFO - 127.0.0.1 - - [26/Feb/2026 15:28:13] "GET /RFQ/admin/api/rfqs HTTP/1.1" 200 -
+2026-02-26 15:28:13,804 - werkzeug - INFO - 127.0.0.1 - - [26/Feb/2026 15:28:13] "GET /RFQ/admin/rfqs HTTP/1.1" 200 -
+2026-02-26 15:28:14,099 - werkzeug - INFO - 127.0.0.1 - - [26/Feb/2026 15:28:14] "GET /RFQ/admin/api/rfqs HTTP/1.1" 200 -
+2026-02-26 15:28:14,495 - werkzeug - INFO - 127.0.0.1 - - [26/Feb/2026 15:28:14] "GET /RFQ/admin/bids HTTP/1.1" 200 -
+2026-02-26 15:28:14,778 - werkzeug - INFO - 127.0.0.1 - - [26/Feb/2026 15:28:14] "GET /RFQ/admin/api/rfqs HTTP/1.1" 200 -
+2026-02-26 15:28:15,239 - werkzeug - INFO - 127.0.0.1 - - [26/Feb/2026 15:28:15] "GET /RFQ/admin/rfqs HTTP/1.1" 200 -
+2026-02-26 15:28:15,531 - werkzeug - INFO - 127.0.0.1 - - [26/Feb/2026 15:28:15] "GET /RFQ/admin/api/rfqs HTTP/1.1" 200 -
+2026-02-26 15:28:16,043 - werkzeug - INFO - 127.0.0.1 - - [26/Feb/2026 15:28:16] "GET /RFQ/admin/bids HTTP/1.1" 200 -
+2026-02-26 15:28:16,331 - werkzeug - INFO - 127.0.0.1 - - [26/Feb/2026 15:28:16] "GET /RFQ/admin/api/rfqs HTTP/1.1" 200 -
+2026-02-26 15:28:16,868 - werkzeug - INFO - 127.0.0.1 - - [26/Feb/2026 15:28:16] "GET /RFQ/admin/rfqs HTTP/1.1" 200 -
+2026-02-26 15:28:17,156 - werkzeug - INFO - 127.0.0.1 - - [26/Feb/2026 15:28:17] "GET /RFQ/admin/api/rfqs HTTP/1.1" 200 -
+2026-02-26 15:28:17,579 - werkzeug - INFO - 127.0.0.1 - - [26/Feb/2026 15:28:17] "GET /RFQ/admin/bids HTTP/1.1" 200 -
+2026-02-26 15:28:17,883 - werkzeug - INFO - 127.0.0.1 - - [26/Feb/2026 15:28:17] "GET /RFQ/admin/api/rfqs HTTP/1.1" 200 -
+2026-02-26 15:28:18,114 - werkzeug - INFO - 127.0.0.1 - - [26/Feb/2026 15:28:18] "GET /RFQ/admin/rfqs HTTP/1.1" 200 -
+2026-02-26 15:28:18,405 - werkzeug - INFO - 127.0.0.1 - - [26/Feb/2026 15:28:18] "GET /RFQ/admin/api/rfqs HTTP/1.1" 200 -
+2026-02-26 15:28:18,523 - werkzeug - INFO - 127.0.0.1 - - [26/Feb/2026 15:28:18] "GET /RFQ/admin/bids HTTP/1.1" 200 -
+2026-02-26 15:28:18,809 - werkzeug - INFO - 127.0.0.1 - - [26/Feb/2026 15:28:18] "GET /RFQ/admin/api/rfqs HTTP/1.1" 200 -
+2026-02-26 15:28:18,941 - werkzeug - INFO - 127.0.0.1 - - [26/Feb/2026 15:28:18] "GET /RFQ/admin/rfqs HTTP/1.1" 200 -
+2026-02-26 15:28:19,240 - werkzeug - INFO - 127.0.0.1 - - [26/Feb/2026 15:28:19] "GET /RFQ/admin/api/rfqs HTTP/1.1" 200 -
+2026-02-26 15:28:19,449 - werkzeug - INFO - 127.0.0.1 - - [26/Feb/2026 15:28:19] "GET /RFQ/admin/bids HTTP/1.1" 200 -
+2026-02-26 15:28:19,732 - werkzeug - INFO - 127.0.0.1 - - [26/Feb/2026 15:28:19] "GET /RFQ/admin/api/rfqs HTTP/1.1" 200 -
+2026-02-26 15:28:19,861 - werkzeug - INFO - 127.0.0.1 - - [26/Feb/2026 15:28:19] "GET /RFQ/admin/rfqs HTTP/1.1" 200 -
+2026-02-26 15:28:20,142 - werkzeug - INFO - 127.0.0.1 - - [26/Feb/2026 15:28:20] "GET /RFQ/admin/api/rfqs HTTP/1.1" 200 -
+2026-02-26 15:28:29,693 - werkzeug - INFO - 127.0.0.1 - - [26/Feb/2026 15:28:29] "GET /RFQ/admin/bids HTTP/1.1" 200 -
+2026-02-26 15:28:30,080 - werkzeug - INFO - 127.0.0.1 - - [26/Feb/2026 15:28:30] "GET /RFQ/admin/api/rfqs HTTP/1.1" 200 -
+2026-02-26 15:28:30,459 - werkzeug - INFO - 127.0.0.1 - - [26/Feb/2026 15:28:30] "GET /RFQ/admin/rfqs HTTP/1.1" 200 -
+2026-02-26 15:28:30,836 - werkzeug - INFO - 127.0.0.1 - - [26/Feb/2026 15:28:30] "GET /RFQ/admin/api/rfqs HTTP/1.1" 200 -
+2026-02-26 15:28:30,934 - werkzeug - INFO - 127.0.0.1 - - [26/Feb/2026 15:28:30] "GET /RFQ/admin/bids HTTP/1.1" 200 -
+2026-02-26 15:28:31,315 - werkzeug - INFO - 127.0.0.1 - - [26/Feb/2026 15:28:31] "GET /RFQ/admin/api/rfqs HTTP/1.1" 200 -
+2026-02-26 15:28:31,640 - werkzeug - INFO - 127.0.0.1 - - [26/Feb/2026 15:28:31] "GET /RFQ/admin/rfqs HTTP/1.1" 200 -
+2026-02-26 15:28:32,063 - werkzeug - INFO - 127.0.0.1 - - [26/Feb/2026 15:28:32] "GET /RFQ/admin/api/rfqs HTTP/1.1" 200 -
+2026-02-26 15:28:32,097 - werkzeug - INFO - 127.0.0.1 - - [26/Feb/2026 15:28:32] "GET /RFQ/admin/bids HTTP/1.1" 200 -
+2026-02-26 15:28:32,476 - werkzeug - INFO - 127.0.0.1 - - [26/Feb/2026 15:28:32] "GET /RFQ/admin/api/rfqs HTTP/1.1" 200 -
+2026-02-26 15:28:34,041 - werkzeug - INFO - 127.0.0.1 - - [26/Feb/2026 15:28:34] "GET /RFQ/admin/ HTTP/1.1" 200 -
+2026-02-26 15:28:34,541 - werkzeug - INFO - 127.0.0.1 - - [26/Feb/2026 15:28:34] "GET /RFQ/admin/api/dashboard/stats HTTP/1.1" 200 -
+2026-02-26 15:28:34,915 - werkzeug - INFO - 127.0.0.1 - - [26/Feb/2026 15:28:34] "GET /RFQ/admin/rfqs HTTP/1.1" 200 -
+2026-02-26 15:28:35,209 - werkzeug - INFO - 127.0.0.1 - - [26/Feb/2026 15:28:35] "GET /RFQ/admin/api/rfqs HTTP/1.1" 200 -
+2026-02-26 15:28:36,850 - werkzeug - INFO - 127.0.0.1 - - [26/Feb/2026 15:28:36] "GET /RFQ/admin/ HTTP/1.1" 200 -
+2026-02-26 15:28:37,359 - werkzeug - INFO - 127.0.0.1 - - [26/Feb/2026 15:28:37] "GET /RFQ/admin/api/dashboard/stats HTTP/1.1" 200 -
+2026-02-26 15:28:38,101 - werkzeug - INFO - 127.0.0.1 - - [26/Feb/2026 15:28:38] "GET /RFQ/admin/rfqs HTTP/1.1" 200 -
+2026-02-26 15:28:38,392 - werkzeug - INFO - 127.0.0.1 - - [26/Feb/2026 15:28:38] "GET /RFQ/admin/api/rfqs HTTP/1.1" 200 -
+2026-02-26 15:28:42,261 - werkzeug - INFO - 127.0.0.1 - - [26/Feb/2026 15:28:42] "GET /RFQ/admin/bids HTTP/1.1" 200 -
+2026-02-26 15:28:42,573 - werkzeug - INFO - 127.0.0.1 - - [26/Feb/2026 15:28:42] "GET /RFQ/admin/api/rfqs HTTP/1.1" 200 -
+2026-02-26 15:28:44,633 - werkzeug - INFO - 127.0.0.1 - - [26/Feb/2026 15:28:44] "GET /RFQ/admin/rfqs HTTP/1.1" 200 -
+2026-02-26 15:28:44,947 - werkzeug - INFO - 127.0.0.1 - - [26/Feb/2026 15:28:44] "GET /RFQ/admin/api/rfqs HTTP/1.1" 200 -
+2026-02-26 15:28:54,668 - werkzeug - INFO - 127.0.0.1 - - [26/Feb/2026 15:28:54] "GET /RFQ/admin/api/rfqs HTTP/1.1" 200 -
+2026-02-26 15:29:01,037 - werkzeug - INFO - 127.0.0.1 - - [26/Feb/2026 15:29:01] "GET /RFQ/admin/rfq/RFQ-20260225-0018 HTTP/1.1" 200 -
+2026-02-26 15:29:01,448 - werkzeug - INFO - 127.0.0.1 - - [26/Feb/2026 15:29:01] "GET /RFQ/admin/api/rfq/RFQ-20260225-0018 HTTP/1.1" 200 -
+2026-02-26 15:29:01,757 - werkzeug - INFO - 127.0.0.1 - - [26/Feb/2026 15:29:01] "GET /RFQ/admin/api/bid/17/evaluation-report HTTP/1.1" 200 -
+2026-02-26 15:29:05,954 - werkzeug - INFO - 127.0.0.1 - - [26/Feb/2026 15:29:05] "GET /RFQ/admin/rfq/RFQ-20260225-0018/evaluation HTTP/1.1" 200 -
+2026-02-26 15:29:06,365 - werkzeug - INFO - 127.0.0.1 - - [26/Feb/2026 15:29:06] "GET /RFQ/admin/api/rfq/RFQ-20260225-0018/compare-bids HTTP/1.1" 200 -
+2026-02-26 15:30:14,526 - werkzeug - INFO - 127.0.0.1 - - [26/Feb/2026 15:30:14] "GET /RFQ/admin/rfq/RFQ-20260225-0018/evaluation HTTP/1.1" 200 -
+2026-02-26 15:30:14,966 - werkzeug - INFO - 127.0.0.1 - - [26/Feb/2026 15:30:14] "GET /RFQ/admin/api/rfq/RFQ-20260225-0018/compare-bids HTTP/1.1" 200 -
+2026-02-26 17:14:34,857 - root - INFO - Logging Configuration Initialized
+2026-02-26 17:14:34,949 - src.core.blueprint_registry - INFO - All blueprints are registered successfully
+2026-02-26 17:14:34,949 - src.common.startup - INFO - Starting the Application Startup Validation...
+2026-02-26 17:14:34,950 - src.common.startup - INFO - Base Route: /RFQ
+2026-02-26 17:14:34,950 - src.common.startup - INFO - Unicode support: Enabled
+2026-02-26 17:14:36,120 - src.common.db - INFO - Database Connection Successful
+2026-02-26 17:14:36,125 - src.common.startup - INFO - [PASS] Database Connection
+2026-02-26 17:14:36,143 - werkzeug - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5000
+ * Running on http://192.168.3.85:5000
+2026-02-26 17:14:36,144 - werkzeug - INFO - [33mPress CTRL+C to quit[0m
+2026-02-26 17:14:36,145 - werkzeug - INFO -  * Restarting with stat
+2026-02-26 17:14:39,324 - root - INFO - Logging Configuration Initialized
+2026-02-26 17:14:39,369 - src.core.blueprint_registry - INFO - All blueprints are registered successfully
+2026-02-26 17:14:39,370 - src.common.startup - INFO - Starting the Application Startup Validation...
+2026-02-26 17:14:39,370 - src.common.startup - INFO - Base Route: /RFQ
+2026-02-26 17:14:39,370 - src.common.startup - INFO - Unicode support: Enabled
+2026-02-26 17:14:40,367 - src.common.db - INFO - Database Connection Successful
+2026-02-26 17:14:40,367 - src.common.startup - INFO - [PASS] Database Connection
+2026-02-26 17:14:40,377 - werkzeug - WARNING -  * Debugger is active!
+2026-02-26 17:14:40,381 - werkzeug - INFO -  * Debugger PIN: 122-096-730
+2026-02-26 23:36:27,326 - root - INFO - Logging Configuration Initialized
+2026-02-26 23:36:27,463 - src.core.blueprint_registry - INFO - All blueprints are registered successfully
+2026-02-26 23:36:27,464 - src.common.startup - INFO - Starting the Application Startup Validation...
+2026-02-26 23:36:27,464 - src.common.startup - INFO - Base Route: /RFQ
+2026-02-26 23:36:27,465 - src.common.startup - INFO - Unicode support: Enabled
+2026-02-26 23:36:28,705 - src.common.db - INFO - Database Connection Successful
+2026-02-26 23:36:28,705 - src.common.startup - INFO - [PASS] Database Connection
+2026-02-26 23:36:28,728 - werkzeug - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5000
+ * Running on http://192.168.3.85:5000
+2026-02-26 23:36:28,729 - werkzeug - INFO - [33mPress CTRL+C to quit[0m
+2026-02-26 23:36:28,729 - werkzeug - INFO -  * Restarting with stat
+2026-02-26 23:36:33,000 - root - INFO - Logging Configuration Initialized
+2026-02-26 23:36:33,095 - src.core.blueprint_registry - INFO - All blueprints are registered successfully
+2026-02-26 23:36:33,096 - src.common.startup - INFO - Starting the Application Startup Validation...
+2026-02-26 23:36:33,096 - src.common.startup - INFO - Base Route: /RFQ
+2026-02-26 23:36:33,096 - src.common.startup - INFO - Unicode support: Enabled
+2026-02-26 23:36:34,407 - src.common.db - INFO - Database Connection Successful
+2026-02-26 23:36:34,407 - src.common.startup - INFO - [PASS] Database Connection
+2026-02-26 23:36:34,419 - werkzeug - WARNING -  * Debugger is active!
+2026-02-26 23:36:34,424 - werkzeug - INFO -  * Debugger PIN: 122-096-730
+2026-02-26 23:36:34,437 - werkzeug - INFO - 127.0.0.1 - - [26/Feb/2026 23:36:34] "[32mGET /RFQ/admin/ HTTP/1.1[0m" 302 -
+2026-02-26 23:36:34,457 - werkzeug - INFO - 127.0.0.1 - - [26/Feb/2026 23:36:34] "GET /RFQ/admin/login HTTP/1.1" 200 -
+2026-02-26 23:36:34,729 - werkzeug - INFO - 127.0.0.1 - - [26/Feb/2026 23:36:34] "[33mGET /static/images/faite-bg-v2.png HTTP/1.1[0m" 404 -
+2026-02-26 23:36:40,169 - werkzeug - INFO - 127.0.0.1 - - [26/Feb/2026 23:36:40] "[32mPOST /RFQ/admin/login HTTP/1.1[0m" 302 -
+2026-02-26 23:36:40,228 - werkzeug - INFO - 127.0.0.1 - - [26/Feb/2026 23:36:40] "GET /RFQ/admin/ HTTP/1.1" 200 -
+2026-02-26 23:36:40,286 - werkzeug - INFO - 127.0.0.1 - - [26/Feb/2026 23:36:40] "[33mGET /static/images/faite-bg-v2.png HTTP/1.1[0m" 404 -
+2026-02-26 23:36:41,573 - werkzeug - INFO - 127.0.0.1 - - [26/Feb/2026 23:36:41] "GET /RFQ/admin/api/dashboard/stats HTTP/1.1" 200 -
+2026-02-26 23:36:45,244 - werkzeug - INFO - 127.0.0.1 - - [26/Feb/2026 23:36:45] "GET /RFQ/admin/rfq/RFQ-20260226-0002 HTTP/1.1" 200 -
+2026-02-26 23:36:45,292 - werkzeug - INFO - 127.0.0.1 - - [26/Feb/2026 23:36:45] "[33mGET /static/images/faite-bg-v2.png HTTP/1.1[0m" 404 -
+2026-02-26 23:36:45,751 - werkzeug - INFO - 127.0.0.1 - - [26/Feb/2026 23:36:45] "GET /RFQ/admin/api/rfq/RFQ-20260226-0002 HTTP/1.1" 200 -
+2026-02-26 23:36:46,084 - werkzeug - INFO - 127.0.0.1 - - [26/Feb/2026 23:36:46] "GET /RFQ/admin/api/bid/26/evaluation-report HTTP/1.1" 200 -
+2026-02-26 23:36:46,409 - werkzeug - INFO - 127.0.0.1 - - [26/Feb/2026 23:36:46] "GET /RFQ/admin/api/bid/25/evaluation-report HTTP/1.1" 200 -
+2026-02-26 23:36:51,492 - werkzeug - INFO - 127.0.0.1 - - [26/Feb/2026 23:36:51] "GET /RFQ/admin/bids HTTP/1.1" 200 -
+2026-02-26 23:36:51,864 - werkzeug - INFO - 127.0.0.1 - - [26/Feb/2026 23:36:51] "GET /RFQ/admin/api/rfqs HTTP/1.1" 200 -
+2026-02-26 23:36:53,605 - werkzeug - INFO - 127.0.0.1 - - [26/Feb/2026 23:36:53] "GET /RFQ/admin/ HTTP/1.1" 200 -
+2026-02-26 23:36:54,251 - werkzeug - INFO - 127.0.0.1 - - [26/Feb/2026 23:36:54] "GET /RFQ/admin/api/dashboard/stats HTTP/1.1" 200 -
+2026-02-26 23:36:55,602 - werkzeug - INFO - 127.0.0.1 - - [26/Feb/2026 23:36:55] "GET /RFQ/admin/rfqs HTTP/1.1" 200 -
+2026-02-26 23:36:55,636 - werkzeug - INFO - 127.0.0.1 - - [26/Feb/2026 23:36:55] "[33mGET /static/images/faite-bg-v2.png HTTP/1.1[0m" 404 -
+2026-02-26 23:36:55,968 - werkzeug - INFO - 127.0.0.1 - - [26/Feb/2026 23:36:55] "GET /RFQ/admin/api/rfqs HTTP/1.1" 200 -
+2026-02-26 23:36:56,933 - werkzeug - INFO - 127.0.0.1 - - [26/Feb/2026 23:36:56] "GET /RFQ/admin/bids HTTP/1.1" 200 -
+2026-02-26 23:36:57,303 - werkzeug - INFO - 127.0.0.1 - - [26/Feb/2026 23:36:57] "GET /RFQ/admin/api/rfqs HTTP/1.1" 200 -
+2026-02-26 23:36:58,826 - werkzeug - INFO - 127.0.0.1 - - [26/Feb/2026 23:36:58] "GET /RFQ/admin/rfqs HTTP/1.1" 200 -
+2026-02-26 23:36:59,197 - werkzeug - INFO - 127.0.0.1 - - [26/Feb/2026 23:36:59] "GET /RFQ/admin/api/rfqs HTTP/1.1" 200 -
+2026-02-26 23:37:02,362 - werkzeug - INFO - 127.0.0.1 - - [26/Feb/2026 23:37:02] "GET /RFQ/admin/rfq/RFQ-20260226-0002 HTTP/1.1" 200 -
+2026-02-26 23:37:02,864 - werkzeug - INFO - 127.0.0.1 - - [26/Feb/2026 23:37:02] "GET /RFQ/admin/api/rfq/RFQ-20260226-0002 HTTP/1.1" 200 -
+2026-02-26 23:37:03,208 - werkzeug - INFO - 127.0.0.1 - - [26/Feb/2026 23:37:03] "GET /RFQ/admin/api/bid/25/evaluation-report HTTP/1.1" 200 -
+2026-02-26 23:37:03,213 - werkzeug - INFO - 127.0.0.1 - - [26/Feb/2026 23:37:03] "GET /RFQ/admin/api/bid/26/evaluation-report HTTP/1.1" 200 -
+2026-02-26 23:37:05,407 - werkzeug - INFO - 127.0.0.1 - - [26/Feb/2026 23:37:05] "GET /RFQ/admin/bid/25 HTTP/1.1" 200 -
+2026-02-26 23:37:05,454 - werkzeug - INFO - 127.0.0.1 - - [26/Feb/2026 23:37:05] "[33mGET /static/images/faite-bg-v2.png HTTP/1.1[0m" 404 -
+2026-02-26 23:37:05,848 - werkzeug - INFO - 127.0.0.1 - - [26/Feb/2026 23:37:05] "GET /RFQ/admin/api/bid/25 HTTP/1.1" 200 -
+2026-02-26 23:37:06,193 - werkzeug - INFO - 127.0.0.1 - - [26/Feb/2026 23:37:06] "GET /RFQ/admin/api/bid/25/evaluation-report HTTP/1.1" 200 -
+2026-02-26 23:37:12,192 - werkzeug - INFO - 127.0.0.1 - - [26/Feb/2026 23:37:12] "GET /RFQ/admin/bids HTTP/1.1" 200 -
+2026-02-26 23:37:12,561 - werkzeug - INFO - 127.0.0.1 - - [26/Feb/2026 23:37:12] "GET /RFQ/admin/api/rfqs HTTP/1.1" 200 -
+2026-02-27 00:18:20,729 - root - INFO - Logging Configuration Initialized
+2026-02-27 00:18:20,837 - src.core.blueprint_registry - INFO - All blueprints are registered successfully
+2026-02-27 00:18:20,838 - src.common.startup - INFO - Starting the Application Startup Validation...
+2026-02-27 00:18:20,839 - src.common.startup - INFO - Base Route: /RFQ
+2026-02-27 00:18:20,839 - src.common.startup - INFO - Unicode support: Enabled
+2026-02-27 00:18:22,047 - src.common.db - INFO - Database Connection Successful
+2026-02-27 00:18:22,047 - src.common.startup - INFO - [PASS] Database Connection
+2026-02-27 00:18:22,070 - werkzeug - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5000
+ * Running on http://192.168.3.85:5000
+2026-02-27 00:18:22,072 - werkzeug - INFO - [33mPress CTRL+C to quit[0m
+2026-02-27 00:18:22,074 - werkzeug - INFO -  * Restarting with stat
+2026-02-27 00:18:25,782 - root - INFO - Logging Configuration Initialized
+2026-02-27 00:18:25,832 - src.core.blueprint_registry - INFO - All blueprints are registered successfully
+2026-02-27 00:18:25,833 - src.common.startup - INFO - Starting the Application Startup Validation...
+2026-02-27 00:18:25,833 - src.common.startup - INFO - Base Route: /RFQ
+2026-02-27 00:18:25,833 - src.common.startup - INFO - Unicode support: Enabled
+2026-02-27 00:18:26,843 - src.common.db - INFO - Database Connection Successful
+2026-02-27 00:18:26,845 - src.common.startup - INFO - [PASS] Database Connection
+2026-02-27 00:18:26,872 - werkzeug - WARNING -  * Debugger is active!
+2026-02-27 00:18:26,880 - werkzeug - INFO -  * Debugger PIN: 122-096-730
+2026-02-27 00:18:26,910 - werkzeug - INFO - 127.0.0.1 - - [27/Feb/2026 00:18:26] "[32mGET /RFQ/customer HTTP/1.1[0m" 308 -
+2026-02-27 00:18:26,921 - werkzeug - INFO - 127.0.0.1 - - [27/Feb/2026 00:18:26] "GET /RFQ/customer/ HTTP/1.1" 200 -
+2026-02-27 00:18:27,184 - werkzeug - INFO - 127.0.0.1 - - [27/Feb/2026 00:18:27] "[33mGET /static/images/faite-bg-v2.png HTTP/1.1[0m" 404 -
+2026-02-27 00:18:33,848 - werkzeug - INFO - 127.0.0.1 - - [27/Feb/2026 00:18:33] "GET /RFQ/customer/ HTTP/1.1" 200 -
+2026-02-27 00:19:40,268 - werkzeug - INFO - 127.0.0.1 - - [27/Feb/2026 00:19:40] "GET /RFQ/customer/ HTTP/1.1" 200 -
+2026-02-27 00:20:55,491 - werkzeug - INFO - 127.0.0.1 - - [27/Feb/2026 00:20:55] "GET /RFQ/customer/ HTTP/1.1" 200 -
+2026-02-27 00:22:47,220 - werkzeug - INFO - 127.0.0.1 - - [27/Feb/2026 00:22:47] "GET /RFQ/customer/ HTTP/1.1" 200 -
+2026-02-27 00:22:51,756 - werkzeug - INFO - 127.0.0.1 - - [27/Feb/2026 00:22:51] "GET /RFQ/customer/ HTTP/1.1" 200 -
+2026-02-27 02:43:28,191 - root - INFO - Logging Configuration Initialized
+2026-02-27 02:43:28,308 - src.core.blueprint_registry - INFO - All blueprints are registered successfully
+2026-02-27 02:43:28,309 - src.common.startup - INFO - Starting the Application Startup Validation...
+2026-02-27 02:43:28,309 - src.common.startup - INFO - Base Route: /RFQ
+2026-02-27 02:43:28,309 - src.common.startup - INFO - Unicode support: Enabled
+2026-02-27 02:43:29,492 - src.common.db - INFO - Database Connection Successful
+2026-02-27 02:43:29,493 - src.common.startup - INFO - [PASS] Database Connection
+2026-02-27 02:43:29,527 - werkzeug - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5000
+ * Running on http://192.168.3.85:5000
+2026-02-27 02:43:29,528 - werkzeug - INFO - [33mPress CTRL+C to quit[0m
+2026-02-27 02:43:29,530 - werkzeug - INFO -  * Restarting with stat
+2026-02-27 02:43:33,155 - root - INFO - Logging Configuration Initialized
+2026-02-27 02:43:33,221 - src.core.blueprint_registry - INFO - All blueprints are registered successfully
+2026-02-27 02:43:33,221 - src.common.startup - INFO - Starting the Application Startup Validation...
+2026-02-27 02:43:33,221 - src.common.startup - INFO - Base Route: /RFQ
+2026-02-27 02:43:33,222 - src.common.startup - INFO - Unicode support: Enabled
+2026-02-27 02:43:34,325 - src.common.db - INFO - Database Connection Successful
+2026-02-27 02:43:34,325 - src.common.startup - INFO - [PASS] Database Connection
+2026-02-27 02:43:34,337 - werkzeug - WARNING -  * Debugger is active!
+2026-02-27 02:43:34,341 - werkzeug - INFO -  * Debugger PIN: 122-096-730
+2026-02-27 02:43:37,549 - werkzeug - INFO - 127.0.0.1 - - [27/Feb/2026 02:43:37] "[32mGET /RFQ/admin/ HTTP/1.1[0m" 302 -
+2026-02-27 02:43:37,560 - werkzeug - INFO - 127.0.0.1 - - [27/Feb/2026 02:43:37] "GET /RFQ/admin/login HTTP/1.1" 200 -
+2026-02-27 02:43:40,751 - werkzeug - INFO - 127.0.0.1 - - [27/Feb/2026 02:43:40] "[32mPOST /RFQ/admin/login HTTP/1.1[0m" 302 -
+2026-02-27 02:43:40,818 - werkzeug - INFO - 127.0.0.1 - - [27/Feb/2026 02:43:40] "GET /RFQ/admin/ HTTP/1.1" 200 -
+2026-02-27 02:43:40,897 - werkzeug - INFO - 127.0.0.1 - - [27/Feb/2026 02:43:40] "[33mGET /RFX/admin/api/dashboard/stats HTTP/1.1[0m" 404 -
+2026-02-27 02:43:43,782 - werkzeug - INFO - 127.0.0.1 - - [27/Feb/2026 02:43:43] "[35m[1mGET /RFQ/admin/rfqs HTTP/1.1[0m" 500 -
+2026-02-27 02:43:43,930 - werkzeug - INFO - 127.0.0.1 - - [27/Feb/2026 02:43:43] "[36mGET /RFQ/admin/rfqs?__debugger__=yes&cmd=resource&f=style.css HTTP/1.1[0m" 304 -
+2026-02-27 02:43:43,950 - werkzeug - INFO - 127.0.0.1 - - [27/Feb/2026 02:43:43] "[36mGET /RFQ/admin/rfqs?__debugger__=yes&cmd=resource&f=debugger.js HTTP/1.1[0m" 304 -
+2026-02-27 02:43:43,970 - werkzeug - INFO - 127.0.0.1 - - [27/Feb/2026 02:43:43] "GET /RFQ/admin/rfqs?__debugger__=yes&cmd=resource&f=console.png&s=cp3NSo57C83EGkBNIp8a HTTP/1.1" 200 -
+2026-02-27 02:50:24,549 - werkzeug - INFO - 127.0.0.1 - - [27/Feb/2026 02:50:24] "GET /RFQ/admin/rfqs HTTP/1.1" 200 -
+2026-02-27 02:50:24,637 - werkzeug - INFO - 127.0.0.1 - - [27/Feb/2026 02:50:24] "[33mGET /RFX/admin/api/rfqs HTTP/1.1[0m" 404 -
+2026-02-27 02:50:42,809 - werkzeug - INFO - 127.0.0.1 - - [27/Feb/2026 02:50:42] "GET /RFQ/admin/bids HTTP/1.1" 200 -
+2026-02-27 02:50:42,873 - werkzeug - INFO - 127.0.0.1 - - [27/Feb/2026 02:50:42] "[33mGET /RFX/admin/api/rfqs HTTP/1.1[0m" 404 -
+2026-02-27 02:50:43,729 - werkzeug - INFO - 127.0.0.1 - - [27/Feb/2026 02:50:43] "GET /RFQ/admin/ HTTP/1.1" 200 -
+2026-02-27 02:50:43,803 - werkzeug - INFO - 127.0.0.1 - - [27/Feb/2026 02:50:43] "[33mGET /RFX/admin/api/dashboard/stats HTTP/1.1[0m" 404 -
+2026-02-27 02:51:20,366 - root - INFO - Logging Configuration Initialized
+2026-02-27 02:51:20,418 - src.core.blueprint_registry - INFO - All blueprints are registered successfully
+2026-02-27 02:51:20,418 - src.common.startup - INFO - Starting the Application Startup Validation...
+2026-02-27 02:51:20,419 - src.common.startup - INFO - Base Route: /RFX
+2026-02-27 02:51:20,419 - src.common.startup - INFO - Unicode support: Enabled
+2026-02-27 02:51:21,420 - src.common.db - INFO - Database Connection Successful
+2026-02-27 02:51:21,421 - src.common.startup - INFO - [PASS] Database Connection
+2026-02-27 02:51:21,466 - werkzeug - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5000
+ * Running on http://192.168.3.85:5000
+2026-02-27 02:51:21,467 - werkzeug - INFO - [33mPress CTRL+C to quit[0m
+2026-02-27 02:51:21,469 - werkzeug - INFO -  * Restarting with stat
+2026-02-27 02:51:25,193 - root - INFO - Logging Configuration Initialized
+2026-02-27 02:51:25,282 - src.core.blueprint_registry - INFO - All blueprints are registered successfully
+2026-02-27 02:51:25,283 - src.common.startup - INFO - Starting the Application Startup Validation...
+2026-02-27 02:51:25,283 - src.common.startup - INFO - Base Route: /RFX
+2026-02-27 02:51:25,283 - src.common.startup - INFO - Unicode support: Enabled
+2026-02-27 02:51:26,519 - src.common.db - INFO - Database Connection Successful
+2026-02-27 02:51:26,521 - src.common.startup - INFO - [PASS] Database Connection
+2026-02-27 02:51:26,532 - werkzeug - WARNING -  * Debugger is active!
+2026-02-27 02:51:26,543 - werkzeug - INFO -  * Debugger PIN: 122-096-730
+2026-02-27 02:51:26,583 - werkzeug - INFO - 127.0.0.1 - - [27/Feb/2026 02:51:26] "GET /RFX/admin/ HTTP/1.1" 200 -
+2026-02-27 02:51:27,504 - werkzeug - INFO - 127.0.0.1 - - [27/Feb/2026 02:51:27] "GET /RFX/admin/api/dashboard/stats HTTP/1.1" 200 -
+2026-02-27 02:51:29,072 - werkzeug - INFO - 127.0.0.1 - - [27/Feb/2026 02:51:29] "GET /RFX/admin/bids HTTP/1.1" 200 -
+2026-02-27 02:51:29,363 - werkzeug - INFO - 127.0.0.1 - - [27/Feb/2026 02:51:29] "GET /RFX/admin/api/rfqs HTTP/1.1" 200 -
+2026-02-27 02:51:30,901 - werkzeug - INFO - 127.0.0.1 - - [27/Feb/2026 02:51:30] "GET /RFX/admin/rfqs HTTP/1.1" 200 -
+2026-02-27 02:51:31,200 - werkzeug - INFO - 127.0.0.1 - - [27/Feb/2026 02:51:31] "GET /RFX/admin/api/rfqs HTTP/1.1" 200 -
+2026-02-27 02:51:32,780 - werkzeug - INFO - 127.0.0.1 - - [27/Feb/2026 02:51:32] "GET /RFX/admin/bids HTTP/1.1" 200 -
+2026-02-27 02:51:33,077 - werkzeug - INFO - 127.0.0.1 - - [27/Feb/2026 02:51:33] "GET /RFX/admin/api/rfqs HTTP/1.1" 200 -
+2026-02-27 02:51:33,631 - werkzeug - INFO - 127.0.0.1 - - [27/Feb/2026 02:51:33] "GET /RFX/admin/rfqs HTTP/1.1" 200 -
+2026-02-27 02:51:33,923 - werkzeug - INFO - 127.0.0.1 - - [27/Feb/2026 02:51:33] "GET /RFX/admin/api/rfqs HTTP/1.1" 200 -
+2026-02-27 02:51:34,170 - werkzeug - INFO - 127.0.0.1 - - [27/Feb/2026 02:51:34] "GET /RFX/admin/bids HTTP/1.1" 200 -
+2026-02-27 02:51:34,457 - werkzeug - INFO - 127.0.0.1 - - [27/Feb/2026 02:51:34] "GET /RFX/admin/api/rfqs HTTP/1.1" 200 -
+2026-02-27 02:51:35,166 - werkzeug - INFO - 127.0.0.1 - - [27/Feb/2026 02:51:35] "GET /RFX/admin/rfqs HTTP/1.1" 200 -
+2026-02-27 02:51:35,459 - werkzeug - INFO - 127.0.0.1 - - [27/Feb/2026 02:51:35] "GET /RFX/admin/api/rfqs HTTP/1.1" 200 -
+2026-02-27 02:51:36,137 - werkzeug - INFO - 127.0.0.1 - - [27/Feb/2026 02:51:36] "GET /RFX/admin/bids HTTP/1.1" 200 -
+2026-02-27 02:51:36,434 - werkzeug - INFO - 127.0.0.1 - - [27/Feb/2026 02:51:36] "GET /RFX/admin/api/rfqs HTTP/1.1" 200 -
+2026-02-27 02:52:53,517 - werkzeug - INFO - 127.0.0.1 - - [27/Feb/2026 02:52:53] "GET /RFX/admin/bids HTTP/1.1" 200 -
+2026-02-27 02:52:54,300 - werkzeug - INFO - 127.0.0.1 - - [27/Feb/2026 02:52:54] "GET /RFX/admin/api/rfqs HTTP/1.1" 200 -
+2026-02-27 02:52:57,830 - werkzeug - INFO - 127.0.0.1 - - [27/Feb/2026 02:52:57] "GET /RFX/admin/rfqs HTTP/1.1" 200 -
+2026-02-27 02:52:58,197 - werkzeug - INFO - 127.0.0.1 - - [27/Feb/2026 02:52:58] "GET /RFX/admin/api/rfqs HTTP/1.1" 200 -
+2026-02-27 02:56:29,957 - werkzeug - INFO - 127.0.0.1 - - [27/Feb/2026 02:56:29] "GET /RFX/admin/rfqs HTTP/1.1" 200 -
+2026-02-27 02:56:29,998 - werkzeug - INFO - 127.0.0.1 - - [27/Feb/2026 02:56:29] "[33mGET /static/images/faite-bg-v2.png HTTP/1.1[0m" 404 -
+2026-02-27 02:56:30,589 - werkzeug - INFO - 127.0.0.1 - - [27/Feb/2026 02:56:30] "GET /RFX/admin/api/rfqs HTTP/1.1" 200 -
+2026-02-27 02:56:34,999 - werkzeug - INFO - 127.0.0.1 - - [27/Feb/2026 02:56:34] "GET /RFX/admin/bids HTTP/1.1" 200 -
+2026-02-27 02:56:35,332 - werkzeug - INFO - 127.0.0.1 - - [27/Feb/2026 02:56:35] "GET /RFX/admin/api/rfqs HTTP/1.1" 200 -
+2026-02-27 02:56:36,616 - werkzeug - INFO - 127.0.0.1 - - [27/Feb/2026 02:56:36] "GET /RFX/admin/rfqs HTTP/1.1" 200 -
+2026-02-27 02:56:36,961 - werkzeug - INFO - 127.0.0.1 - - [27/Feb/2026 02:56:36] "GET /RFX/admin/api/rfqs HTTP/1.1" 200 -
+2026-02-27 02:56:39,145 - werkzeug - INFO - 127.0.0.1 - - [27/Feb/2026 02:56:39] "GET /RFX/admin/ HTTP/1.1" 200 -
+2026-02-27 02:56:39,736 - werkzeug - INFO - 127.0.0.1 - - [27/Feb/2026 02:56:39] "GET /RFX/admin/api/dashboard/stats HTTP/1.1" 200 -
+2026-02-27 02:56:40,826 - werkzeug - INFO - 127.0.0.1 - - [27/Feb/2026 02:56:40] "GET /RFX/admin/rfqs HTTP/1.1" 200 -
+2026-02-27 02:56:41,173 - werkzeug - INFO - 127.0.0.1 - - [27/Feb/2026 02:56:41] "GET /RFX/admin/api/rfqs HTTP/1.1" 200 -
+2026-02-27 02:56:46,249 - werkzeug - INFO - 127.0.0.1 - - [27/Feb/2026 02:56:46] "GET /RFX/admin/rfq/RFQ-20260226-0002 HTTP/1.1" 200 -
+2026-02-27 02:56:46,297 - werkzeug - INFO - 127.0.0.1 - - [27/Feb/2026 02:56:46] "[33mGET /static/images/faite-bg-v2.png HTTP/1.1[0m" 404 -
+2026-02-27 02:56:46,701 - werkzeug - INFO - 127.0.0.1 - - [27/Feb/2026 02:56:46] "GET /RFX/admin/api/rfq/RFQ-20260226-0002 HTTP/1.1" 200 -
+2026-02-27 02:56:46,997 - werkzeug - INFO - 127.0.0.1 - - [27/Feb/2026 02:56:46] "GET /RFX/admin/api/bid/25/evaluation-report HTTP/1.1" 200 -
+2026-02-27 02:56:47,241 - werkzeug - INFO - 127.0.0.1 - - [27/Feb/2026 02:56:47] "GET /RFX/admin/api/bid/26/evaluation-report HTTP/1.1" 200 -
+2026-02-27 02:56:48,836 - werkzeug - INFO - 127.0.0.1 - - [27/Feb/2026 02:56:48] "GET /RFX/admin/bid/25 HTTP/1.1" 200 -
+2026-02-27 02:56:49,177 - werkzeug - INFO - 127.0.0.1 - - [27/Feb/2026 02:56:49] "GET /RFX/admin/api/bid/25 HTTP/1.1" 200 -
+2026-02-27 02:56:49,430 - werkzeug - INFO - 127.0.0.1 - - [27/Feb/2026 02:56:49] "GET /RFX/admin/api/bid/25/evaluation-report HTTP/1.1" 200 -
+2026-02-27 08:43:54,609 - root - INFO - Logging Configuration Initialized
+2026-02-27 08:43:54,692 - src.core.blueprint_registry - INFO - All blueprints are registered successfully
+2026-02-27 08:43:54,692 - src.common.startup - INFO - Starting the Application Startup Validation...
+2026-02-27 08:43:54,692 - src.common.startup - INFO - Base Route: /RFX
+2026-02-27 08:43:54,692 - src.common.startup - INFO - Unicode support: Enabled
+2026-02-27 08:43:55,682 - src.common.db - INFO - Database Connection Successful
+2026-02-27 08:43:55,682 - src.common.startup - INFO - [PASS] Database Connection
+2026-02-27 08:43:55,700 - werkzeug - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5000
+ * Running on http://192.168.3.85:5000
+2026-02-27 08:43:55,706 - werkzeug - INFO - [33mPress CTRL+C to quit[0m
+2026-02-27 08:43:55,708 - werkzeug - INFO -  * Restarting with stat
+2026-02-27 08:43:59,032 - root - INFO - Logging Configuration Initialized
+2026-02-27 08:43:59,081 - src.core.blueprint_registry - INFO - All blueprints are registered successfully
+2026-02-27 08:43:59,088 - src.common.startup - INFO - Starting the Application Startup Validation...
+2026-02-27 08:43:59,088 - src.common.startup - INFO - Base Route: /RFX
+2026-02-27 08:43:59,088 - src.common.startup - INFO - Unicode support: Enabled
+2026-02-27 08:44:00,393 - src.common.db - INFO - Database Connection Successful
+2026-02-27 08:44:00,393 - src.common.startup - INFO - [PASS] Database Connection
+2026-02-27 08:44:00,400 - werkzeug - WARNING -  * Debugger is active!
+2026-02-27 08:44:00,410 - werkzeug - INFO -  * Debugger PIN: 122-096-730
+2026-02-27 08:44:10,076 - werkzeug - INFO - 127.0.0.1 - - [27/Feb/2026 08:44:10] "[33mGET /RFX/ HTTP/1.1[0m" 404 -
+2026-02-27 08:44:14,653 - werkzeug - INFO - 127.0.0.1 - - [27/Feb/2026 08:44:14] "[32mGET /RFX/admin/ HTTP/1.1[0m" 302 -
+2026-02-27 08:44:14,680 - werkzeug - INFO - 127.0.0.1 - - [27/Feb/2026 08:44:14] "GET /RFX/admin/login HTTP/1.1" 200 -
+2026-02-27 08:44:14,716 - werkzeug - INFO - 127.0.0.1 - - [27/Feb/2026 08:44:14] "[33mGET /static/images/faite-bg-v2.png HTTP/1.1[0m" 404 -
+2026-02-27 08:44:19,267 - werkzeug - INFO - 127.0.0.1 - - [27/Feb/2026 08:44:19] "[32mPOST /RFX/admin/login HTTP/1.1[0m" 302 -
+2026-02-27 08:44:19,350 - werkzeug - INFO - 127.0.0.1 - - [27/Feb/2026 08:44:19] "GET /RFX/admin/ HTTP/1.1" 200 -
+2026-02-27 08:44:19,402 - werkzeug - INFO - 127.0.0.1 - - [27/Feb/2026 08:44:19] "[33mGET /static/images/faite-bg-v2.png HTTP/1.1[0m" 404 -
+2026-02-27 08:44:20,466 - werkzeug - INFO - 127.0.0.1 - - [27/Feb/2026 08:44:20] "GET /RFX/admin/api/dashboard/stats HTTP/1.1" 200 -
+2026-02-27 08:44:23,318 - werkzeug - INFO - 127.0.0.1 - - [27/Feb/2026 08:44:23] "GET /RFX/admin/rfqs HTTP/1.1" 200 -
+2026-02-27 08:44:23,355 - werkzeug - INFO - 127.0.0.1 - - [27/Feb/2026 08:44:23] "[33mGET /static/images/faite-bg-v2.png HTTP/1.1[0m" 404 -
+2026-02-27 08:44:23,637 - werkzeug - INFO - 127.0.0.1 - - [27/Feb/2026 08:44:23] "GET /RFX/admin/api/rfqs HTTP/1.1" 200 -
+2026-02-27 08:44:29,144 - werkzeug - INFO - 127.0.0.1 - - [27/Feb/2026 08:44:29] "GET /RFX/admin/rfq/RFQ-20260225-0018 HTTP/1.1" 200 -
+2026-02-27 08:44:29,178 - werkzeug - INFO - 127.0.0.1 - - [27/Feb/2026 08:44:29] "[33mGET /static/images/faite-bg-v2.png HTTP/1.1[0m" 404 -
+2026-02-27 08:44:29,595 - werkzeug - INFO - 127.0.0.1 - - [27/Feb/2026 08:44:29] "GET /RFX/admin/api/rfq/RFQ-20260225-0018 HTTP/1.1" 200 -
+2026-02-27 08:44:29,958 - werkzeug - INFO - 127.0.0.1 - - [27/Feb/2026 08:44:29] "GET /RFX/admin/api/bid/17/evaluation-report HTTP/1.1" 200 -
+2026-02-27 08:44:32,984 - src.features.admin_portal.services.admin_service - ERROR - Error awarding bid: ('23000', '[23000] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]The UPDATE statement conflicted with the CHECK constraint "CHK_rfq_headers_status". The conflict occurred in database "P8_NOAH_AI", table "RFQ.rfq_headers", column \'status\'. (547) (SQLExecDirectW); [23000] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]The statement has been terminated. (3621)')
+2026-02-27 08:44:33,099 - werkzeug - INFO - 127.0.0.1 - - [27/Feb/2026 08:44:33] "POST /RFX/admin/api/bid/17/award HTTP/1.1" 200 -
+2026-02-27 08:48:23,556 - werkzeug - INFO -  * Detected change in 'D:\\Shared Files\\RFX\\src\\features\\admin_portal\\services\\admin_service.py', reloading
+2026-02-27 08:48:24,149 - werkzeug - INFO -  * Restarting with stat
+2026-02-27 08:48:27,933 - root - INFO - Logging Configuration Initialized
+2026-02-27 08:52:13,356 - root - INFO - Logging Configuration Initialized
+2026-02-27 08:52:13,405 - src.core.blueprint_registry - INFO - All blueprints are registered successfully
+2026-02-27 08:52:13,405 - src.common.startup - INFO - Starting the Application Startup Validation...
+2026-02-27 08:52:13,405 - src.common.startup - INFO - Base Route: /RFX
+2026-02-27 08:52:13,405 - src.common.startup - INFO - Unicode support: Enabled
+2026-02-27 08:52:14,385 - src.common.db - INFO - Database Connection Successful
+2026-02-27 08:52:14,386 - src.common.startup - INFO - [PASS] Database Connection
+2026-02-27 08:52:14,403 - werkzeug - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5000
+ * Running on http://192.168.3.85:5000
+2026-02-27 08:52:14,403 - werkzeug - INFO - [33mPress CTRL+C to quit[0m
+2026-02-27 08:52:14,406 - werkzeug - INFO -  * Restarting with stat
+2026-02-27 08:52:17,918 - root - INFO - Logging Configuration Initialized
+2026-02-27 08:52:18,015 - src.core.blueprint_registry - INFO - All blueprints are registered successfully
+2026-02-27 08:52:18,016 - src.common.startup - INFO - Starting the Application Startup Validation...
+2026-02-27 08:52:18,016 - src.common.startup - INFO - Base Route: /RFX
+2026-02-27 08:52:18,016 - src.common.startup - INFO - Unicode support: Enabled
+2026-02-27 08:52:19,160 - src.common.db - INFO - Database Connection Successful
+2026-02-27 08:52:19,160 - src.common.startup - INFO - [PASS] Database Connection
+2026-02-27 08:52:19,167 - werkzeug - WARNING -  * Debugger is active!
+2026-02-27 08:52:19,179 - werkzeug - INFO -  * Debugger PIN: 122-096-730
+2026-02-27 08:52:19,223 - werkzeug - INFO - 127.0.0.1 - - [27/Feb/2026 08:52:19] "GET /RFX/admin/rfq/RFQ-20260225-0018 HTTP/1.1" 200 -
+2026-02-27 08:52:20,328 - werkzeug - INFO - 127.0.0.1 - - [27/Feb/2026 08:52:20] "GET /RFX/admin/api/rfq/RFQ-20260225-0018 HTTP/1.1" 200 -
+2026-02-27 08:52:20,720 - werkzeug - INFO - 127.0.0.1 - - [27/Feb/2026 08:52:20] "GET /RFX/admin/api/bid/17/evaluation-report HTTP/1.1" 200 -
+2026-02-27 08:52:23,653 - werkzeug - INFO - 127.0.0.1 - - [27/Feb/2026 08:52:23] "POST /RFX/admin/api/bid/17/award HTTP/1.1" 200 -
+2026-02-27 08:52:24,105 - werkzeug - INFO - 127.0.0.1 - - [27/Feb/2026 08:52:24] "GET /RFX/admin/api/rfq/RFQ-20260225-0018 HTTP/1.1" 200 -
+2026-02-27 08:52:24,499 - werkzeug - INFO - 127.0.0.1 - - [27/Feb/2026 08:52:24] "GET /RFX/admin/api/bid/17/evaluation-report HTTP/1.1" 200 -
+2026-02-27 08:52:28,938 - werkzeug - INFO - 127.0.0.1 - - [27/Feb/2026 08:52:28] "GET /RFX/admin/bids HTTP/1.1" 200 -
+2026-02-27 08:52:29,293 - werkzeug - INFO - 127.0.0.1 - - [27/Feb/2026 08:52:29] "GET /RFX/admin/api/rfqs HTTP/1.1" 200 -
+2026-02-27 08:52:35,536 - werkzeug - INFO - 127.0.0.1 - - [27/Feb/2026 08:52:35] "GET /RFX/admin/ HTTP/1.1" 200 -
+2026-02-27 08:52:36,154 - werkzeug - INFO - 127.0.0.1 - - [27/Feb/2026 08:52:36] "GET /RFX/admin/api/dashboard/stats HTTP/1.1" 200 -
+2026-02-27 08:52:39,057 - werkzeug - INFO - 127.0.0.1 - - [27/Feb/2026 08:52:39] "GET /RFX/admin/rfq/RFQ-20260227-0001 HTTP/1.1" 200 -
+2026-02-27 08:52:39,536 - werkzeug - INFO - 127.0.0.1 - - [27/Feb/2026 08:52:39] "GET /RFX/admin/api/rfq/RFQ-20260227-0001 HTTP/1.1" 200 -
+2026-02-27 08:52:42,070 - werkzeug - INFO - 127.0.0.1 - - [27/Feb/2026 08:52:42] "GET /RFX/admin/rfq/RFQ-20260227-0001/evaluation HTTP/1.1" 200 -
+2026-02-27 08:52:42,106 - werkzeug - INFO - 127.0.0.1 - - [27/Feb/2026 08:52:42] "[33mGET /static/images/faite-bg-v2.png HTTP/1.1[0m" 404 -
+2026-02-27 08:52:42,106 - werkzeug - INFO - 127.0.0.1 - - [27/Feb/2026 08:52:42] "[33mGET /RFQ/admin/api/rfq/RFQ-20260227-0001/compare-bids HTTP/1.1[0m" 404 -
+2026-02-27 08:52:43,370 - werkzeug - INFO - 127.0.0.1 - - [27/Feb/2026 08:52:43] "[33mGET /RFQ/admin/rfq/RFQ-20260227-0001 HTTP/1.1[0m" 404 -
+2026-02-27 08:52:46,307 - werkzeug - INFO - 127.0.0.1 - - [27/Feb/2026 08:52:46] "[33mGET /RFQ/admin/bids HTTP/1.1[0m" 404 -
+2026-02-27 08:52:50,460 - werkzeug - INFO - 127.0.0.1 - - [27/Feb/2026 08:52:50] "GET /RFX/admin/bids HTTP/1.1" 200 -
+2026-02-27 08:52:50,834 - werkzeug - INFO - 127.0.0.1 - - [27/Feb/2026 08:52:50] "GET /RFX/admin/api/rfqs HTTP/1.1" 200 -
+2026-02-27 08:52:55,293 - werkzeug - INFO - 127.0.0.1 - - [27/Feb/2026 08:52:55] "GET /RFX/admin/rfq/RFQ-20260226-0002 HTTP/1.1" 200 -
+2026-02-27 08:52:55,765 - werkzeug - INFO - 127.0.0.1 - - [27/Feb/2026 08:52:55] "GET /RFX/admin/api/rfq/RFQ-20260226-0002 HTTP/1.1" 200 -
+2026-02-27 08:52:56,082 - werkzeug - INFO - 127.0.0.1 - - [27/Feb/2026 08:52:56] "GET /RFX/admin/api/bid/25/evaluation-report HTTP/1.1" 200 -
+2026-02-27 08:52:56,445 - werkzeug - INFO - 127.0.0.1 - - [27/Feb/2026 08:52:56] "GET /RFX/admin/api/bid/26/evaluation-report HTTP/1.1" 200 -
+2026-02-27 08:53:03,203 - werkzeug - INFO - 127.0.0.1 - - [27/Feb/2026 08:53:03] "GET /RFX/admin/rfq/RFQ-20260225-0021 HTTP/1.1" 200 -
+2026-02-27 08:53:03,688 - werkzeug - INFO - 127.0.0.1 - - [27/Feb/2026 08:53:03] "GET /RFX/admin/api/rfq/RFQ-20260225-0021 HTTP/1.1" 200 -
+2026-02-27 08:53:04,005 - werkzeug - INFO - 127.0.0.1 - - [27/Feb/2026 08:53:04] "GET /RFX/admin/api/bid/21/evaluation-report HTTP/1.1" 200 -
+2026-02-27 08:53:04,070 - werkzeug - INFO - 127.0.0.1 - - [27/Feb/2026 08:53:04] "GET /RFX/admin/api/bid/20/evaluation-report HTTP/1.1" 200 -
+2026-02-27 08:53:07,991 - werkzeug - INFO - 127.0.0.1 - - [27/Feb/2026 08:53:07] "GET /RFX/admin/rfq/RFQ-20260225-0018 HTTP/1.1" 200 -
+2026-02-27 08:53:08,461 - werkzeug - INFO - 127.0.0.1 - - [27/Feb/2026 08:53:08] "GET /RFX/admin/api/rfq/RFQ-20260225-0018 HTTP/1.1" 200 -
+2026-02-27 08:53:08,853 - werkzeug - INFO - 127.0.0.1 - - [27/Feb/2026 08:53:08] "GET /RFX/admin/api/bid/17/evaluation-report HTTP/1.1" 200 -
+2026-02-27 08:53:18,260 - werkzeug - INFO - 127.0.0.1 - - [27/Feb/2026 08:53:18] "GET /RFX/admin/bid/17 HTTP/1.1" 200 -
+2026-02-27 08:53:18,297 - werkzeug - INFO - 127.0.0.1 - - [27/Feb/2026 08:53:18] "[33mGET /static/images/faite-bg-v2.png HTTP/1.1[0m" 404 -
+2026-02-27 08:53:18,668 - werkzeug - INFO - 127.0.0.1 - - [27/Feb/2026 08:53:18] "GET /RFX/admin/api/bid/17 HTTP/1.1" 200 -
+2026-02-27 08:53:19,050 - werkzeug - INFO - 127.0.0.1 - - [27/Feb/2026 08:53:19] "GET /RFX/admin/api/bid/17/evaluation-report HTTP/1.1" 200 -
+2026-02-27 08:55:16,946 - werkzeug - INFO -  * Detected change in 'D:\\Shared Files\\RFX\\src\\features\\admin_portal\\services\\admin_service.py', reloading
+2026-02-27 08:55:17,476 - werkzeug - INFO -  * Restarting with stat
+2026-02-27 08:55:21,216 - root - INFO - Logging Configuration Initialized
+2026-02-27 08:57:30,092 - root - INFO - Logging Configuration Initialized
+2026-02-27 08:57:30,143 - src.core.blueprint_registry - INFO - All blueprints are registered successfully
+2026-02-27 08:57:30,143 - src.common.startup - INFO - Starting the Application Startup Validation...
+2026-02-27 08:57:30,143 - src.common.startup - INFO - Base Route: /RFX
+2026-02-27 08:57:30,143 - src.common.startup - INFO - Unicode support: Enabled
+2026-02-27 08:57:31,128 - src.common.db - INFO - Database Connection Successful
+2026-02-27 08:57:31,128 - src.common.startup - INFO - [PASS] Database Connection
+2026-02-27 08:57:31,146 - werkzeug - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5000
+ * Running on http://192.168.3.85:5000
+2026-02-27 08:57:31,146 - werkzeug - INFO - [33mPress CTRL+C to quit[0m
+2026-02-27 08:57:31,146 - werkzeug - INFO -  * Restarting with stat
+2026-02-27 08:57:34,580 - root - INFO - Logging Configuration Initialized
+2026-02-27 08:57:34,647 - src.core.blueprint_registry - INFO - All blueprints are registered successfully
+2026-02-27 08:57:34,647 - src.common.startup - INFO - Starting the Application Startup Validation...
+2026-02-27 08:57:34,648 - src.common.startup - INFO - Base Route: /RFX
+2026-02-27 08:57:34,649 - src.common.startup - INFO - Unicode support: Enabled
+2026-02-27 08:57:35,656 - src.common.db - INFO - Database Connection Successful
+2026-02-27 08:57:35,656 - src.common.startup - INFO - [PASS] Database Connection
+2026-02-27 08:57:35,670 - werkzeug - WARNING -  * Debugger is active!
+2026-02-27 08:57:35,680 - werkzeug - INFO -  * Debugger PIN: 122-096-730
+2026-02-27 08:57:35,733 - werkzeug - INFO - 127.0.0.1 - - [27/Feb/2026 08:57:35] "GET /RFX/admin/bids HTTP/1.1" 200 -
+2026-02-27 08:57:36,572 - werkzeug - INFO - 127.0.0.1 - - [27/Feb/2026 08:57:36] "GET /RFX/admin/api/rfqs HTTP/1.1" 200 -
+2026-02-27 08:57:41,672 - werkzeug - INFO - 127.0.0.1 - - [27/Feb/2026 08:57:41] "GET /RFX/admin/rfq/RFQ-20260225-0018 HTTP/1.1" 200 -
+2026-02-27 08:57:42,096 - werkzeug - INFO - 127.0.0.1 - - [27/Feb/2026 08:57:42] "GET /RFX/admin/api/rfq/RFQ-20260225-0018 HTTP/1.1" 200 -
+2026-02-27 08:57:42,449 - werkzeug - INFO - 127.0.0.1 - - [27/Feb/2026 08:57:42] "GET /RFX/admin/api/bid/17/evaluation-report HTTP/1.1" 200 -
+2026-02-27 08:57:46,212 - werkzeug - INFO - 127.0.0.1 - - [27/Feb/2026 08:57:46] "GET /RFX/admin/rfq/RFQ-20260225-0021 HTTP/1.1" 200 -
+2026-02-27 08:57:46,642 - werkzeug - INFO - 127.0.0.1 - - [27/Feb/2026 08:57:46] "GET /RFX/admin/api/rfq/RFQ-20260225-0021 HTTP/1.1" 200 -
+2026-02-27 08:57:46,989 - werkzeug - INFO - 127.0.0.1 - - [27/Feb/2026 08:57:46] "GET /RFX/admin/api/bid/20/evaluation-report HTTP/1.1" 200 -
+2026-02-27 08:57:47,410 - werkzeug - INFO - 127.0.0.1 - - [27/Feb/2026 08:57:47] "GET /RFX/admin/api/bid/21/evaluation-report HTTP/1.1" 200 -
+2026-02-27 08:57:52,142 - werkzeug - INFO - 127.0.0.1 - - [27/Feb/2026 08:57:52] "GET /RFX/admin/rfq/RFQ-20260225-0021 HTTP/1.1" 200 -
+2026-02-27 08:57:52,559 - werkzeug - INFO - 127.0.0.1 - - [27/Feb/2026 08:57:52] "GET /RFX/admin/api/rfq/RFQ-20260225-0021 HTTP/1.1" 200 -
+2026-02-27 08:57:52,845 - werkzeug - INFO - 127.0.0.1 - - [27/Feb/2026 08:57:52] "GET /RFX/admin/api/bid/21/evaluation-report HTTP/1.1" 200 -
+2026-02-27 08:57:52,914 - werkzeug - INFO - 127.0.0.1 - - [27/Feb/2026 08:57:52] "GET /RFX/admin/api/bid/20/evaluation-report HTTP/1.1" 200 -
+2026-02-27 08:57:55,094 - werkzeug - INFO - 127.0.0.1 - - [27/Feb/2026 08:57:55] "POST /RFX/admin/api/bid/20/award HTTP/1.1" 200 -
+2026-02-27 08:57:55,507 - werkzeug - INFO - 127.0.0.1 - - [27/Feb/2026 08:57:55] "GET /RFX/admin/api/rfq/RFQ-20260225-0021 HTTP/1.1" 200 -
+2026-02-27 08:57:55,809 - werkzeug - INFO - 127.0.0.1 - - [27/Feb/2026 08:57:55] "GET /RFX/admin/api/bid/21/evaluation-report HTTP/1.1" 200 -
+2026-02-27 08:57:55,850 - werkzeug - INFO - 127.0.0.1 - - [27/Feb/2026 08:57:55] "GET /RFX/admin/api/bid/20/evaluation-report HTTP/1.1" 200 -
+2026-02-27 08:58:02,242 - werkzeug - INFO - 127.0.0.1 - - [27/Feb/2026 08:58:02] "GET /RFX/admin/bid/20 HTTP/1.1" 200 -
+2026-02-27 08:58:02,614 - werkzeug - INFO - 127.0.0.1 - - [27/Feb/2026 08:58:02] "GET /RFX/admin/api/bid/20 HTTP/1.1" 200 -
+2026-02-27 08:58:02,948 - werkzeug - INFO - 127.0.0.1 - - [27/Feb/2026 08:58:02] "GET /RFX/admin/api/bid/20/evaluation-report HTTP/1.1" 200 -
+2026-02-27 09:02:17,043 - werkzeug - INFO -  * Detected change in 'D:\\Shared Files\\RFX\\src\\features\\procurement_assistant\\services\\supplier_matching_service.py', reloading
+2026-02-27 09:02:17,526 - werkzeug - INFO -  * Restarting with stat
+2026-02-27 09:02:20,762 - root - INFO - Logging Configuration Initialized
+2026-02-27 09:02:20,822 - src.core.blueprint_registry - INFO - All blueprints are registered successfully
+2026-02-27 09:02:20,823 - src.common.startup - INFO - Starting the Application Startup Validation...
+2026-02-27 09:02:20,823 - src.common.startup - INFO - Base Route: /RFX
+2026-02-27 09:02:20,823 - src.common.startup - INFO - Unicode support: Enabled
+2026-02-27 09:02:22,123 - src.common.db - INFO - Database Connection Successful
+2026-02-27 09:02:22,123 - src.common.startup - INFO - [PASS] Database Connection
+2026-02-27 09:02:22,135 - werkzeug - WARNING -  * Debugger is active!
+2026-02-27 09:02:22,139 - werkzeug - INFO -  * Debugger PIN: 122-096-730
+2026-02-27 09:02:35,250 - werkzeug - INFO -  * Detected change in 'D:\\Shared Files\\RFX\\src\\features\\procurement_assistant\\services\\supplier_matching_service.py', reloading
+2026-02-27 09:02:35,770 - werkzeug - INFO -  * Restarting with stat
+2026-02-27 09:02:39,260 - root - INFO - Logging Configuration Initialized
+2026-02-27 09:02:39,319 - src.core.blueprint_registry - INFO - All blueprints are registered successfully
+2026-02-27 09:02:39,319 - src.common.startup - INFO - Starting the Application Startup Validation...
+2026-02-27 09:02:39,319 - src.common.startup - INFO - Base Route: /RFX
+2026-02-27 09:02:39,319 - src.common.startup - INFO - Unicode support: Enabled
+2026-02-27 09:02:40,327 - src.common.db - INFO - Database Connection Successful
+2026-02-27 09:02:40,327 - src.common.startup - INFO - [PASS] Database Connection
+2026-02-27 09:02:40,341 - werkzeug - WARNING -  * Debugger is active!
+2026-02-27 09:02:40,342 - werkzeug - INFO -  * Debugger PIN: 122-096-730
+2026-02-27 09:02:55,479 - werkzeug - INFO -  * Detected change in 'D:\\Shared Files\\RFX\\src\\features\\admin_portal\\services\\admin_service.py', reloading
+2026-02-27 09:02:56,005 - werkzeug - INFO -  * Restarting with stat
+2026-02-27 09:02:59,367 - root - INFO - Logging Configuration Initialized
+2026-02-27 09:02:59,413 - src.core.blueprint_registry - INFO - All blueprints are registered successfully
+2026-02-27 09:02:59,414 - src.common.startup - INFO - Starting the Application Startup Validation...
+2026-02-27 09:02:59,414 - src.common.startup - INFO - Base Route: /RFX
+2026-02-27 09:02:59,414 - src.common.startup - INFO - Unicode support: Enabled
+2026-02-27 09:03:00,426 - src.common.db - INFO - Database Connection Successful
+2026-02-27 09:03:00,426 - src.common.startup - INFO - [PASS] Database Connection
+2026-02-27 09:03:00,437 - werkzeug - WARNING -  * Debugger is active!
+2026-02-27 09:03:00,441 - werkzeug - INFO -  * Debugger PIN: 122-096-730
+2026-02-27 09:03:01,462 - werkzeug - INFO -  * Detected change in 'D:\\Shared Files\\RFX\\src\\features\\admin_portal\\services\\admin_service.py', reloading
+2026-02-27 09:03:01,968 - werkzeug - INFO -  * Restarting with stat
+2026-02-27 09:03:05,444 - root - INFO - Logging Configuration Initialized
+2026-02-27 09:03:05,492 - src.core.blueprint_registry - INFO - All blueprints are registered successfully
+2026-02-27 09:03:05,492 - src.common.startup - INFO - Starting the Application Startup Validation...
+2026-02-27 09:03:05,492 - src.common.startup - INFO - Base Route: /RFX
+2026-02-27 09:03:05,492 - src.common.startup - INFO - Unicode support: Enabled
+2026-02-27 09:03:06,802 - src.common.db - INFO - Database Connection Successful
+2026-02-27 09:03:06,802 - src.common.startup - INFO - [PASS] Database Connection
+2026-02-27 09:03:06,813 - werkzeug - WARNING -  * Debugger is active!
+2026-02-27 09:03:06,817 - werkzeug - INFO -  * Debugger PIN: 122-096-730
+2026-02-27 09:03:11,871 - werkzeug - INFO -  * Detected change in 'D:\\Shared Files\\RFX\\src\\features\\admin_portal\\services\\admin_service.py', reloading
+2026-02-27 09:03:12,391 - werkzeug - INFO -  * Restarting with stat
+2026-02-27 09:03:15,693 - root - INFO - Logging Configuration Initialized
+2026-02-27 09:03:15,745 - src.core.blueprint_registry - INFO - All blueprints are registered successfully
+2026-02-27 09:03:15,745 - src.common.startup - INFO - Starting the Application Startup Validation...
+2026-02-27 09:03:15,746 - src.common.startup - INFO - Base Route: /RFX
+2026-02-27 09:03:15,746 - src.common.startup - INFO - Unicode support: Enabled
+2026-02-27 09:03:16,745 - src.common.db - INFO - Database Connection Successful
+2026-02-27 09:03:16,746 - src.common.startup - INFO - [PASS] Database Connection
+2026-02-27 09:03:16,758 - werkzeug - WARNING -  * Debugger is active!
+2026-02-27 09:03:16,761 - werkzeug - INFO -  * Debugger PIN: 122-096-730
+2026-02-27 09:03:18,797 - werkzeug - INFO -  * Detected change in 'D:\\Shared Files\\RFX\\src\\features\\admin_portal\\services\\admin_service.py', reloading
+2026-02-27 09:03:19,350 - werkzeug - INFO -  * Restarting with stat
+2026-02-27 09:03:23,113 - root - INFO - Logging Configuration Initialized
+2026-02-27 09:06:21,646 - root - INFO - Logging Configuration Initialized
+2026-02-27 09:06:21,704 - src.core.blueprint_registry - INFO - All blueprints are registered successfully
+2026-02-27 09:06:21,705 - src.common.startup - INFO - Starting the Application Startup Validation...
+2026-02-27 09:06:21,706 - src.common.startup - INFO - Base Route: /RFX
+2026-02-27 09:06:21,707 - src.common.startup - INFO - Unicode support: Enabled
+2026-02-27 09:06:22,853 - src.common.db - INFO - Database Connection Successful
+2026-02-27 09:06:22,854 - src.common.startup - INFO - [PASS] Database Connection
+2026-02-27 09:06:22,880 - werkzeug - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5000
+ * Running on http://192.168.3.85:5000
+2026-02-27 09:06:22,881 - werkzeug - INFO - [33mPress CTRL+C to quit[0m
+2026-02-27 09:06:22,885 - werkzeug - INFO -  * Restarting with stat
+2026-02-27 09:06:26,519 - root - INFO - Logging Configuration Initialized
+2026-02-27 09:06:26,614 - src.core.blueprint_registry - INFO - All blueprints are registered successfully
+2026-02-27 09:06:26,614 - src.common.startup - INFO - Starting the Application Startup Validation...
+2026-02-27 09:06:26,615 - src.common.startup - INFO - Base Route: /RFX
+2026-02-27 09:06:26,615 - src.common.startup - INFO - Unicode support: Enabled
+2026-02-27 09:06:28,091 - src.common.db - INFO - Database Connection Successful
+2026-02-27 09:06:28,091 - src.common.startup - INFO - [PASS] Database Connection
+2026-02-27 09:06:28,109 - werkzeug - WARNING -  * Debugger is active!
+2026-02-27 09:06:28,112 - werkzeug - INFO -  * Debugger PIN: 122-096-730
+2026-02-27 09:06:30,184 - werkzeug - INFO - 127.0.0.1 - - [27/Feb/2026 09:06:30] "GET /RFX/admin/bids HTTP/1.1" 200 -
+2026-02-27 09:06:31,105 - werkzeug - INFO - 127.0.0.1 - - [27/Feb/2026 09:06:31] "GET /RFX/admin/api/rfqs HTTP/1.1" 200 -
+2026-02-27 09:06:37,591 - werkzeug - INFO - 127.0.0.1 - - [27/Feb/2026 09:06:37] "GET /RFX/admin/rfq/RFQ-20260226-0002 HTTP/1.1" 200 -
+2026-02-27 09:06:38,067 - werkzeug - INFO - 127.0.0.1 - - [27/Feb/2026 09:06:38] "GET /RFX/admin/api/rfq/RFQ-20260226-0002 HTTP/1.1" 200 -
+2026-02-27 09:06:38,394 - werkzeug - INFO - 127.0.0.1 - - [27/Feb/2026 09:06:38] "GET /RFX/admin/api/bid/25/evaluation-report HTTP/1.1" 200 -
+2026-02-27 09:06:38,698 - werkzeug - INFO - 127.0.0.1 - - [27/Feb/2026 09:06:38] "GET /RFX/admin/api/bid/26/evaluation-report HTTP/1.1" 200 -
+2026-02-27 09:06:46,494 - src.features.admin_portal.services.admin_service - INFO - Email sent successfully to zeus@delcavisiontech.com
+2026-02-27 09:06:46,620 - src.features.admin_portal.services.admin_service - ERROR - Error sending award email: ('23000', "[23000] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Cannot insert the value NULL into column 'email_body', table 'P8_NOAH_AI.RFQ.email_logs'; column does not allow nulls. INSERT fails. (515) (SQLExecDirectW); [23000] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]The statement has been terminated. (3621)")
+2026-02-27 09:06:46,803 - werkzeug - INFO - 127.0.0.1 - - [27/Feb/2026 09:06:46] "POST /RFX/admin/api/bid/26/award HTTP/1.1" 200 -
+2026-02-27 09:06:47,245 - werkzeug - INFO - 127.0.0.1 - - [27/Feb/2026 09:06:47] "GET /RFX/admin/api/rfq/RFQ-20260226-0002 HTTP/1.1" 200 -
+2026-02-27 09:06:47,535 - werkzeug - INFO - 127.0.0.1 - - [27/Feb/2026 09:06:47] "GET /RFX/admin/api/bid/25/evaluation-report HTTP/1.1" 200 -
+2026-02-27 09:06:47,622 - werkzeug - INFO - 127.0.0.1 - - [27/Feb/2026 09:06:47] "GET /RFX/admin/api/bid/26/evaluation-report HTTP/1.1" 200 -
+2026-02-27 09:07:53,933 - werkzeug - INFO - 127.0.0.1 - - [27/Feb/2026 09:07:53] "GET /RFX/admin/rfq/RFQ-20260226-0002 HTTP/1.1" 200 -
+2026-02-27 09:07:54,408 - werkzeug - INFO - 127.0.0.1 - - [27/Feb/2026 09:07:54] "GET /RFX/admin/api/rfq/RFQ-20260226-0002 HTTP/1.1" 200 -
+2026-02-27 09:07:54,704 - werkzeug - INFO - 127.0.0.1 - - [27/Feb/2026 09:07:54] "GET /RFX/admin/api/bid/25/evaluation-report HTTP/1.1" 200 -
+2026-02-27 09:07:54,794 - werkzeug - INFO - 127.0.0.1 - - [27/Feb/2026 09:07:54] "GET /RFX/admin/api/bid/26/evaluation-report HTTP/1.1" 200 -
+2026-02-27 09:08:23,119 - werkzeug - INFO -  * Detected change in 'D:\\Shared Files\\RFX\\src\\features\\admin_portal\\services\\admin_service.py', reloading
+2026-02-27 09:08:23,722 - werkzeug - INFO -  * Restarting with stat
+2026-02-27 09:08:27,247 - root - INFO - Logging Configuration Initialized
+2026-02-27 09:08:27,294 - src.core.blueprint_registry - INFO - All blueprints are registered successfully
+2026-02-27 09:08:27,294 - src.common.startup - INFO - Starting the Application Startup Validation...
+2026-02-27 09:08:27,294 - src.common.startup - INFO - Base Route: /RFX
+2026-02-27 09:08:27,294 - src.common.startup - INFO - Unicode support: Enabled
+2026-02-27 09:08:28,636 - src.common.db - INFO - Database Connection Successful
+2026-02-27 09:08:28,636 - src.common.startup - INFO - [PASS] Database Connection
+2026-02-27 09:08:28,649 - werkzeug - WARNING -  * Debugger is active!
+2026-02-27 09:08:28,653 - werkzeug - INFO -  * Debugger PIN: 122-096-730
+2026-02-27 09:12:34,290 - werkzeug - INFO - 127.0.0.1 - - [27/Feb/2026 09:12:34] "GET /RFX/admin/rfq/RFQ-20260226-0002 HTTP/1.1" 200 -
+2026-02-27 09:12:35,141 - werkzeug - INFO - 127.0.0.1 - - [27/Feb/2026 09:12:35] "GET /RFX/admin/api/rfq/RFQ-20260226-0002 HTTP/1.1" 200 -
+2026-02-27 09:12:35,447 - werkzeug - INFO - 127.0.0.1 - - [27/Feb/2026 09:12:35] "GET /RFX/admin/api/bid/26/evaluation-report HTTP/1.1" 200 -
+2026-02-27 09:12:35,726 - werkzeug - INFO - 127.0.0.1 - - [27/Feb/2026 09:12:35] "GET /RFX/admin/api/bid/25/evaluation-report HTTP/1.1" 200 -
+2026-02-27 09:12:47,246 - src.features.admin_portal.services.admin_service - INFO - Email sent successfully to zeus@delcavisiontech.com
+2026-02-27 09:12:47,395 - src.features.admin_portal.services.admin_service - INFO - Award email sent to zeus@delcavisiontech.com for mapping_id 26
+2026-02-27 09:12:47,493 - werkzeug - INFO - 127.0.0.1 - - [27/Feb/2026 09:12:47] "POST /RFX/admin/api/bid/26/award HTTP/1.1" 200 -
+2026-02-27 09:12:47,843 - werkzeug - INFO - 127.0.0.1 - - [27/Feb/2026 09:12:47] "GET /RFX/admin/api/rfq/RFQ-20260226-0002 HTTP/1.1" 200 -
+2026-02-27 09:12:48,093 - werkzeug - INFO - 127.0.0.1 - - [27/Feb/2026 09:12:48] "GET /RFX/admin/api/bid/25/evaluation-report HTTP/1.1" 200 -
+2026-02-27 09:12:48,180 - werkzeug - INFO - 127.0.0.1 - - [27/Feb/2026 09:12:48] "GET /RFX/admin/api/bid/26/evaluation-report HTTP/1.1" 200 -
+2026-02-27 09:13:41,131 - werkzeug - INFO - 127.0.0.1 - - [27/Feb/2026 09:13:41] "GET /RFX/admin/bid/26 HTTP/1.1" 200 -
+2026-02-27 09:13:41,474 - werkzeug - INFO - 127.0.0.1 - - [27/Feb/2026 09:13:41] "GET /RFX/admin/api/bid/26 HTTP/1.1" 200 -
+2026-02-27 09:13:41,766 - werkzeug - INFO - 127.0.0.1 - - [27/Feb/2026 09:13:41] "GET /RFX/admin/api/bid/26/evaluation-report HTTP/1.1" 200 -
+2026-02-27 10:25:58,070 - root - INFO - Logging Configuration Initialized
+2026-02-27 10:25:58,122 - src.core.blueprint_registry - INFO - All blueprints are registered successfully
+2026-02-27 10:25:58,122 - src.common.startup - INFO - Starting the Application Startup Validation...
+2026-02-27 10:25:58,122 - src.common.startup - INFO - Base Route: /RFX
+2026-02-27 10:25:58,122 - src.common.startup - INFO - Unicode support: Enabled
+2026-02-27 10:26:00,012 - src.common.db - INFO - Database Connection Successful
+2026-02-27 10:26:00,012 - src.common.startup - INFO - [PASS] Database Connection
+2026-02-27 10:26:00,034 - werkzeug - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5000
+ * Running on http://192.168.3.85:5000
+2026-02-27 10:26:00,034 - werkzeug - INFO - [33mPress CTRL+C to quit[0m
+2026-02-27 10:26:00,034 - werkzeug - INFO -  * Restarting with stat
+2026-02-27 10:26:02,945 - root - INFO - Logging Configuration Initialized
+2026-02-27 10:26:02,986 - src.core.blueprint_registry - INFO - All blueprints are registered successfully
+2026-02-27 10:26:02,986 - src.common.startup - INFO - Starting the Application Startup Validation...
+2026-02-27 10:26:02,986 - src.common.startup - INFO - Base Route: /RFX
+2026-02-27 10:26:02,986 - src.common.startup - INFO - Unicode support: Enabled
+2026-02-27 10:26:04,018 - src.common.db - INFO - Database Connection Successful
+2026-02-27 10:26:04,018 - src.common.startup - INFO - [PASS] Database Connection
+2026-02-27 10:26:04,028 - werkzeug - WARNING -  * Debugger is active!
+2026-02-27 10:26:04,033 - werkzeug - INFO -  * Debugger PIN: 122-096-730
+2026-02-27 10:26:55,414 - werkzeug - INFO - 127.0.0.1 - - [27/Feb/2026 10:26:55] "[33mGET /admin HTTP/1.1[0m" 404 -
+2026-02-27 10:27:00,320 - werkzeug - INFO - 127.0.0.1 - - [27/Feb/2026 10:27:00] "[32mGET /RFX/admin/ HTTP/1.1[0m" 302 -
+2026-02-27 10:27:00,332 - werkzeug - INFO - 127.0.0.1 - - [27/Feb/2026 10:27:00] "GET /RFX/admin/login HTTP/1.1" 200 -
+2026-02-27 10:27:00,365 - werkzeug - INFO - 127.0.0.1 - - [27/Feb/2026 10:27:00] "[33mGET /static/images/faite-bg-v2.png HTTP/1.1[0m" 404 -
+2026-02-27 10:27:03,566 - werkzeug - INFO - 127.0.0.1 - - [27/Feb/2026 10:27:03] "[32mPOST /RFX/admin/login HTTP/1.1[0m" 302 -
+2026-02-27 10:27:03,593 - werkzeug - INFO - 127.0.0.1 - - [27/Feb/2026 10:27:03] "GET /RFX/admin/ HTTP/1.1" 200 -
+2026-02-27 10:27:03,641 - werkzeug - INFO - 127.0.0.1 - - [27/Feb/2026 10:27:03] "[33mGET /static/images/faite-bg-v2.png HTTP/1.1[0m" 404 -
+2026-02-27 10:27:04,542 - werkzeug - INFO - 127.0.0.1 - - [27/Feb/2026 10:27:04] "GET /RFX/admin/api/dashboard/stats HTTP/1.1" 200 -
+2026-02-27 10:27:07,074 - werkzeug - INFO - 127.0.0.1 - - [27/Feb/2026 10:27:07] "GET /RFX/admin/rfqs HTTP/1.1" 200 -
+2026-02-27 10:27:07,105 - werkzeug - INFO - 127.0.0.1 - - [27/Feb/2026 10:27:07] "[33mGET /static/images/faite-bg-v2.png HTTP/1.1[0m" 404 -
+2026-02-27 10:27:07,343 - werkzeug - INFO - 127.0.0.1 - - [27/Feb/2026 10:27:07] "GET /RFX/admin/api/rfqs HTTP/1.1" 200 -
+2026-02-27 10:27:09,150 - werkzeug - INFO - 127.0.0.1 - - [27/Feb/2026 10:27:09] "GET /RFX/admin/rfq/RFQ-20260227-0004 HTTP/1.1" 200 -
+2026-02-27 10:27:09,181 - werkzeug - INFO - 127.0.0.1 - - [27/Feb/2026 10:27:09] "[33mGET /static/images/faite-bg-v2.png HTTP/1.1[0m" 404 -
+2026-02-27 10:27:09,511 - werkzeug - INFO - 127.0.0.1 - - [27/Feb/2026 10:27:09] "GET /RFX/admin/api/rfq/RFQ-20260227-0004 HTTP/1.1" 200 -
+2026-02-27 10:27:09,807 - werkzeug - INFO - 127.0.0.1 - - [27/Feb/2026 10:27:09] "GET /RFX/admin/api/bid/41/evaluation-report HTTP/1.1" 200 -
+2026-02-27 10:27:11,106 - werkzeug - INFO - 127.0.0.1 - - [27/Feb/2026 10:27:11] "GET /RFX/admin/bid/41 HTTP/1.1" 200 -
+2026-02-27 10:27:11,135 - werkzeug - INFO - 127.0.0.1 - - [27/Feb/2026 10:27:11] "[33mGET /static/images/faite-bg-v2.png HTTP/1.1[0m" 404 -
+2026-02-27 10:27:11,414 - werkzeug - INFO - 127.0.0.1 - - [27/Feb/2026 10:27:11] "GET /RFX/admin/api/bid/41 HTTP/1.1" 200 -
+2026-02-27 10:27:11,708 - werkzeug - INFO - 127.0.0.1 - - [27/Feb/2026 10:27:11] "GET /RFX/admin/api/bid/41/evaluation-report HTTP/1.1" 200 -
+2026-02-27 10:27:19,227 - werkzeug - INFO - 127.0.0.1 - - [27/Feb/2026 10:27:19] "GET /RFX/admin/rfq/RFQ-20260227-0004/evaluation HTTP/1.1" 200 -
+2026-02-27 10:27:19,270 - werkzeug - INFO - 127.0.0.1 - - [27/Feb/2026 10:27:19] "[33mGET /RFQ/admin/api/rfq/RFQ-20260227-0004/compare-bids HTTP/1.1[0m" 404 -
+2026-02-27 10:27:19,270 - werkzeug - INFO - 127.0.0.1 - - [27/Feb/2026 10:27:19] "[33mGET /static/images/faite-bg-v2.png HTTP/1.1[0m" 404 -
+2026-02-27 10:28:08,770 - werkzeug - INFO - 127.0.0.1 - - [27/Feb/2026 10:28:08] "GET /RFX/admin/rfq/RFQ-20260227-0004/evaluation HTTP/1.1" 200 -
+2026-02-27 10:28:09,154 - werkzeug - INFO - 127.0.0.1 - - [27/Feb/2026 10:28:09] "GET /RFX/admin/api/rfq/RFQ-20260227-0004/compare-bids HTTP/1.1" 200 -
+2026-02-27 10:31:09,376 - werkzeug - INFO - 127.0.0.1 - - [27/Feb/2026 10:31:09] "GET /RFX/admin/bids HTTP/1.1" 200 -
+2026-02-27 10:31:09,950 - werkzeug - INFO - 127.0.0.1 - - [27/Feb/2026 10:31:09] "GET /RFX/admin/api/rfqs HTTP/1.1" 200 -
+2026-02-27 16:54:29,169 - werkzeug - INFO -  * Detected change in 'D:\\Shared Files\\RFX\\src\\features\\admin_portal\\routes\\admin_routes.py', reloading
+2026-02-27 16:54:29,915 - werkzeug - INFO -  * Restarting with stat
+2026-02-27 16:54:33,402 - root - INFO - Logging Configuration Initialized
+2026-02-27 16:54:33,462 - src.core.blueprint_registry - INFO - All blueprints are registered successfully
+2026-02-27 16:54:33,463 - src.common.startup - INFO - Starting the Application Startup Validation...
+2026-02-27 16:54:33,463 - src.common.startup - INFO - Base Route: /RFX
+2026-02-27 16:54:33,464 - src.common.startup - INFO - Unicode support: Enabled
+2026-02-27 16:54:34,491 - src.common.db - INFO - Database Connection Successful
+2026-02-27 16:54:34,492 - src.common.startup - INFO - [PASS] Database Connection
+2026-02-27 16:54:34,503 - werkzeug - WARNING -  * Debugger is active!
+2026-02-27 16:54:34,507 - werkzeug - INFO -  * Debugger PIN: 122-096-730
+2026-02-27 16:54:47,623 - werkzeug - INFO -  * Detected change in 'D:\\Shared Files\\RFX\\src\\features\\admin_portal\\services\\ai_bid_evaluation_service.py', reloading
+2026-02-27 16:54:48,219 - werkzeug - INFO -  * Restarting with stat
+2026-02-27 16:54:51,973 - root - INFO - Logging Configuration Initialized
+2026-02-27 16:55:44,035 - root - INFO - Logging Configuration Initialized
+2026-02-27 16:55:44,127 - src.core.blueprint_registry - INFO - All blueprints are registered successfully
+2026-02-27 16:55:44,128 - src.common.startup - INFO - Starting the Application Startup Validation...
+2026-02-27 16:55:44,129 - src.common.startup - INFO - Base Route: /RFX
+2026-02-27 16:55:44,130 - src.common.startup - INFO - Unicode support: Enabled
+2026-02-27 16:55:45,376 - src.common.db - INFO - Database Connection Successful
+2026-02-27 16:55:45,377 - src.common.startup - INFO - [PASS] Database Connection
+2026-02-27 16:55:45,414 - werkzeug - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5000
+ * Running on http://192.168.3.85:5000
+2026-02-27 16:55:45,415 - werkzeug - INFO - [33mPress CTRL+C to quit[0m
+2026-02-27 16:55:45,419 - werkzeug - INFO -  * Restarting with stat
+2026-02-27 16:55:48,990 - root - INFO - Logging Configuration Initialized
+2026-02-27 16:55:49,114 - src.core.blueprint_registry - INFO - All blueprints are registered successfully
+2026-02-27 16:55:49,115 - src.common.startup - INFO - Starting the Application Startup Validation...
+2026-02-27 16:55:49,115 - src.common.startup - INFO - Base Route: /RFX
+2026-02-27 16:55:49,116 - src.common.startup - INFO - Unicode support: Enabled
+2026-02-27 16:55:50,296 - src.common.db - INFO - Database Connection Successful
+2026-02-27 16:55:50,296 - src.common.startup - INFO - [PASS] Database Connection
+2026-02-27 16:55:50,322 - werkzeug - WARNING -  * Debugger is active!
+2026-02-27 16:55:50,330 - werkzeug - INFO -  * Debugger PIN: 122-096-730
+2026-02-27 16:55:51,738 - werkzeug - INFO - 127.0.0.1 - - [27/Feb/2026 16:55:51] "[32mGET /RFX/admin/bids HTTP/1.1[0m" 302 -
+2026-02-27 16:55:51,750 - werkzeug - INFO - 127.0.0.1 - - [27/Feb/2026 16:55:51] "GET /RFX/admin/login HTTP/1.1" 200 -
+2026-02-27 16:55:55,985 - werkzeug - INFO - 127.0.0.1 - - [27/Feb/2026 16:55:55] "[32mPOST /RFX/admin/login HTTP/1.1[0m" 302 -
+2026-02-27 16:55:56,043 - werkzeug - INFO - 127.0.0.1 - - [27/Feb/2026 16:55:56] "GET /RFX/admin/ HTTP/1.1" 200 -
+2026-02-27 16:55:57,170 - werkzeug - INFO - 127.0.0.1 - - [27/Feb/2026 16:55:57] "GET /RFX/admin/api/dashboard/stats HTTP/1.1" 200 -
+2026-02-27 16:55:57,938 - werkzeug - INFO - 127.0.0.1 - - [27/Feb/2026 16:55:57] "GET /RFX/admin/rfq/RFQ-20260227-0009 HTTP/1.1" 200 -
+2026-02-27 16:55:58,317 - werkzeug - INFO - 127.0.0.1 - - [27/Feb/2026 16:55:58] "GET /RFX/admin/api/rfq/RFQ-20260227-0009 HTTP/1.1" 200 -
+2026-02-27 16:55:58,629 - werkzeug - INFO - 127.0.0.1 - - [27/Feb/2026 16:55:58] "GET /RFX/admin/api/bid/106/evaluation-report HTTP/1.1" 200 -
+2026-02-27 16:55:58,910 - werkzeug - INFO - 127.0.0.1 - - [27/Feb/2026 16:55:58] "GET /RFX/admin/api/bid/107/evaluation-report HTTP/1.1" 200 -
+2026-02-27 16:55:59,979 - werkzeug - INFO - 127.0.0.1 - - [27/Feb/2026 16:55:59] "GET /RFX/admin/rfq/RFQ-20260227-0009/evaluation HTTP/1.1" 200 -
+2026-02-27 16:56:00,487 - werkzeug - INFO - 127.0.0.1 - - [27/Feb/2026 16:56:00] "GET /RFX/admin/api/rfq/RFQ-20260227-0009/compare-bids HTTP/1.1" 200 -
+2026-02-27 16:56:07,264 - werkzeug - INFO - 127.0.0.1 - - [27/Feb/2026 16:56:07] "GET /RFX/admin/rfq/RFQ-20260227-0009/evaluation HTTP/1.1" 200 -
+2026-02-27 16:56:07,892 - werkzeug - INFO - 127.0.0.1 - - [27/Feb/2026 16:56:07] "GET /RFX/admin/api/rfq/RFQ-20260227-0009/compare-bids HTTP/1.1" 200 -
+2026-02-27 16:56:14,670 - ibm_watson_machine_learning.client - INFO - Client successfully initialized
+2026-02-27 16:56:16,352 - ibm_watson_machine_learning.client - INFO - Client successfully initialized
+2026-02-27 16:56:24,334 - ibm_watson_machine_learning.wml_resource - INFO - Successfully finished generate for url: 'https://eu-gb.ml.cloud.ibm.com/ml/v1/text/generation?version=2025-06-25'
+2026-02-27 16:56:24,336 - src.common.llm_service - INFO - LLM Output - Model: ibm/granite-3-8b-instruct, Response: 
+Here is the structured JSON object with the comprehensive analysis:
+
+```json
+{
+    "top_performer": {
+        "supplier_name": "DELCA Test Trading",
+        "score": 46.83,
+        "strengths": ["Moderately competitive pricing", "Good delivery readiness"],
+        "key_advantages": "The supplier offers moderately competitive pricing and demonstrates good delivery readiness, making it a viable option for the RFQ."
+    },
+    "best_price": {
+        "supplier_name": "Coconut Exporters PH",
+        "amount": 20000.0,
+        "currency": "PHP",
+        "trade_offs": "The low price comes with significant trade-offs, including low value for money, limited quantity fulfillment capability, and moderate delivery readiness."
+    },
+    "competitive_landscape": "The competitive landscape is relatively limited, with only two suppliers participating in the RFQ. DELCA Test Trading is the top performer, while Coconut Exporters PH offers the best price but with notable weaknesses.",
+    "risk_assessment": "Both suppliers carry moderate risk due to limited quantity fulfillment capability and limited discount potential. DELCA Test Trading has a higher overall risk due to its limited quantity fulfillment capability, while Coconut Exporters PH has a higher risk due to its low quantity fulfillment and moderate delivery readiness.",
+    "recommendation": "CONSIDER WITH CAUTION",
+    "recommendation_rationale": "DELCA Test Trading is recommended with caution due to its moderate overall risk, which is primarily driven by its limited quantity fulfillment capability. The supplier's moderately competitive pricing and good delivery readiness make it a viable option, but the risk of limited quantity fulfillment should be carefully considered and mitigated through strategies such as diversifying the supplier base.",
+    "negotiation_strategies": [
+        "Negotiate for additional services or better terms to offset the lack of price discounts",
+        "Consider diversifying the supplier base to mitigate the risk of limited quantity fulfillment capability"
+    ],
+    "next_steps": [
+        "Conduct further due diligence on DELCA Test Trading, focusing on its quantity fulfillment capability and potential for negotiation",
+        "Explore potential for additional discounts with Coconut Exporters PH",
+        "Consider engaging with other suppliers to broaden the competitive landscape and mitigate risks"
+    ]
+}
+```
+2026-02-27 16:56:24,652 - werkzeug - INFO - 127.0.0.1 - - [27/Feb/2026 16:56:24] "GET /RFX/admin/api/rfq/RFQ-20260227-0009/ai-summary HTTP/1.1" 200 -
+2026-02-27 16:56:24,822 - ibm_watson_machine_learning.wml_resource - INFO - Successfully finished generate for url: 'https://eu-gb.ml.cloud.ibm.com/ml/v1/text/generation?version=2025-06-25'
+2026-02-27 16:56:24,824 - src.common.llm_service - INFO - LLM Output - Model: ibm/granite-3-8b-instruct, Response: 
+Here is the structured JSON object with the comprehensive analysis:
+
+```json
+{
+    "top_performer": {
+        "supplier_name": "DELCA Test Trading",
+        "score": 46.83,
+        "strengths": [
+            "Moderately competitive pricing",
+            "Good delivery readiness"
+        ],
+        "key_advantages": "Offers a moderately competitive price and good delivery readiness, making it a viable option despite limited quantity fulfillment capability and discount potential."
+    },
+    "best_price": {
+        "supplier_name": "Coconut Exporters PH",
+        "amount": 20000.0,
+        "currency": "PHP",
+        "trade_offs": "The low price comes with significant trade-offs, including low value for money, limited quantity fulfillment, and moderate delivery readiness."
+    },
+    "competitive_landscape": "The competitive landscape is relatively limited, with only two suppliers participating in the RFQ. DELCA Test Trading offers a more competitive price and better delivery readiness compared to Coconut Exporters PH.",
+    "risk_assessment": "Both suppliers have moderate overall risk levels. DELCA Test Trading's risks include limited quantity fulfillment capability and limited discount potential. Coconut Exporters PH's risks include low quantity fulfillment and moderate delivery readiness.",
+    "recommendation": "CONSIDER WITH CAUTION",
+    "recommendation_rationale": "DELCA Test Trading is recommended with caution due to its moderately competitive pricing, good delivery readiness, and potential for negotiation on additional services or better terms. However, the limited quantity fulfillment capability and discount potential should be carefully considered and mitigated through diversification of the supplier base.",
+    "negotiation_strategies": [
+        "Negotiate for additional services or better terms to offset the lack of price discounts",
+        "Consider diversifying the supplier base to mitigate the risk of limited quantity fulfillment capability"
+    ],
+    "next_steps": [
+        "Conduct further due diligence on DELCA Test Trading, including their track record, financial stability, and ability to meet larger quantity demands",
+        "Explore potential for additional discounts or better terms with DELCA Test Trading",
+        "Consider negotiating with Coconut Exporters PH for a higher quantity or better delivery timeline"
+    ]
+}
+```
+2026-02-27 16:56:25,176 - werkzeug - INFO - 127.0.0.1 - - [27/Feb/2026 16:56:25] "GET /RFX/admin/api/rfq/RFQ-20260227-0009/ai-summary HTTP/1.1" 200 -
+2026-03-02 16:03:07,806 - root - INFO - Logging Configuration Initialized
+2026-03-02 16:03:39,056 - root - INFO - Logging Configuration Initialized
+2026-03-02 16:04:17,515 - root - INFO - Logging Configuration Initialized
+2026-03-02 16:04:17,563 - src.core.blueprint_registry - INFO - All blueprints are registered successfully
+2026-03-02 16:04:17,563 - src.common.startup - INFO - Starting the Application Startup Validation...
+2026-03-02 16:04:17,563 - src.common.startup - INFO - Base Route: /RFX
+2026-03-02 16:04:17,563 - src.common.startup - INFO - Unicode support: Enabled
+2026-03-02 16:04:18,029 - src.common.db - INFO - Database Connection Successful
+2026-03-02 16:04:18,029 - src.common.startup - INFO - [PASS] Database Connection
+2026-03-02 16:04:18,055 - werkzeug - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5000
+ * Running on http://192.168.3.85:5000
+2026-03-02 16:04:18,055 - werkzeug - INFO - [33mPress CTRL+C to quit[0m
+2026-03-02 16:04:18,057 - werkzeug - INFO -  * Restarting with stat
+2026-03-02 16:04:21,244 - root - INFO - Logging Configuration Initialized
+2026-03-02 16:04:21,343 - src.core.blueprint_registry - INFO - All blueprints are registered successfully
+2026-03-02 16:04:21,344 - src.common.startup - INFO - Starting the Application Startup Validation...
+2026-03-02 16:04:21,345 - src.common.startup - INFO - Base Route: /RFX
+2026-03-02 16:04:21,345 - src.common.startup - INFO - Unicode support: Enabled
+2026-03-02 16:04:21,757 - src.common.db - INFO - Database Connection Successful
+2026-03-02 16:04:21,757 - src.common.startup - INFO - [PASS] Database Connection
+2026-03-02 16:04:21,774 - werkzeug - WARNING -  * Debugger is active!
+2026-03-02 16:04:21,779 - werkzeug - INFO -  * Debugger PIN: 122-096-730
+2026-03-02 16:04:23,522 - werkzeug - INFO - 127.0.0.1 - - [02/Mar/2026 16:04:23] "[32mGET / HTTP/1.1[0m" 302 -
+2026-03-02 16:04:23,533 - werkzeug - INFO - 127.0.0.1 - - [02/Mar/2026 16:04:23] "[33mGET /RFX/askInno HTTP/1.1[0m" 404 -
+2026-03-02 16:04:33,939 - werkzeug - INFO -  * Detected change in 'D:\\Shared Files\\RFX\\src\\core\\blueprint_registry.py', reloading
+2026-03-02 16:04:34,501 - werkzeug - INFO -  * Restarting with stat
+2026-03-02 16:04:38,313 - root - INFO - Logging Configuration Initialized
+2026-03-02 16:04:38,418 - src.core.blueprint_registry - INFO - All blueprints are registered successfully
+2026-03-02 16:04:38,418 - src.common.startup - INFO - Starting the Application Startup Validation...
+2026-03-02 16:04:38,418 - src.common.startup - INFO - Base Route: /RFX
+2026-03-02 16:04:38,418 - src.common.startup - INFO - Unicode support: Enabled
+2026-03-02 16:04:38,855 - src.common.db - INFO - Database Connection Successful
+2026-03-02 16:04:38,876 - src.common.startup - INFO - [PASS] Database Connection
+2026-03-02 16:04:38,888 - werkzeug - WARNING -  * Debugger is active!
+2026-03-02 16:04:38,892 - werkzeug - INFO -  * Debugger PIN: 122-096-730
+2026-03-02 16:04:38,909 - werkzeug - INFO - 127.0.0.1 - - [02/Mar/2026 16:04:38] "[33mGET /RFX/askInno HTTP/1.1[0m" 404 -
+2026-03-02 16:04:38,910 - werkzeug - INFO - 127.0.0.1 - - [02/Mar/2026 16:04:38] "[32mGET / HTTP/1.1[0m" 302 -
+2026-03-02 16:04:38,918 - werkzeug - INFO - 127.0.0.1 - - [02/Mar/2026 16:04:38] "[32mGET /RFX/admin HTTP/1.1[0m" 308 -
+2026-03-02 16:04:38,924 - werkzeug - INFO - 127.0.0.1 - - [02/Mar/2026 16:04:38] "[32mGET /RFX/admin/ HTTP/1.1[0m" 302 -
+2026-03-02 16:04:38,953 - werkzeug - INFO - 127.0.0.1 - - [02/Mar/2026 16:04:38] "GET /RFX/admin/login HTTP/1.1" 200 -
+2026-03-02 16:04:39,105 - werkzeug - INFO - 127.0.0.1 - - [02/Mar/2026 16:04:39] "[33mGET /static/images/faite-bg-v2.png HTTP/1.1[0m" 404 -
+2026-03-02 16:07:25,284 - werkzeug - INFO -  * Detected change in 'D:\\Shared Files\\RFX\\src\\features\\admin_portal\\routes\\award_routes.py', reloading
+2026-03-02 16:07:25,763 - werkzeug - INFO -  * Restarting with stat
+2026-03-02 16:07:29,235 - root - INFO - Logging Configuration Initialized
+2026-03-02 16:07:29,287 - src.core.blueprint_registry - INFO - All blueprints are registered successfully
+2026-03-02 16:07:29,287 - src.common.startup - INFO - Starting the Application Startup Validation...
+2026-03-02 16:07:29,287 - src.common.startup - INFO - Base Route: /RFX
+2026-03-02 16:07:29,287 - src.common.startup - INFO - Unicode support: Enabled
+2026-03-02 16:07:29,689 - src.common.db - INFO - Database Connection Successful
+2026-03-02 16:07:29,689 - src.common.startup - INFO - [PASS] Database Connection
+2026-03-02 16:07:29,708 - werkzeug - WARNING -  * Debugger is active!
+2026-03-02 16:07:29,711 - werkzeug - INFO -  * Debugger PIN: 122-096-730
+2026-03-02 16:07:30,738 - werkzeug - INFO -  * Detected change in 'D:\\Shared Files\\RFX\\src\\features\\admin_portal\\routes\\award_routes.py', reloading
+2026-03-02 16:07:31,199 - werkzeug - INFO -  * Restarting with stat
+2026-03-02 16:07:34,465 - root - INFO - Logging Configuration Initialized
+2026-03-02 16:07:34,519 - src.core.blueprint_registry - INFO - All blueprints are registered successfully
+2026-03-02 16:07:34,519 - src.common.startup - INFO - Starting the Application Startup Validation...
+2026-03-02 16:07:34,519 - src.common.startup - INFO - Base Route: /RFX
+2026-03-02 16:07:34,519 - src.common.startup - INFO - Unicode support: Enabled
+2026-03-02 16:07:34,950 - src.common.db - INFO - Database Connection Successful
+2026-03-02 16:07:34,951 - src.common.startup - INFO - [PASS] Database Connection
+2026-03-02 16:07:34,962 - werkzeug - WARNING -  * Debugger is active!
+2026-03-02 16:07:34,965 - werkzeug - INFO -  * Debugger PIN: 122-096-730
+2026-03-02 16:07:37,000 - werkzeug - INFO -  * Detected change in 'D:\\Shared Files\\RFX\\src\\features\\admin_portal\\routes\\award_routes.py', reloading
+2026-03-02 16:07:37,448 - werkzeug - INFO -  * Restarting with stat
+2026-03-02 16:07:40,559 - root - INFO - Logging Configuration Initialized
+2026-03-02 16:07:40,613 - src.core.blueprint_registry - INFO - All blueprints are registered successfully
+2026-03-02 16:07:40,613 - src.common.startup - INFO - Starting the Application Startup Validation...
+2026-03-02 16:07:40,613 - src.common.startup - INFO - Base Route: /RFX
+2026-03-02 16:07:40,613 - src.common.startup - INFO - Unicode support: Enabled
+2026-03-02 16:07:41,050 - src.common.db - INFO - Database Connection Successful
+2026-03-02 16:07:41,050 - src.common.startup - INFO - [PASS] Database Connection
+2026-03-02 16:07:41,057 - werkzeug - WARNING -  * Debugger is active!
+2026-03-02 16:07:41,064 - werkzeug - INFO -  * Debugger PIN: 122-096-730
+2026-03-02 16:07:56,432 - werkzeug - INFO - 127.0.0.1 - - [02/Mar/2026 16:07:56] "[33mGET /RFX/admin/award/ HTTP/1.1[0m" 404 -
+2026-03-02 16:08:14,532 - werkzeug - INFO - 127.0.0.1 - - [02/Mar/2026 16:08:14] "[33mGET /RFX/admin/award/RFQ-20260225-0004 HTTP/1.1[0m" 404 -
+2026-03-02 16:08:37,700 - werkzeug - INFO - 127.0.0.1 - - [02/Mar/2026 16:08:37] "[32mGET /RFX/admin HTTP/1.1[0m" 308 -
+2026-03-02 16:08:37,704 - werkzeug - INFO - 127.0.0.1 - - [02/Mar/2026 16:08:37] "[32mGET /RFX/admin/ HTTP/1.1[0m" 302 -
+2026-03-02 16:08:37,719 - werkzeug - INFO - 127.0.0.1 - - [02/Mar/2026 16:08:37] "GET /RFX/admin/login HTTP/1.1" 200 -
+2026-03-02 16:08:40,825 - werkzeug - INFO - 127.0.0.1 - - [02/Mar/2026 16:08:40] "[32mPOST /RFX/admin/login HTTP/1.1[0m" 302 -
+2026-03-02 16:08:40,912 - werkzeug - INFO - 127.0.0.1 - - [02/Mar/2026 16:08:40] "GET /RFX/admin/ HTTP/1.1" 200 -
+2026-03-02 16:08:41,062 - werkzeug - INFO - 127.0.0.1 - - [02/Mar/2026 16:08:41] "[33mGET /static/images/faite-bg-v2.png HTTP/1.1[0m" 404 -
+2026-03-02 16:08:41,446 - werkzeug - INFO - 127.0.0.1 - - [02/Mar/2026 16:08:41] "GET /RFX/admin/api/dashboard/stats HTTP/1.1" 200 -
+2026-03-02 16:08:43,365 - werkzeug - INFO - 127.0.0.1 - - [02/Mar/2026 16:08:43] "GET /RFX/admin/rfq/RFQ-20260227-0009 HTTP/1.1" 200 -
+2026-03-02 16:08:43,401 - werkzeug - INFO - 127.0.0.1 - - [02/Mar/2026 16:08:43] "[33mGET /static/images/faite-bg-v2.png HTTP/1.1[0m" 404 -
+2026-03-02 16:08:43,544 - werkzeug - INFO - 127.0.0.1 - - [02/Mar/2026 16:08:43] "GET /RFX/admin/api/rfq/RFQ-20260227-0009 HTTP/1.1" 200 -
+2026-03-02 16:08:43,672 - werkzeug - INFO - 127.0.0.1 - - [02/Mar/2026 16:08:43] "GET /RFX/admin/api/bid/106/evaluation-report HTTP/1.1" 200 -
+2026-03-02 16:08:43,744 - werkzeug - INFO - 127.0.0.1 - - [02/Mar/2026 16:08:43] "GET /RFX/admin/api/bid/107/evaluation-report HTTP/1.1" 200 -
+2026-03-02 16:09:07,093 - werkzeug - INFO - 127.0.0.1 - - [02/Mar/2026 16:09:07] "[33mGET /RFX/admin/award/RFQ-20260227-0009 HTTP/1.1[0m" 404 -
+2026-03-02 16:09:34,152 - root - INFO - Logging Configuration Initialized
+2026-03-02 16:09:34,231 - src.core.blueprint_registry - INFO - All blueprints are registered successfully
+2026-03-02 16:09:34,231 - src.common.startup - INFO - Starting the Application Startup Validation...
+2026-03-02 16:09:34,233 - src.common.startup - INFO - Base Route: /RFX
+2026-03-02 16:09:34,233 - src.common.startup - INFO - Unicode support: Enabled
+2026-03-02 16:09:34,656 - src.common.db - INFO - Database Connection Successful
+2026-03-02 16:09:34,656 - src.common.startup - INFO - [PASS] Database Connection
+2026-03-02 16:09:34,698 - werkzeug - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5000
+ * Running on http://192.168.3.85:5000
+2026-03-02 16:09:34,699 - werkzeug - INFO - [33mPress CTRL+C to quit[0m
+2026-03-02 16:09:34,701 - werkzeug - INFO -  * Restarting with stat
+2026-03-02 16:09:38,165 - root - INFO - Logging Configuration Initialized
+2026-03-02 16:09:38,225 - src.core.blueprint_registry - INFO - All blueprints are registered successfully
+2026-03-02 16:09:38,225 - src.common.startup - INFO - Starting the Application Startup Validation...
+2026-03-02 16:09:38,225 - src.common.startup - INFO - Base Route: /RFX
+2026-03-02 16:09:38,225 - src.common.startup - INFO - Unicode support: Enabled
+2026-03-02 16:09:38,633 - src.common.db - INFO - Database Connection Successful
+2026-03-02 16:09:38,633 - src.common.startup - INFO - [PASS] Database Connection
+2026-03-02 16:09:38,644 - werkzeug - WARNING -  * Debugger is active!
+2026-03-02 16:09:38,658 - werkzeug - INFO -  * Debugger PIN: 122-096-730
+2026-03-02 16:09:38,684 - werkzeug - INFO - 127.0.0.1 - - [02/Mar/2026 16:09:38] "[33mGET /RFX/admin/award/RFQ-20260227-0009 HTTP/1.1[0m" 404 -
+2026-03-02 16:11:26,534 - werkzeug - INFO -  * Detected change in 'D:\\Shared Files\\RFX\\src\\features\\admin_portal\\routes\\award_routes.py', reloading
+2026-03-02 16:11:27,035 - werkzeug - INFO -  * Restarting with stat
+2026-03-02 16:11:30,288 - root - INFO - Logging Configuration Initialized
+2026-03-02 16:11:30,345 - src.core.blueprint_registry - INFO - All blueprints are registered successfully
+2026-03-02 16:11:30,345 - src.common.startup - INFO - Starting the Application Startup Validation...
+2026-03-02 16:11:30,345 - src.common.startup - INFO - Base Route: /RFX
+2026-03-02 16:11:30,345 - src.common.startup - INFO - Unicode support: Enabled
+2026-03-02 16:11:30,746 - src.common.db - INFO - Database Connection Successful
+2026-03-02 16:11:30,746 - src.common.startup - INFO - [PASS] Database Connection
+2026-03-02 16:11:30,757 - werkzeug - WARNING -  * Debugger is active!
+2026-03-02 16:11:30,761 - werkzeug - INFO -  * Debugger PIN: 122-096-730
+2026-03-02 16:12:01,010 - werkzeug - INFO -  * Detected change in 'D:\\Shared Files\\RFX\\src\\features\\admin_portal\\routes\\award_routes.py', reloading
+2026-03-02 16:12:01,455 - werkzeug - INFO -  * Restarting with stat
+2026-03-02 16:12:04,712 - root - INFO - Logging Configuration Initialized
+2026-03-02 16:12:04,761 - src.core.blueprint_registry - INFO - All blueprints are registered successfully
+2026-03-02 16:12:04,761 - src.common.startup - INFO - Starting the Application Startup Validation...
+2026-03-02 16:12:04,761 - src.common.startup - INFO - Base Route: /RFX
+2026-03-02 16:12:04,761 - src.common.startup - INFO - Unicode support: Enabled
+2026-03-02 16:12:05,171 - src.common.db - INFO - Database Connection Successful
+2026-03-02 16:12:05,171 - src.common.startup - INFO - [PASS] Database Connection
+2026-03-02 16:12:05,185 - werkzeug - WARNING -  * Debugger is active!
+2026-03-02 16:12:05,188 - werkzeug - INFO -  * Debugger PIN: 122-096-730
+2026-03-02 16:12:10,240 - werkzeug - INFO -  * Detected change in 'D:\\Shared Files\\RFX\\src\\features\\admin_portal\\routes\\award_routes.py', reloading
+2026-03-02 16:12:10,717 - werkzeug - INFO -  * Restarting with stat
+2026-03-02 16:12:13,994 - root - INFO - Logging Configuration Initialized
+2026-03-02 16:12:14,059 - src.core.blueprint_registry - INFO - All blueprints are registered successfully
+2026-03-02 16:12:14,059 - src.common.startup - INFO - Starting the Application Startup Validation...
+2026-03-02 16:12:14,060 - src.common.startup - INFO - Base Route: /RFX
+2026-03-02 16:12:14,060 - src.common.startup - INFO - Unicode support: Enabled
+2026-03-02 16:12:14,467 - src.common.db - INFO - Database Connection Successful
+2026-03-02 16:12:14,468 - src.common.startup - INFO - [PASS] Database Connection
+2026-03-02 16:12:14,479 - werkzeug - WARNING -  * Debugger is active!
+2026-03-02 16:12:14,479 - werkzeug - INFO -  * Debugger PIN: 122-096-730
+2026-03-02 16:12:18,530 - werkzeug - INFO -  * Detected change in 'D:\\Shared Files\\RFX\\src\\features\\admin_portal\\routes\\award_routes.py', reloading
+2026-03-02 16:12:19,029 - werkzeug - INFO -  * Restarting with stat
+2026-03-02 16:12:22,441 - root - INFO - Logging Configuration Initialized
+2026-03-02 16:12:22,512 - src.core.blueprint_registry - INFO - All blueprints are registered successfully
+2026-03-02 16:12:22,512 - src.common.startup - INFO - Starting the Application Startup Validation...
+2026-03-02 16:12:22,512 - src.common.startup - INFO - Base Route: /RFX
+2026-03-02 16:12:22,512 - src.common.startup - INFO - Unicode support: Enabled
+2026-03-02 16:12:22,914 - src.common.db - INFO - Database Connection Successful
+2026-03-02 16:12:22,915 - src.common.startup - INFO - [PASS] Database Connection
+2026-03-02 16:12:22,928 - werkzeug - WARNING -  * Debugger is active!
+2026-03-02 16:12:22,931 - werkzeug - INFO -  * Debugger PIN: 122-096-730
+2026-03-02 16:13:24,133 - werkzeug - INFO - 127.0.0.1 - - [02/Mar/2026 16:13:24] "GET /RFX/admin/award/RFQ-20260227-0009 HTTP/1.1" 200 -
+2026-03-02 16:13:24,479 - src.features.admin_portal.services.award_management_service - ERROR - Error parsing bid for mapping_id 106: ('42S02', "[42S02] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Invalid object name 'RFQ.rfq_proposal_items'. (208) (SQLExecDirectW); [42S02] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Statement(s) could not be prepared. (8180)")
+2026-03-02 16:13:24,535 - src.features.admin_portal.services.award_management_service - ERROR - Error parsing bid for mapping_id 107: ('42S02', "[42S02] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Invalid object name 'RFQ.rfq_proposal_items'. (208) (SQLExecDirectW); [42S02] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Statement(s) could not be prepared. (8180)")
+2026-03-02 16:13:24,619 - werkzeug - INFO - 127.0.0.1 - - [02/Mar/2026 16:13:24] "GET /RFX/admin/api/award/selection-data/RFQ-20260227-0009 HTTP/1.1" 200 -
+2026-03-02 16:15:48,668 - werkzeug - INFO - 127.0.0.1 - - [02/Mar/2026 16:15:48] "[32mGET /RFX/customer HTTP/1.1[0m" 308 -
+2026-03-02 16:15:48,728 - werkzeug - INFO - 127.0.0.1 - - [02/Mar/2026 16:15:48] "GET /RFX/customer/ HTTP/1.1" 200 -
+2026-03-02 16:15:48,875 - werkzeug - INFO - 127.0.0.1 - - [02/Mar/2026 16:15:48] "[33mGET /static/images/faite-bg-v2.png HTTP/1.1[0m" 404 -
+2026-03-02 16:18:22,218 - werkzeug - INFO - 127.0.0.1 - - [02/Mar/2026 16:18:22] "GET /RFX/admin/award/RFQ-20260227-0009 HTTP/1.1" 200 -
+2026-03-02 16:18:22,462 - src.features.admin_portal.services.award_management_service - ERROR - Error parsing bid for mapping_id 106: ('42S02', "[42S02] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Invalid object name 'RFQ.rfq_proposal_items'. (208) (SQLExecDirectW); [42S02] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Statement(s) could not be prepared. (8180)")
+2026-03-02 16:18:22,501 - src.features.admin_portal.services.award_management_service - ERROR - Error parsing bid for mapping_id 107: ('42S02', "[42S02] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Invalid object name 'RFQ.rfq_proposal_items'. (208) (SQLExecDirectW); [42S02] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Statement(s) could not be prepared. (8180)")
+2026-03-02 16:18:22,581 - werkzeug - INFO - 127.0.0.1 - - [02/Mar/2026 16:18:22] "GET /RFX/admin/api/award/selection-data/RFQ-20260227-0009 HTTP/1.1" 200 -
+2026-03-02 16:20:39,514 - werkzeug - INFO - 127.0.0.1 - - [02/Mar/2026 16:20:39] "GET /RFX/customer/ HTTP/1.1" 200 -
+2026-03-02 16:20:46,389 - werkzeug - INFO - 127.0.0.1 - - [02/Mar/2026 16:20:46] "GET /RFX/customer/ HTTP/1.1" 200 -
+2026-03-02 16:20:46,433 - werkzeug - INFO - 127.0.0.1 - - [02/Mar/2026 16:20:46] "[33mGET /static/images/faite-bg-v2.png HTTP/1.1[0m" 404 -
+2026-03-02 16:23:34,637 - werkzeug - INFO - 127.0.0.1 - - [02/Mar/2026 16:23:34] "GET /RFX/supplier/M0I4OS0yWkhXLTk3MFkuNzNmZTE1ZWMwNGFhYzhmNA== HTTP/1.1" 200 -
+2026-03-02 16:23:34,681 - werkzeug - INFO - 127.0.0.1 - - [02/Mar/2026 16:23:34] "[33mGET /static/images/faite-bg-v2.png HTTP/1.1[0m" 404 -
+2026-03-02 16:23:39,703 - src.features.procurement_assistant.services.supplier_matching_service - INFO - Successful passcode validation for mapping_id: 124
+2026-03-02 16:23:39,747 - werkzeug - INFO - 127.0.0.1 - - [02/Mar/2026 16:23:39] "POST /RFX/supplier/validate-passcode HTTP/1.1" 200 -
+2026-03-02 16:23:39,919 - werkzeug - INFO - 127.0.0.1 - - [02/Mar/2026 16:23:39] "GET /RFX/supplier/bid-form HTTP/1.1" 200 -
+2026-03-02 16:23:39,949 - werkzeug - INFO - 127.0.0.1 - - [02/Mar/2026 16:23:39] "[33mGET /static/images/faite-bg-v2.png HTTP/1.1[0m" 404 -
+2026-03-02 16:23:40,090 - werkzeug - INFO - 127.0.0.1 - - [02/Mar/2026 16:23:40] "GET /RFX/supplier/api/rfq-details HTTP/1.1" 200 -
+2026-03-02 16:24:38,431 - src.features.supplier_portal.services.bid_submission_service - ERROR - Error submitting bid: 'str' object has no attribute 'get'
+2026-03-02 16:24:38,476 - werkzeug - INFO - 127.0.0.1 - - [02/Mar/2026 16:24:38] "[31m[1mPOST /RFX/supplier/api/submit-bid HTTP/1.1[0m" 400 -
+2026-03-02 16:25:57,726 - src.features.supplier_portal.services.bid_submission_service - ERROR - Error submitting bid: 'str' object has no attribute 'get'
+2026-03-02 16:25:57,773 - werkzeug - INFO - 127.0.0.1 - - [02/Mar/2026 16:25:57] "[31m[1mPOST /RFX/supplier/api/submit-bid HTTP/1.1[0m" 400 -
+2026-03-02 16:28:43,654 - werkzeug - INFO -  * Detected change in 'D:\\Shared Files\\RFX\\src\\features\\supplier_portal\\services\\bid_submission_service.py', reloading
+2026-03-02 16:28:44,128 - werkzeug - INFO -  * Restarting with stat
+2026-03-02 16:28:47,566 - root - INFO - Logging Configuration Initialized
+2026-03-02 16:29:31,719 - root - INFO - Logging Configuration Initialized
+2026-03-02 16:29:31,779 - src.core.blueprint_registry - INFO - All blueprints are registered successfully
+2026-03-02 16:29:31,780 - src.common.startup - INFO - Starting the Application Startup Validation...
+2026-03-02 16:29:31,780 - src.common.startup - INFO - Base Route: /RFX
+2026-03-02 16:29:31,781 - src.common.startup - INFO - Unicode support: Enabled
+2026-03-02 16:29:32,178 - src.common.db - INFO - Database Connection Successful
+2026-03-02 16:29:32,179 - src.common.startup - INFO - [PASS] Database Connection
+2026-03-02 16:29:32,195 - werkzeug - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5000
+ * Running on http://192.168.3.85:5000
+2026-03-02 16:29:32,196 - werkzeug - INFO - [33mPress CTRL+C to quit[0m
+2026-03-02 16:29:32,197 - werkzeug - INFO -  * Restarting with stat
+2026-03-02 16:29:35,789 - root - INFO - Logging Configuration Initialized
+2026-03-02 16:29:35,925 - src.core.blueprint_registry - INFO - All blueprints are registered successfully
+2026-03-02 16:29:35,925 - src.common.startup - INFO - Starting the Application Startup Validation...
+2026-03-02 16:29:35,926 - src.common.startup - INFO - Base Route: /RFX
+2026-03-02 16:29:35,927 - src.common.startup - INFO - Unicode support: Enabled
+2026-03-02 16:29:36,356 - src.common.db - INFO - Database Connection Successful
+2026-03-02 16:29:36,356 - src.common.startup - INFO - [PASS] Database Connection
+2026-03-02 16:29:36,387 - werkzeug - WARNING -  * Debugger is active!
+2026-03-02 16:29:36,400 - werkzeug - INFO -  * Debugger PIN: 122-096-730
+2026-03-02 16:29:36,693 - src.features.supplier_portal.services.bid_submission_service - ERROR - Error submitting bid: 'str' object has no attribute 'get'
+2026-03-02 16:29:36,740 - werkzeug - INFO - 127.0.0.1 - - [02/Mar/2026 16:29:36] "[31m[1mPOST /RFX/supplier/api/submit-bid HTTP/1.1[0m" 400 -
+2026-03-02 16:32:09,041 - werkzeug - INFO - 127.0.0.1 - - [02/Mar/2026 16:32:09] "GET /RFX/supplier/bid-form HTTP/1.1" 200 -
+2026-03-02 16:32:09,223 - werkzeug - INFO - 127.0.0.1 - - [02/Mar/2026 16:32:09] "GET /RFX/supplier/api/rfq-details HTTP/1.1" 200 -
+2026-03-02 16:32:25,763 - werkzeug - INFO - 127.0.0.1 - - [02/Mar/2026 16:32:25] "GET /RFX/supplier/bid-form HTTP/1.1" 200 -
+2026-03-02 16:32:25,945 - werkzeug - INFO - 127.0.0.1 - - [02/Mar/2026 16:32:25] "GET /RFX/supplier/api/rfq-details HTTP/1.1" 200 -
+2026-03-02 16:32:41,824 - werkzeug - INFO - 127.0.0.1 - - [02/Mar/2026 16:32:41] "GET /RFX/supplier/M0I4OS0yWkhXLTk3MFkuNzNmZTE1ZWMwNGFhYzhmNA== HTTP/1.1" 200 -
+2026-03-02 16:32:54,883 - src.features.procurement_assistant.services.supplier_matching_service - INFO - Successful passcode validation for mapping_id: 124
+2026-03-02 16:32:54,927 - werkzeug - INFO - 127.0.0.1 - - [02/Mar/2026 16:32:54] "POST /RFX/supplier/validate-passcode HTTP/1.1" 200 -
+2026-03-02 16:32:55,086 - werkzeug - INFO - 127.0.0.1 - - [02/Mar/2026 16:32:55] "GET /RFX/supplier/bid-form HTTP/1.1" 200 -
+2026-03-02 16:32:55,270 - werkzeug - INFO - 127.0.0.1 - - [02/Mar/2026 16:32:55] "GET /RFX/supplier/api/rfq-details HTTP/1.1" 200 -
+2026-03-02 16:33:24,104 - werkzeug - INFO - 127.0.0.1 - - [02/Mar/2026 16:33:24] "GET /RFX/supplier/bid-form HTTP/1.1" 200 -
+2026-03-02 16:33:24,313 - werkzeug - INFO - 127.0.0.1 - - [02/Mar/2026 16:33:24] "GET /RFX/supplier/api/rfq-details HTTP/1.1" 200 -
+2026-03-02 16:34:55,145 - werkzeug - INFO - 127.0.0.1 - - [02/Mar/2026 16:34:55] "GET /RFX/supplier/bid-form HTTP/1.1" 200 -
+2026-03-02 16:34:55,346 - werkzeug - INFO - 127.0.0.1 - - [02/Mar/2026 16:34:55] "GET /RFX/supplier/api/rfq-details HTTP/1.1" 200 -
+2026-03-02 16:35:32,378 - src.features.supplier_portal.services.bid_submission_service - ERROR - Error submitting bid: 'str' object has no attribute 'get'
+2026-03-02 16:35:32,419 - werkzeug - INFO - 127.0.0.1 - - [02/Mar/2026 16:35:32] "[31m[1mPOST /RFX/supplier/api/submit-bid HTTP/1.1[0m" 400 -
+2026-03-02 16:37:23,285 - werkzeug - INFO -  * Detected change in 'D:\\Shared Files\\RFX\\src\\features\\supplier_portal\\services\\bid_submission_service.py', reloading
+2026-03-02 16:37:23,855 - werkzeug - INFO -  * Restarting with stat
+2026-03-02 16:37:27,781 - root - INFO - Logging Configuration Initialized
+2026-03-02 16:37:40,657 - root - INFO - Logging Configuration Initialized
+2026-03-02 16:37:40,719 - src.core.blueprint_registry - INFO - All blueprints are registered successfully
+2026-03-02 16:37:40,719 - src.common.startup - INFO - Starting the Application Startup Validation...
+2026-03-02 16:37:40,719 - src.common.startup - INFO - Base Route: /RFX
+2026-03-02 16:37:40,719 - src.common.startup - INFO - Unicode support: Enabled
+2026-03-02 16:37:41,145 - src.common.db - INFO - Database Connection Successful
+2026-03-02 16:37:41,145 - src.common.startup - INFO - [PASS] Database Connection
+2026-03-02 16:37:41,163 - werkzeug - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5000
+ * Running on http://192.168.3.85:5000
+2026-03-02 16:37:41,163 - werkzeug - INFO - [33mPress CTRL+C to quit[0m
+2026-03-02 16:37:41,165 - werkzeug - INFO -  * Restarting with stat
+2026-03-02 16:37:44,941 - root - INFO - Logging Configuration Initialized
+2026-03-02 16:37:45,038 - src.core.blueprint_registry - INFO - All blueprints are registered successfully
+2026-03-02 16:37:45,042 - src.common.startup - INFO - Starting the Application Startup Validation...
+2026-03-02 16:37:45,042 - src.common.startup - INFO - Base Route: /RFX
+2026-03-02 16:37:45,042 - src.common.startup - INFO - Unicode support: Enabled
+2026-03-02 16:37:45,476 - src.common.db - INFO - Database Connection Successful
+2026-03-02 16:37:45,476 - src.common.startup - INFO - [PASS] Database Connection
+2026-03-02 16:37:45,497 - werkzeug - WARNING -  * Debugger is active!
+2026-03-02 16:37:45,502 - werkzeug - INFO -  * Debugger PIN: 122-096-730
+2026-03-02 16:37:45,997 - src.features.supplier_portal.services.bid_submission_service - ERROR - Error submitting bid: 'str' object has no attribute 'get'
+2026-03-02 16:37:46,036 - werkzeug - INFO - 127.0.0.1 - - [02/Mar/2026 16:37:46] "[31m[1mPOST /RFX/supplier/api/submit-bid HTTP/1.1[0m" 400 -
+2026-03-02 16:39:47,891 - werkzeug - INFO -  * Detected change in 'D:\\Shared Files\\RFX\\src\\features\\supplier_portal\\services\\bid_submission_service.py', reloading
+2026-03-02 16:39:48,453 - werkzeug - INFO -  * Restarting with stat
+2026-03-02 16:39:51,994 - root - INFO - Logging Configuration Initialized
+2026-03-02 16:40:11,035 - root - INFO - Logging Configuration Initialized
+2026-03-02 16:40:11,092 - src.core.blueprint_registry - INFO - All blueprints are registered successfully
+2026-03-02 16:40:11,092 - src.common.startup - INFO - Starting the Application Startup Validation...
+2026-03-02 16:40:11,092 - src.common.startup - INFO - Base Route: /RFX
+2026-03-02 16:40:11,093 - src.common.startup - INFO - Unicode support: Enabled
+2026-03-02 16:40:11,492 - src.common.db - INFO - Database Connection Successful
+2026-03-02 16:40:11,493 - src.common.startup - INFO - [PASS] Database Connection
+2026-03-02 16:40:11,510 - werkzeug - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5000
+ * Running on http://192.168.3.85:5000
+2026-03-02 16:40:11,511 - werkzeug - INFO - [33mPress CTRL+C to quit[0m
+2026-03-02 16:40:11,511 - werkzeug - INFO -  * Restarting with stat
+2026-03-02 16:40:15,101 - root - INFO - Logging Configuration Initialized
+2026-03-02 16:40:15,195 - src.core.blueprint_registry - INFO - All blueprints are registered successfully
+2026-03-02 16:40:15,195 - src.common.startup - INFO - Starting the Application Startup Validation...
+2026-03-02 16:40:15,195 - src.common.startup - INFO - Base Route: /RFX
+2026-03-02 16:40:15,195 - src.common.startup - INFO - Unicode support: Enabled
+2026-03-02 16:40:15,834 - src.common.db - INFO - Database Connection Successful
+2026-03-02 16:40:15,834 - src.common.startup - INFO - [PASS] Database Connection
+2026-03-02 16:40:15,861 - werkzeug - WARNING -  * Debugger is active!
+2026-03-02 16:40:15,866 - werkzeug - INFO -  * Debugger PIN: 122-096-730
+2026-03-02 16:40:16,202 - werkzeug - INFO - 127.0.0.1 - - [02/Mar/2026 16:40:16] "GET /RFX/supplier/bid-form HTTP/1.1" 200 -
+2026-03-02 16:40:16,405 - werkzeug - INFO - 127.0.0.1 - - [02/Mar/2026 16:40:16] "GET /RFX/supplier/api/rfq-details HTTP/1.1" 200 -
+2026-03-02 16:40:50,845 - src.features.supplier_portal.services.bid_submission_service - ERROR - Error submitting bid: 'str' object has no attribute 'get'
+2026-03-02 16:40:50,884 - werkzeug - INFO - 127.0.0.1 - - [02/Mar/2026 16:40:50] "[31m[1mPOST /RFX/supplier/api/submit-bid HTTP/1.1[0m" 400 -
+2026-03-02 16:42:04,030 - werkzeug - INFO -  * Detected change in 'D:\\Shared Files\\RFX\\src\\features\\supplier_portal\\routes\\supplier_routes.py', reloading
+2026-03-02 16:42:04,543 - werkzeug - INFO -  * Restarting with stat
+2026-03-02 16:42:08,056 - root - INFO - Logging Configuration Initialized
+2026-03-02 16:42:08,110 - src.core.blueprint_registry - INFO - All blueprints are registered successfully
+2026-03-02 16:42:08,110 - src.common.startup - INFO - Starting the Application Startup Validation...
+2026-03-02 16:42:08,110 - src.common.startup - INFO - Base Route: /RFX
+2026-03-02 16:42:08,113 - src.common.startup - INFO - Unicode support: Enabled
+2026-03-02 16:42:08,506 - src.common.db - INFO - Database Connection Successful
+2026-03-02 16:42:08,506 - src.common.startup - INFO - [PASS] Database Connection
+2026-03-02 16:42:08,519 - werkzeug - WARNING -  * Debugger is active!
+2026-03-02 16:42:08,523 - werkzeug - INFO -  * Debugger PIN: 122-096-730
+2026-03-02 16:42:19,275 - src.features.supplier_portal.routes.supplier_routes - INFO - Raw request data: {"supplier_info":{"contact_person":"Jennifer Cruz","email":"zeus@delcavisiontech.com","submitted_at":"2026-03-02T08:42:19.272Z"},"quotations":[{"line_number":1,"original_request":{"brand":"Any Brand","category":"Laptops","model":"","part_number":"","quantity":20,"description":""},"match_status":"partial","offered_products":[{"product_name":"Lapi","brand":"Any Brand","model":"Lapi","specifications":{},"quantity":20,"unit_price":20000,"delivery_time_days":23,"warranty":36,"notes":""}]},{"line_number":2,"original_request":{"brand":"Any Brand","category":"Monitors","model":"","part_number":"","quantity":5,"description":""},"match_status":"none","offered_products":[]},{"line_number":3,"original_request":{"brand":"Any Brand","category":"Printers","model":"","part_number":"","quantity":6,"description":""},"match_status":"none","offered_products":[{"product_name":"Printy","brand":"Any Brand","model":"Printy","specifications":{},"quantity":4,"unit_price":8000,"delivery_time_days":32,"warranty":36,"notes":""}]}],"summary":{"currency":"PHP","valid_until":"2026-04-01","delivery_terms":"","payment_terms":"","notes":""}}
+2026-03-02 16:42:19,275 - src.features.supplier_portal.routes.supplier_routes - INFO - Parsed JSON data type: <class 'dict'>
+2026-03-02 16:42:19,275 - src.features.supplier_portal.routes.supplier_routes - INFO - Parsed JSON data: {
+  "supplier_info": {
+    "contact_person": "Jennifer Cruz",
+    "email": "zeus@delcavisiontech.com",
+    "submitted_at": "2026-03-02T08:42:19.272Z"
+  },
+  "quotations": [
+    {
+      "line_number": 1,
+      "original_request": {
+        "brand": "Any Brand",
+        "category": "Laptops",
+        "model": "",
+        "part_number": "",
+        "quantity": 20,
+        "description": ""
+      },
+      "match_status": "partial",
+      "offered_products": [
+        {
+          "product_name": "Lapi",
+          "brand": "Any Brand",
+          "model": "Lapi",
+          "specifications": {},
+          "quantity": 20,
+          "unit_price": 20000,
+          "delivery_time_days": 23,
+          "warranty": 36,
+          "notes": ""
+        }
+      ]
+    },
+    {
+      "line_number": 2,
+      "original_request": {
+        "brand": "Any Brand",
+        "category": "Monitors",
+        "model": "",
+        "part_number": "",
+        "quantity": 5,
+        "description": ""
+      },
+      "match_status": "none",
+      "offered_products": []
+    },
+    {
+      "line_number": 3,
+      "original_request": {
+        "brand": "Any Brand",
+        "category": "Printers",
+        "model": "",
+        "part_number": "",
+        "quantity": 6,
+        "description": ""
+      },
+      "match_status": "none",
+      "offered_products": [
+        {
+          "product_name": "Printy",
+          "brand": "Any Brand",
+          "model": "Printy",
+          "specifications": {},
+          "quantity": 4,
+          "unit_price": 8000,
+          "delivery_time_days": 32,
+          "warranty": 36,
+          "notes": ""
+        }
+      ]
+    }
+  ],
+  "summary": {
+    "currency": "PHP",
+    "valid_until": "2026-04-01",
+    "delivery_terms": "",
+    "payment_terms": "",
+    "notes": ""
+  }
+}
+2026-03-02 16:42:19,559 - src.features.supplier_portal.services.bid_submission_service - ERROR - Error submitting bid: 'str' object has no attribute 'get'
+2026-03-02 16:42:19,604 - werkzeug - INFO - 127.0.0.1 - - [02/Mar/2026 16:42:19] "[31m[1mPOST /RFX/supplier/api/submit-bid HTTP/1.1[0m" 400 -
+2026-03-02 16:43:56,431 - werkzeug - INFO -  * Detected change in 'D:\\Shared Files\\RFX\\src\\features\\supplier_portal\\services\\bid_submission_service.py', reloading
+2026-03-02 16:43:56,971 - werkzeug - INFO -  * Restarting with stat
+2026-03-02 16:44:00,913 - root - INFO - Logging Configuration Initialized
+2026-03-02 16:44:17,898 - root - INFO - Logging Configuration Initialized
+2026-03-02 16:44:17,965 - src.core.blueprint_registry - INFO - All blueprints are registered successfully
+2026-03-02 16:44:17,966 - src.common.startup - INFO - Starting the Application Startup Validation...
+2026-03-02 16:44:17,966 - src.common.startup - INFO - Base Route: /RFX
+2026-03-02 16:44:17,967 - src.common.startup - INFO - Unicode support: Enabled
+2026-03-02 16:44:18,397 - src.common.db - INFO - Database Connection Successful
+2026-03-02 16:44:18,397 - src.common.startup - INFO - [PASS] Database Connection
+2026-03-02 16:44:18,416 - werkzeug - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5000
+ * Running on http://192.168.3.85:5000
+2026-03-02 16:44:18,416 - werkzeug - INFO - [33mPress CTRL+C to quit[0m
+2026-03-02 16:44:18,417 - werkzeug - INFO -  * Restarting with stat
+2026-03-02 16:44:21,978 - root - INFO - Logging Configuration Initialized
+2026-03-02 16:44:22,070 - src.core.blueprint_registry - INFO - All blueprints are registered successfully
+2026-03-02 16:44:22,070 - src.common.startup - INFO - Starting the Application Startup Validation...
+2026-03-02 16:44:22,070 - src.common.startup - INFO - Base Route: /RFX
+2026-03-02 16:44:22,070 - src.common.startup - INFO - Unicode support: Enabled
+2026-03-02 16:44:22,500 - src.common.db - INFO - Database Connection Successful
+2026-03-02 16:44:22,501 - src.common.startup - INFO - [PASS] Database Connection
+2026-03-02 16:44:22,525 - werkzeug - WARNING -  * Debugger is active!
+2026-03-02 16:44:22,530 - werkzeug - INFO -  * Debugger PIN: 122-096-730
+2026-03-02 16:44:22,561 - src.features.supplier_portal.routes.supplier_routes - INFO - Raw request data: {"supplier_info":{"contact_person":"Jennifer Cruz","email":"zeus@delcavisiontech.com","submitted_at":"2026-03-02T08:44:22.057Z"},"quotations":[{"line_number":1,"original_request":{"brand":"Any Brand","category":"Laptops","model":"","part_number":"","quantity":20,"description":""},"match_status":"partial","offered_products":[{"product_name":"Lapi","brand":"Any Brand","model":"Lapi","specifications":{},"quantity":20,"unit_price":20000,"delivery_time_days":23,"warranty":36,"notes":""}]},{"line_number":2,"original_request":{"brand":"Any Brand","category":"Monitors","model":"","part_number":"","quantity":5,"description":""},"match_status":"none","offered_products":[]},{"line_number":3,"original_request":{"brand":"Any Brand","category":"Printers","model":"","part_number":"","quantity":6,"description":""},"match_status":"none","offered_products":[{"product_name":"Printy","brand":"Any Brand","model":"Printy","specifications":{},"quantity":4,"unit_price":8000,"delivery_time_days":32,"warranty":36,"notes":""}]}],"summary":{"currency":"PHP","valid_until":"2026-04-01","delivery_terms":"","payment_terms":"","notes":""}}
+2026-03-02 16:44:22,561 - src.features.supplier_portal.routes.supplier_routes - INFO - Parsed JSON data type: <class 'dict'>
+2026-03-02 16:44:22,561 - src.features.supplier_portal.routes.supplier_routes - INFO - Parsed JSON data: {
+  "supplier_info": {
+    "contact_person": "Jennifer Cruz",
+    "email": "zeus@delcavisiontech.com",
+    "submitted_at": "2026-03-02T08:44:22.057Z"
+  },
+  "quotations": [
+    {
+      "line_number": 1,
+      "original_request": {
+        "brand": "Any Brand",
+        "category": "Laptops",
+        "model": "",
+        "part_number": "",
+        "quantity": 20,
+        "description": ""
+      },
+      "match_status": "partial",
+      "offered_products": [
+        {
+          "product_name": "Lapi",
+          "brand": "Any Brand",
+          "model": "Lapi",
+          "specifications": {},
+          "quantity": 20,
+          "unit_price": 20000,
+          "delivery_time_days": 23,
+          "warranty": 36,
+          "notes": ""
+        }
+      ]
+    },
+    {
+      "line_number": 2,
+      "original_request": {
+        "brand": "Any Brand",
+        "category": "Monitors",
+        "model": "",
+        "part_number": "",
+        "quantity": 5,
+        "description": ""
+      },
+      "match_status": "none",
+      "offered_products": []
+    },
+    {
+      "line_number": 3,
+      "original_request": {
+        "brand": "Any Brand",
+        "category": "Printers",
+        "model": "",
+        "part_number": "",
+        "quantity": 6,
+        "description": ""
+      },
+      "match_status": "none",
+      "offered_products": [
+        {
+          "product_name": "Printy",
+          "brand": "Any Brand",
+          "model": "Printy",
+          "specifications": {},
+          "quantity": 4,
+          "unit_price": 8000,
+          "delivery_time_days": 32,
+          "warranty": 36,
+          "notes": ""
+        }
+      ]
+    }
+  ],
+  "summary": {
+    "currency": "PHP",
+    "valid_until": "2026-04-01",
+    "delivery_terms": "",
+    "payment_terms": "",
+    "notes": ""
+  }
+}
+2026-03-02 16:44:22,787 - src.features.supplier_portal.services.bid_submission_service - INFO - === Starting submit_bid ===
+2026-03-02 16:44:22,787 - src.features.supplier_portal.services.bid_submission_service - INFO - submit_bid received - mapping_id: 124, supplier_id: 15, rfq_id: RFQ-20260302-0002
+2026-03-02 16:44:22,787 - src.features.supplier_portal.services.bid_submission_service - INFO - bid_data type: <class 'dict'>
+2026-03-02 16:44:22,797 - src.features.supplier_portal.services.bid_submission_service - INFO - bid_data is dictionary with keys: ['supplier_info', 'quotations', 'summary']
+2026-03-02 16:44:22,797 - src.features.supplier_portal.services.bid_submission_service - INFO - Checking existing submission...
+2026-03-02 16:44:22,816 - src.features.supplier_portal.services.bid_submission_service - INFO - Existing submission: (False, None, None)
+2026-03-02 16:44:22,816 - src.features.supplier_portal.services.bid_submission_service - INFO - Getting quotations from bid_data...
+2026-03-02 16:44:22,816 - src.features.supplier_portal.services.bid_submission_service - INFO - Number of quotations: 3
+2026-03-02 16:44:22,823 - src.features.supplier_portal.services.bid_submission_service - INFO - Quotations type: <class 'list'>
+2026-03-02 16:44:22,823 - src.features.supplier_portal.services.bid_submission_service - INFO - Processing quotation 0, type: <class 'dict'>
+2026-03-02 16:44:22,824 - src.features.supplier_portal.services.bid_submission_service - INFO - Line 1: original_request type: <class 'dict'>
+2026-03-02 16:44:22,824 - src.features.supplier_portal.services.bid_submission_service - INFO - Line 1: offered_products type: <class 'list'>
+2026-03-02 16:44:22,825 - src.features.supplier_portal.services.bid_submission_service - INFO - Line 1: offered_products count: 1
+2026-03-02 16:44:22,827 - src.features.supplier_portal.services.bid_submission_service - INFO - Processing product 0 for line 1, type: <class 'dict'>
+2026-03-02 16:44:22,827 - src.features.supplier_portal.services.bid_submission_service - INFO - Product 0 quantity: 20.0
+2026-03-02 16:44:22,829 - src.features.supplier_portal.services.bid_submission_service - INFO - Product 0 unit_price: 20000.0
+2026-03-02 16:44:22,830 - src.features.supplier_portal.services.bid_submission_service - INFO - Successfully added line item bid for line 1
+2026-03-02 16:44:22,831 - src.features.supplier_portal.services.bid_submission_service - INFO - Processing quotation 1, type: <class 'dict'>
+2026-03-02 16:44:22,832 - src.features.supplier_portal.services.bid_submission_service - INFO - Line 2: original_request type: <class 'dict'>
+2026-03-02 16:44:22,832 - src.features.supplier_portal.services.bid_submission_service - INFO - Line 2: offered_products type: <class 'list'>
+2026-03-02 16:44:22,833 - src.features.supplier_portal.services.bid_submission_service - INFO - Line 2: offered_products count: 0
+2026-03-02 16:44:22,833 - src.features.supplier_portal.services.bid_submission_service - INFO - Successfully added line item bid for line 2
+2026-03-02 16:44:22,836 - src.features.supplier_portal.services.bid_submission_service - INFO - Processing quotation 2, type: <class 'dict'>
+2026-03-02 16:44:22,837 - src.features.supplier_portal.services.bid_submission_service - INFO - Line 3: original_request type: <class 'dict'>
+2026-03-02 16:44:22,838 - src.features.supplier_portal.services.bid_submission_service - INFO - Line 3: offered_products type: <class 'list'>
+2026-03-02 16:44:22,839 - src.features.supplier_portal.services.bid_submission_service - INFO - Line 3: offered_products count: 1
+2026-03-02 16:44:22,839 - src.features.supplier_portal.services.bid_submission_service - INFO - Processing product 0 for line 3, type: <class 'dict'>
+2026-03-02 16:44:22,840 - src.features.supplier_portal.services.bid_submission_service - INFO - Product 0 quantity: 4.0
+2026-03-02 16:44:22,841 - src.features.supplier_portal.services.bid_submission_service - INFO - Product 0 unit_price: 8000.0
+2026-03-02 16:44:22,841 - src.features.supplier_portal.services.bid_submission_service - INFO - Successfully added line item bid for line 3
+2026-03-02 16:44:22,843 - src.features.supplier_portal.services.bid_submission_service - INFO - Total amount: 432000.0, items bid on: 2
+2026-03-02 16:44:22,844 - src.features.supplier_portal.services.bid_submission_service - INFO - Number of line_item_bids: 3
+2026-03-02 16:44:22,905 - src.features.supplier_portal.routes.supplier_routes - ERROR - Error submitting bid: 'NoneType' object is not subscriptable
+2026-03-02 16:44:22,912 - werkzeug - INFO - 127.0.0.1 - - [02/Mar/2026 16:44:22] "[35m[1mPOST /RFX/supplier/api/submit-bid HTTP/1.1[0m" 500 -
+2026-03-02 16:45:39,225 - werkzeug - INFO -  * Detected change in 'D:\\Shared Files\\RFX\\src\\features\\supplier_portal\\services\\bid_submission_service.py', reloading
+2026-03-02 16:45:39,794 - werkzeug - INFO -  * Restarting with stat
+2026-03-02 16:45:43,576 - root - INFO - Logging Configuration Initialized
+2026-03-02 16:46:01,621 - root - INFO - Logging Configuration Initialized
+2026-03-02 16:46:01,678 - src.core.blueprint_registry - INFO - All blueprints are registered successfully
+2026-03-02 16:46:01,679 - src.common.startup - INFO - Starting the Application Startup Validation...
+2026-03-02 16:46:01,679 - src.common.startup - INFO - Base Route: /RFX
+2026-03-02 16:46:01,679 - src.common.startup - INFO - Unicode support: Enabled
+2026-03-02 16:46:02,088 - src.common.db - INFO - Database Connection Successful
+2026-03-02 16:46:02,088 - src.common.startup - INFO - [PASS] Database Connection
+2026-03-02 16:46:02,110 - werkzeug - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5000
+ * Running on http://192.168.3.85:5000
+2026-03-02 16:46:02,111 - werkzeug - INFO - [33mPress CTRL+C to quit[0m
+2026-03-02 16:46:02,112 - werkzeug - INFO -  * Restarting with stat
+2026-03-02 16:46:06,111 - root - INFO - Logging Configuration Initialized
+2026-03-02 16:46:06,201 - src.core.blueprint_registry - INFO - All blueprints are registered successfully
+2026-03-02 16:46:06,201 - src.common.startup - INFO - Starting the Application Startup Validation...
+2026-03-02 16:46:06,201 - src.common.startup - INFO - Base Route: /RFX
+2026-03-02 16:46:06,201 - src.common.startup - INFO - Unicode support: Enabled
+2026-03-02 16:46:06,644 - src.common.db - INFO - Database Connection Successful
+2026-03-02 16:46:06,645 - src.common.startup - INFO - [PASS] Database Connection
+2026-03-02 16:46:06,653 - werkzeug - WARNING -  * Debugger is active!
+2026-03-02 16:46:06,659 - werkzeug - INFO -  * Debugger PIN: 122-096-730
+2026-03-02 16:46:06,691 - src.features.supplier_portal.routes.supplier_routes - INFO - Raw request data: {"supplier_info":{"contact_person":"Jennifer Cruz","email":"zeus@delcavisiontech.com","submitted_at":"2026-03-02T08:46:04.311Z"},"quotations":[{"line_number":1,"original_request":{"brand":"Any Brand","category":"Laptops","model":"","part_number":"","quantity":20,"description":""},"match_status":"partial","offered_products":[{"product_name":"Lapi","brand":"Any Brand","model":"Lapi","specifications":{},"quantity":20,"unit_price":20000,"delivery_time_days":23,"warranty":36,"notes":""}]},{"line_number":2,"original_request":{"brand":"Any Brand","category":"Monitors","model":"","part_number":"","quantity":5,"description":""},"match_status":"none","offered_products":[]},{"line_number":3,"original_request":{"brand":"Any Brand","category":"Printers","model":"","part_number":"","quantity":6,"description":""},"match_status":"none","offered_products":[{"product_name":"Printy","brand":"Any Brand","model":"Printy","specifications":{},"quantity":4,"unit_price":8000,"delivery_time_days":32,"warranty":36,"notes":""}]}],"summary":{"currency":"PHP","valid_until":"2026-04-01","delivery_terms":"","payment_terms":"","notes":""}}
+2026-03-02 16:46:06,691 - src.features.supplier_portal.routes.supplier_routes - INFO - Parsed JSON data type: <class 'dict'>
+2026-03-02 16:46:06,691 - src.features.supplier_portal.routes.supplier_routes - INFO - Parsed JSON data: {
+  "supplier_info": {
+    "contact_person": "Jennifer Cruz",
+    "email": "zeus@delcavisiontech.com",
+    "submitted_at": "2026-03-02T08:46:04.311Z"
+  },
+  "quotations": [
+    {
+      "line_number": 1,
+      "original_request": {
+        "brand": "Any Brand",
+        "category": "Laptops",
+        "model": "",
+        "part_number": "",
+        "quantity": 20,
+        "description": ""
+      },
+      "match_status": "partial",
+      "offered_products": [
+        {
+          "product_name": "Lapi",
+          "brand": "Any Brand",
+          "model": "Lapi",
+          "specifications": {},
+          "quantity": 20,
+          "unit_price": 20000,
+          "delivery_time_days": 23,
+          "warranty": 36,
+          "notes": ""
+        }
+      ]
+    },
+    {
+      "line_number": 2,
+      "original_request": {
+        "brand": "Any Brand",
+        "category": "Monitors",
+        "model": "",
+        "part_number": "",
+        "quantity": 5,
+        "description": ""
+      },
+      "match_status": "none",
+      "offered_products": []
+    },
+    {
+      "line_number": 3,
+      "original_request": {
+        "brand": "Any Brand",
+        "category": "Printers",
+        "model": "",
+        "part_number": "",
+        "quantity": 6,
+        "description": ""
+      },
+      "match_status": "none",
+      "offered_products": [
+        {
+          "product_name": "Printy",
+          "brand": "Any Brand",
+          "model": "Printy",
+          "specifications": {},
+          "quantity": 4,
+          "unit_price": 8000,
+          "delivery_time_days": 32,
+          "warranty": 36,
+          "notes": ""
+        }
+      ]
+    }
+  ],
+  "summary": {
+    "currency": "PHP",
+    "valid_until": "2026-04-01",
+    "delivery_terms": "",
+    "payment_terms": "",
+    "notes": ""
+  }
+}
+2026-03-02 16:46:06,902 - src.features.supplier_portal.services.bid_submission_service - INFO - === Starting submit_bid ===
+2026-03-02 16:46:06,902 - src.features.supplier_portal.services.bid_submission_service - INFO - submit_bid received - mapping_id: 124, supplier_id: 15, rfq_id: RFQ-20260302-0002
+2026-03-02 16:46:06,902 - src.features.supplier_portal.services.bid_submission_service - INFO - bid_data type: <class 'dict'>
+2026-03-02 16:46:06,902 - src.features.supplier_portal.services.bid_submission_service - INFO - bid_data is dictionary with keys: ['supplier_info', 'quotations', 'summary']
+2026-03-02 16:46:06,902 - src.features.supplier_portal.services.bid_submission_service - INFO - Checking existing submission...
+2026-03-02 16:46:06,920 - src.features.supplier_portal.services.bid_submission_service - INFO - Existing submission: (False, None, None)
+2026-03-02 16:46:06,920 - src.features.supplier_portal.services.bid_submission_service - INFO - Getting quotations from bid_data...
+2026-03-02 16:46:06,920 - src.features.supplier_portal.services.bid_submission_service - INFO - Number of quotations: 3
+2026-03-02 16:46:06,920 - src.features.supplier_portal.services.bid_submission_service - INFO - Quotations type: <class 'list'>
+2026-03-02 16:46:06,920 - src.features.supplier_portal.services.bid_submission_service - INFO - Processing quotation 0, type: <class 'dict'>
+2026-03-02 16:46:06,930 - src.features.supplier_portal.services.bid_submission_service - INFO - Line 1: original_request type: <class 'dict'>
+2026-03-02 16:46:06,933 - src.features.supplier_portal.services.bid_submission_service - INFO - Line 1: offered_products type: <class 'list'>
+2026-03-02 16:46:06,934 - src.features.supplier_portal.services.bid_submission_service - INFO - Line 1: offered_products count: 1
+2026-03-02 16:46:06,934 - src.features.supplier_portal.services.bid_submission_service - INFO - Processing product 0 for line 1, type: <class 'dict'>
+2026-03-02 16:46:06,942 - src.features.supplier_portal.services.bid_submission_service - INFO - Product 0 quantity: 20.0
+2026-03-02 16:46:06,944 - src.features.supplier_portal.services.bid_submission_service - INFO - Product 0 unit_price: 20000.0
+2026-03-02 16:46:06,944 - src.features.supplier_portal.services.bid_submission_service - INFO - Successfully added line item bid for line 1
+2026-03-02 16:46:06,944 - src.features.supplier_portal.services.bid_submission_service - INFO - Processing quotation 1, type: <class 'dict'>
+2026-03-02 16:46:06,949 - src.features.supplier_portal.services.bid_submission_service - INFO - Line 2: original_request type: <class 'dict'>
+2026-03-02 16:46:06,949 - src.features.supplier_portal.services.bid_submission_service - INFO - Line 2: offered_products type: <class 'list'>
+2026-03-02 16:46:06,954 - src.features.supplier_portal.services.bid_submission_service - INFO - Line 2: offered_products count: 0
+2026-03-02 16:46:06,955 - src.features.supplier_portal.services.bid_submission_service - INFO - Successfully added line item bid for line 2
+2026-03-02 16:46:06,955 - src.features.supplier_portal.services.bid_submission_service - INFO - Processing quotation 2, type: <class 'dict'>
+2026-03-02 16:46:06,962 - src.features.supplier_portal.services.bid_submission_service - INFO - Line 3: original_request type: <class 'dict'>
+2026-03-02 16:46:06,962 - src.features.supplier_portal.services.bid_submission_service - INFO - Line 3: offered_products type: <class 'list'>
+2026-03-02 16:46:06,969 - src.features.supplier_portal.services.bid_submission_service - INFO - Line 3: offered_products count: 1
+2026-03-02 16:46:06,969 - src.features.supplier_portal.services.bid_submission_service - INFO - Processing product 0 for line 3, type: <class 'dict'>
+2026-03-02 16:46:06,969 - src.features.supplier_portal.services.bid_submission_service - INFO - Product 0 quantity: 4.0
+2026-03-02 16:46:06,969 - src.features.supplier_portal.services.bid_submission_service - INFO - Product 0 unit_price: 8000.0
+2026-03-02 16:46:06,969 - src.features.supplier_portal.services.bid_submission_service - INFO - Successfully added line item bid for line 3
+2026-03-02 16:46:06,969 - src.features.supplier_portal.services.bid_submission_service - INFO - Total amount: 432000.0, items bid on: 2
+2026-03-02 16:46:06,976 - src.features.supplier_portal.services.bid_submission_service - INFO - Number of line_item_bids: 3
+2026-03-02 16:46:06,976 - src.features.supplier_portal.services.bid_submission_service - INFO - Total amount: 432000.0, items bid on: 2
+2026-03-02 16:46:06,976 - src.features.supplier_portal.services.bid_submission_service - INFO - Number of line_item_bids: 3
+2026-03-02 16:46:06,976 - src.features.supplier_portal.services.bid_submission_service - INFO - Preparing bid summary...
+2026-03-02 16:46:06,976 - src.features.supplier_portal.services.bid_submission_service - INFO - Summary data type: <class 'dict'>
+2026-03-02 16:46:06,976 - src.features.supplier_portal.services.bid_submission_service - INFO - Summary data: {'currency': 'PHP', 'valid_until': '2026-04-01', 'delivery_terms': '', 'payment_terms': '', 'notes': ''}
+2026-03-02 16:46:06,976 - src.features.supplier_portal.services.bid_submission_service - INFO - Currency: PHP
+2026-03-02 16:46:06,976 - src.features.supplier_portal.services.bid_submission_service - INFO - Bid summary created: {'total_amount': 432000.0, 'currency': 'PHP', 'items_bid_on': 2, 'total_line_items': 3, 'submission_type': 'partial', 'delivery_terms': '', 'payment_terms': '', 'valid_until': '2026-04-01', 'additional_notes': ''}
+2026-03-02 16:46:06,976 - src.features.supplier_portal.services.bid_submission_service - INFO - Calculating delivery dates...
+2026-03-02 16:46:06,983 - src.features.supplier_portal.services.bid_submission_service - INFO - Processing item 0 for delivery dates
+2026-03-02 16:46:06,983 - src.features.supplier_portal.services.bid_submission_service - INFO - Products in item: 1
+2026-03-02 16:46:06,984 - src.features.supplier_portal.services.bid_submission_service - INFO - Processing product 0
+2026-03-02 16:46:06,985 - src.features.supplier_portal.services.bid_submission_service - INFO - Added estimated delivery date: 2026-03-25 (from 23 days)
+2026-03-02 16:46:06,986 - src.features.supplier_portal.services.bid_submission_service - INFO - Processing item 1 for delivery dates
+2026-03-02 16:46:06,986 - src.features.supplier_portal.services.bid_submission_service - INFO - Products in item: 0
+2026-03-02 16:46:06,989 - src.features.supplier_portal.services.bid_submission_service - INFO - Processing item 2 for delivery dates
+2026-03-02 16:46:06,992 - src.features.supplier_portal.services.bid_submission_service - INFO - Products in item: 1
+2026-03-02 16:46:06,994 - src.features.supplier_portal.services.bid_submission_service - INFO - Processing product 0
+2026-03-02 16:46:06,994 - src.features.supplier_portal.services.bid_submission_service - INFO - Added estimated delivery date: 2026-04-03 (from 32 days)
+2026-03-02 16:46:06,997 - src.features.supplier_portal.services.bid_submission_service - INFO - Total delivery dates collected: 2
+2026-03-02 16:46:06,997 - src.features.supplier_portal.services.bid_submission_service - INFO - Creating response_details JSON...
+2026-03-02 16:46:06,997 - src.features.supplier_portal.services.bid_submission_service - INFO - Supplier info type: <class 'dict'>
+2026-03-02 16:46:06,997 - src.features.supplier_portal.services.bid_submission_service - INFO - Response details JSON created successfully
+2026-03-02 16:46:06,997 - src.features.supplier_portal.services.bid_submission_service - INFO - Storing line item bids...
+2026-03-02 16:46:07,218 - src.features.supplier_portal.services.bid_submission_service - INFO - Determining action based on existing: (False, None, None)
+2026-03-02 16:46:07,218 - src.features.supplier_portal.services.bid_submission_service - INFO - Inserting new bid...
+2026-03-02 16:46:07,243 - src.features.supplier_portal.services.bid_submission_service - INFO - Insert executed
+2026-03-02 16:46:07,263 - src.features.supplier_portal.services.bid_submission_service - INFO - Transaction committed
+2026-03-02 16:46:07,306 - werkzeug - INFO - 127.0.0.1 - - [02/Mar/2026 16:46:07] "POST /RFX/supplier/api/submit-bid HTTP/1.1" 200 -
+2026-03-02 16:46:25,085 - werkzeug - INFO - 127.0.0.1 - - [02/Mar/2026 16:46:25] "[32mGET /RFX/supplier/bid-form HTTP/1.1[0m" 302 -
+2026-03-02 16:46:25,316 - werkzeug - INFO - 127.0.0.1 - - [02/Mar/2026 16:46:25] "GET /RFX/supplier/M0I4OS0yWkhXLTk3MFkuNzNmZTE1ZWMwNGFhYzhmNA== HTTP/1.1" 200 -
+2026-03-02 16:46:25,388 - werkzeug - INFO - 127.0.0.1 - - [02/Mar/2026 16:46:25] "[33mGET /static/images/faite-bg-v2.png HTTP/1.1[0m" 404 -
+2026-03-02 16:46:35,038 - werkzeug - INFO - 127.0.0.1 - - [02/Mar/2026 16:46:35] "GET /RFX/admin/rfq/RFQ-20260227-0009 HTTP/1.1" 200 -
+2026-03-02 16:46:35,236 - werkzeug - INFO - 127.0.0.1 - - [02/Mar/2026 16:46:35] "GET /RFX/admin/api/rfq/RFQ-20260227-0009 HTTP/1.1" 200 -
+2026-03-02 16:46:35,351 - werkzeug - INFO - 127.0.0.1 - - [02/Mar/2026 16:46:35] "GET /RFX/admin/api/bid/107/evaluation-report HTTP/1.1" 200 -
+2026-03-02 16:46:35,464 - werkzeug - INFO - 127.0.0.1 - - [02/Mar/2026 16:46:35] "GET /RFX/admin/api/bid/106/evaluation-report HTTP/1.1" 200 -
+2026-03-02 16:46:37,982 - werkzeug - INFO - 127.0.0.1 - - [02/Mar/2026 16:46:37] "GET /RFX/admin/bids HTTP/1.1" 200 -
+2026-03-02 16:46:38,165 - werkzeug - INFO - 127.0.0.1 - - [02/Mar/2026 16:46:38] "GET /RFX/admin/api/rfqs HTTP/1.1" 200 -
+2026-03-02 16:46:39,668 - werkzeug - INFO - 127.0.0.1 - - [02/Mar/2026 16:46:39] "GET /RFX/admin/ HTTP/1.1" 200 -
+2026-03-02 16:46:39,962 - werkzeug - INFO - 127.0.0.1 - - [02/Mar/2026 16:46:39] "GET /RFX/admin/api/dashboard/stats HTTP/1.1" 200 -
+2026-03-02 16:46:40,736 - werkzeug - INFO - 127.0.0.1 - - [02/Mar/2026 16:46:40] "GET /RFX/admin/rfq/RFQ-20260302-0002 HTTP/1.1" 200 -
+2026-03-02 16:46:40,916 - werkzeug - INFO - 127.0.0.1 - - [02/Mar/2026 16:46:40] "GET /RFX/admin/api/rfq/RFQ-20260302-0002 HTTP/1.1" 200 -
+2026-03-02 16:46:51,887 - ibm_watson_machine_learning.client - INFO - Client successfully initialized
+2026-03-02 16:47:01,789 - ibm_watson_machine_learning.wml_resource - INFO - Successfully finished generate for url: 'https://eu-gb.ml.cloud.ibm.com/ml/v1/text/generation?version=2025-06-25'
+2026-03-02 16:47:01,789 - src.common.llm_service - INFO - LLM Output - Model: ibm/granite-3-8b-instruct, Response: 
+
+{
+  "price_analysis": {
+    "price_score": 50.0,
+    "value_for_money": "Moderate",
+    "price_competitiveness": "Below average",
+    "price_competitiveness_analysis": "The quoted price is below the RFQ budget, but the price score is only 50.0 out of 100, indicating that there is room for improvement in terms of competitiveness. The value for money is moderate, suggesting that while the price is lower than the budget, it may not offer the best value compared to other suppliers."
+  },
+  "delivery_analysis": {
+    "delivery_readiness": 50.0,
+    "delivery_timeline_capability": "Moderate",
+    "delivery_timeline_analysis": "The delivery readiness score is 50.0 out of 100, indicating a moderate ability to meet delivery deadlines. Without specific delivery dates or timelines, it is difficult to assess the supplier's capability in this area. However, the moderate score suggests that there may be some uncertainty or risk associated with delivery times."
+  },
+  "quantity_analysis": {
+    "quantity_fulfillment": 0.0,
+    "quantity_fulfillment_capability": "Not applicable",
+    "quantity_fulfillment_analysis": "The quantity fulfillment score is 0.0 out of 100, indicating that this aspect was not evaluated in the bid data. Without information on the supplier's ability to fulfill the required quantities, it is not possible to provide an analysis in this area."
+  },
+  "discount_potential": {
+    "discount_readiness": 30.0,
+    "discount_opportunities": "Limited",
+    "discount_analysis": "The discount readiness score is 30.0 out of 100, indicating limited potential for negotiation or discounts. The limited score suggests that the supplier may not be open to significant discounts or that the current quote is already at a competitive level."
+  },
+  "risk_assessment": {
+    "overall_risk": "Moderate",
+    "risk_factors": ["Price competitiveness", "Delivery timeline capability", "Discount potential"],
+    "risk_mitigation_strategies": ["Negotiate for better pricing", "Clarify delivery timelines and expectations", "Explore potential for additional discounts or value-added services"]
+  },
+  "strengths": ["Below RFQ budget", "Moderate value for money"],
+  "weaknesses": ["Below average price competitiveness", "Moderate delivery timeline capability", "Limited discount potential", "No information on quantity fulfillment capability"],
+  "negotiation_tips": ["Negotiate for better pricing", "Clarify delivery timelines and expectations", "Explore potential for additional discounts or value-added services"]
+}
+2026-03-02 16:47:01,805 - src.features.admin_portal.services.ai_bid_evaluation_service - INFO - Successfully generated AI evaluation for Laptop Warehouse Philippines
+2026-03-02 16:47:01,935 - werkzeug - INFO - 127.0.0.1 - - [02/Mar/2026 16:47:01] "GET /RFX/admin/api/bid/124/evaluation-report HTTP/1.1" 200 -
+2026-03-02 16:47:22,939 - werkzeug - INFO - 127.0.0.1 - - [02/Mar/2026 16:47:22] "GET /RFX/admin/award/RFQ-20260302-0002 HTTP/1.1" 200 -
+2026-03-02 16:47:23,153 - werkzeug - INFO - 127.0.0.1 - - [02/Mar/2026 16:47:23] "GET /RFX/admin/api/award/selection-data/RFQ-20260302-0002 HTTP/1.1" 200 -
+2026-03-02 16:47:33,901 - werkzeug - INFO - 127.0.0.1 - - [02/Mar/2026 16:47:33] "GET /RFX/admin/award/RFQ-20260302-0002 HTTP/1.1" 200 -
+2026-03-02 16:47:34,117 - werkzeug - INFO - 127.0.0.1 - - [02/Mar/2026 16:47:34] "GET /RFX/admin/api/award/selection-data/RFQ-20260302-0002 HTTP/1.1" 200 -
+2026-03-02 16:54:28,584 - werkzeug - INFO -  * Detected change in 'D:\\Shared Files\\RFX\\src\\features\\admin_portal\\services\\award_management_service.py', reloading
+2026-03-02 16:54:29,144 - werkzeug - INFO -  * Restarting with stat
+2026-03-02 16:54:32,864 - root - INFO - Logging Configuration Initialized
+2026-03-02 16:55:10,655 - root - INFO - Logging Configuration Initialized
+2026-03-02 16:55:10,713 - src.core.blueprint_registry - INFO - All blueprints are registered successfully
+2026-03-02 16:55:10,714 - src.common.startup - INFO - Starting the Application Startup Validation...
+2026-03-02 16:55:10,714 - src.common.startup - INFO - Base Route: /RFX
+2026-03-02 16:55:10,714 - src.common.startup - INFO - Unicode support: Enabled
+2026-03-02 16:55:11,029 - src.common.db - INFO - Database Connection Successful
+2026-03-02 16:55:11,029 - src.common.startup - INFO - [PASS] Database Connection
+2026-03-02 16:55:11,045 - werkzeug - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5000
+ * Running on http://192.168.3.85:5000
+2026-03-02 16:55:11,045 - werkzeug - INFO - [33mPress CTRL+C to quit[0m
+2026-03-02 16:55:11,045 - werkzeug - INFO -  * Restarting with stat
+2026-03-02 16:55:14,798 - root - INFO - Logging Configuration Initialized
+2026-03-02 16:55:14,896 - src.core.blueprint_registry - INFO - All blueprints are registered successfully
+2026-03-02 16:55:14,896 - src.common.startup - INFO - Starting the Application Startup Validation...
+2026-03-02 16:55:14,902 - src.common.startup - INFO - Base Route: /RFX
+2026-03-02 16:55:14,902 - src.common.startup - INFO - Unicode support: Enabled
+2026-03-02 16:55:15,305 - src.common.db - INFO - Database Connection Successful
+2026-03-02 16:55:15,306 - src.common.startup - INFO - [PASS] Database Connection
+2026-03-02 16:55:15,325 - werkzeug - WARNING -  * Debugger is active!
+2026-03-02 16:55:15,327 - werkzeug - INFO -  * Debugger PIN: 122-096-730
+2026-03-02 16:55:15,391 - werkzeug - INFO - 127.0.0.1 - - [02/Mar/2026 16:55:15] "GET /RFX/admin/award/RFQ-20260302-0002 HTTP/1.1" 200 -
+2026-03-02 16:55:15,656 - src.features.admin_portal.services.award_management_service - ERROR - Error getting award selection data: ('42S02', "[42S02] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Invalid object name 'rfq_line_item_bids'. (208) (SQLExecDirectW); [42S02] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Statement(s) could not be prepared. (8180)")
+2026-03-02 16:55:15,688 - werkzeug - INFO - 127.0.0.1 - - [02/Mar/2026 16:55:15] "GET /RFX/admin/api/award/selection-data/RFQ-20260302-0002 HTTP/1.1" 200 -
+2026-03-02 16:57:48,737 - werkzeug - INFO -  * Detected change in 'D:\\Shared Files\\RFX\\src\\features\\admin_portal\\services\\award_management_service.py', reloading
+2026-03-02 16:57:49,308 - werkzeug - INFO -  * Restarting with stat
+2026-03-02 16:57:53,272 - root - INFO - Logging Configuration Initialized
+2026-03-02 17:00:49,092 - root - INFO - Logging Configuration Initialized
+2026-03-02 17:00:49,204 - src.core.blueprint_registry - INFO - All blueprints are registered successfully
+2026-03-02 17:00:49,208 - src.common.startup - INFO - Starting the Application Startup Validation...
+2026-03-02 17:00:49,209 - src.common.startup - INFO - Base Route: /RFX
+2026-03-02 17:00:49,210 - src.common.startup - INFO - Unicode support: Enabled
+2026-03-02 17:00:49,578 - src.common.db - INFO - Database Connection Successful
+2026-03-02 17:00:49,578 - src.common.startup - INFO - [PASS] Database Connection
+2026-03-02 17:00:49,611 - werkzeug - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5000
+ * Running on http://192.168.3.85:5000
+2026-03-02 17:00:49,612 - werkzeug - INFO - [33mPress CTRL+C to quit[0m
+2026-03-02 17:00:49,621 - werkzeug - INFO -  * Restarting with stat
+2026-03-02 17:00:53,132 - root - INFO - Logging Configuration Initialized
+2026-03-02 17:00:53,196 - src.core.blueprint_registry - INFO - All blueprints are registered successfully
+2026-03-02 17:00:53,196 - src.common.startup - INFO - Starting the Application Startup Validation...
+2026-03-02 17:00:53,196 - src.common.startup - INFO - Base Route: /RFX
+2026-03-02 17:00:53,196 - src.common.startup - INFO - Unicode support: Enabled
+2026-03-02 17:00:53,537 - src.common.db - INFO - Database Connection Successful
+2026-03-02 17:00:53,537 - src.common.startup - INFO - [PASS] Database Connection
+2026-03-02 17:00:53,572 - werkzeug - WARNING -  * Debugger is active!
+2026-03-02 17:00:53,575 - werkzeug - INFO -  * Debugger PIN: 122-096-730
+2026-03-02 17:01:00,225 - werkzeug - INFO - 127.0.0.1 - - [02/Mar/2026 17:01:00] "GET /RFX/admin/award/RFQ-20260302-0002 HTTP/1.1" 200 -
+2026-03-02 17:01:00,551 - src.features.admin_portal.services.award_management_service - ERROR - Error getting award selection data: ('42S02', "[42S02] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Invalid object name 'P8_NOAH_AI.RFQ.rfq_proposal_items'. (208) (SQLExecDirectW); [42S02] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Statement(s) could not be prepared. (8180)")
+2026-03-02 17:01:00,589 - werkzeug - INFO - 127.0.0.1 - - [02/Mar/2026 17:01:00] "GET /RFX/admin/api/award/selection-data/RFQ-20260302-0002 HTTP/1.1" 200 -
+2026-03-02 17:04:02,772 - werkzeug - INFO - 127.0.0.1 - - [02/Mar/2026 17:04:02] "GET /RFX/admin/award/RFQ-20260302-0002 HTTP/1.1" 200 -
+2026-03-02 17:04:03,142 - werkzeug - INFO - 127.0.0.1 - - [02/Mar/2026 17:04:03] "GET /RFX/admin/api/award/selection-data/RFQ-20260302-0002 HTTP/1.1" 200 -
+2026-03-02 17:04:29,951 - werkzeug - INFO - 127.0.0.1 - - [02/Mar/2026 17:04:29] "GET /RFX/admin/award/RFQ-20260302-0002 HTTP/1.1" 200 -
+2026-03-02 17:04:30,201 - werkzeug - INFO - 127.0.0.1 - - [02/Mar/2026 17:04:30] "GET /RFX/admin/api/award/selection-data/RFQ-20260302-0002 HTTP/1.1" 200 -
+2026-03-02 17:12:21,425 - werkzeug - INFO -  * Detected change in 'D:\\Shared Files\\RFX\\src\\features\\admin_portal\\services\\award_management_service.py', reloading
+2026-03-02 17:12:21,933 - werkzeug - INFO -  * Restarting with stat
+2026-03-02 17:12:25,893 - root - INFO - Logging Configuration Initialized
+2026-03-02 17:12:35,716 - root - INFO - Logging Configuration Initialized
+2026-03-02 17:12:35,794 - src.core.blueprint_registry - INFO - All blueprints are registered successfully
+2026-03-02 17:12:35,797 - src.common.startup - INFO - Starting the Application Startup Validation...
+2026-03-02 17:12:35,798 - src.common.startup - INFO - Base Route: /RFX
+2026-03-02 17:12:35,798 - src.common.startup - INFO - Unicode support: Enabled
+2026-03-02 17:12:36,153 - src.common.db - INFO - Database Connection Successful
+2026-03-02 17:12:36,153 - src.common.startup - INFO - [PASS] Database Connection
+2026-03-02 17:12:36,177 - werkzeug - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5000
+ * Running on http://192.168.3.85:5000
+2026-03-02 17:12:36,177 - werkzeug - INFO - [33mPress CTRL+C to quit[0m
+2026-03-02 17:12:36,179 - werkzeug - INFO -  * Restarting with stat
+2026-03-02 17:12:39,673 - root - INFO - Logging Configuration Initialized
+2026-03-02 17:12:39,754 - src.core.blueprint_registry - INFO - All blueprints are registered successfully
+2026-03-02 17:12:39,764 - src.common.startup - INFO - Starting the Application Startup Validation...
+2026-03-02 17:12:39,764 - src.common.startup - INFO - Base Route: /RFX
+2026-03-02 17:12:39,764 - src.common.startup - INFO - Unicode support: Enabled
+2026-03-02 17:12:40,102 - src.common.db - INFO - Database Connection Successful
+2026-03-02 17:12:40,102 - src.common.startup - INFO - [PASS] Database Connection
+2026-03-02 17:12:40,113 - werkzeug - WARNING -  * Debugger is active!
+2026-03-02 17:12:40,116 - werkzeug - INFO -  * Debugger PIN: 122-096-730
+2026-03-02 17:12:40,139 - werkzeug - INFO - 127.0.0.1 - - [02/Mar/2026 17:12:40] "GET /RFX/admin/award/RFQ-20260302-0002 HTTP/1.1" 200 -
+2026-03-02 17:12:40,610 - werkzeug - INFO - 127.0.0.1 - - [02/Mar/2026 17:12:40] "GET /RFX/admin/api/award/selection-data/RFQ-20260302-0002 HTTP/1.1" 200 -
+2026-03-02 17:16:29,807 - werkzeug - INFO -  * Detected change in 'D:\\Shared Files\\RFX\\src\\features\\admin_portal\\services\\award_management_service.py', reloading
+2026-03-02 17:16:30,329 - werkzeug - INFO -  * Restarting with stat
+2026-03-02 17:16:34,182 - root - INFO - Logging Configuration Initialized
+2026-03-02 17:16:41,352 - root - INFO - Logging Configuration Initialized
+2026-03-02 17:16:41,407 - src.core.blueprint_registry - INFO - All blueprints are registered successfully
+2026-03-02 17:16:41,407 - src.common.startup - INFO - Starting the Application Startup Validation...
+2026-03-02 17:16:41,407 - src.common.startup - INFO - Base Route: /RFX
+2026-03-02 17:16:41,407 - src.common.startup - INFO - Unicode support: Enabled
+2026-03-02 17:16:41,763 - src.common.db - INFO - Database Connection Successful
+2026-03-02 17:16:41,763 - src.common.startup - INFO - [PASS] Database Connection
+2026-03-02 17:16:41,779 - werkzeug - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5000
+ * Running on http://192.168.3.85:5000
+2026-03-02 17:16:41,779 - werkzeug - INFO - [33mPress CTRL+C to quit[0m
+2026-03-02 17:16:41,779 - werkzeug - INFO -  * Restarting with stat
+2026-03-02 17:16:45,272 - root - INFO - Logging Configuration Initialized
+2026-03-02 17:16:45,372 - src.core.blueprint_registry - INFO - All blueprints are registered successfully
+2026-03-02 17:16:45,372 - src.common.startup - INFO - Starting the Application Startup Validation...
+2026-03-02 17:16:45,376 - src.common.startup - INFO - Base Route: /RFX
+2026-03-02 17:16:45,376 - src.common.startup - INFO - Unicode support: Enabled
+2026-03-02 17:16:45,737 - src.common.db - INFO - Database Connection Successful
+2026-03-02 17:16:45,737 - src.common.startup - INFO - [PASS] Database Connection
+2026-03-02 17:16:45,751 - werkzeug - WARNING -  * Debugger is active!
+2026-03-02 17:16:45,751 - werkzeug - INFO -  * Debugger PIN: 122-096-730
+2026-03-02 17:16:45,800 - werkzeug - INFO - 127.0.0.1 - - [02/Mar/2026 17:16:45] "GET /RFX/admin/award/RFQ-20260302-0002 HTTP/1.1" 200 -
+2026-03-02 17:16:46,157 - werkzeug - INFO - 127.0.0.1 - - [02/Mar/2026 17:16:46] "GET /RFX/admin/api/award/selection-data/RFQ-20260302-0002 HTTP/1.1" 200 -
+2026-03-02 17:22:37,804 - werkzeug - INFO - 127.0.0.1 - - [02/Mar/2026 17:22:37] "GET /RFX/admin/ HTTP/1.1" 200 -
+2026-03-02 17:22:38,132 - werkzeug - INFO - 127.0.0.1 - - [02/Mar/2026 17:22:38] "GET /RFX/admin/api/dashboard/stats HTTP/1.1" 200 -
+2026-03-02 17:22:39,451 - werkzeug - INFO - 127.0.0.1 - - [02/Mar/2026 17:22:39] "GET /RFX/admin/rfq/RFQ-20260302-0002 HTTP/1.1" 200 -
+2026-03-02 17:22:39,637 - werkzeug - INFO - 127.0.0.1 - - [02/Mar/2026 17:22:39] "GET /RFX/admin/api/rfq/RFQ-20260302-0002 HTTP/1.1" 200 -
+2026-03-02 17:22:39,726 - werkzeug - INFO - 127.0.0.1 - - [02/Mar/2026 17:22:39] "GET /RFX/admin/api/bid/124/evaluation-report HTTP/1.1" 200 -
+2026-03-02 17:22:47,636 - werkzeug - INFO - 127.0.0.1 - - [02/Mar/2026 17:22:47] "GET /RFX/admin/bid/124 HTTP/1.1" 200 -
+2026-03-02 17:22:47,697 - werkzeug - INFO - 127.0.0.1 - - [02/Mar/2026 17:22:47] "[33mGET /static/images/faite-bg-v2.png HTTP/1.1[0m" 404 -
+2026-03-02 17:22:47,795 - werkzeug - INFO - 127.0.0.1 - - [02/Mar/2026 17:22:47] "GET /RFX/admin/api/bid/124 HTTP/1.1" 200 -
+2026-03-02 17:22:47,886 - werkzeug - INFO - 127.0.0.1 - - [02/Mar/2026 17:22:47] "GET /RFX/admin/api/bid/124/evaluation-report HTTP/1.1" 200 -
+2026-03-02 17:24:28,431 - werkzeug - INFO - 127.0.0.1 - - [02/Mar/2026 17:24:28] "GET /RFX/admin/award/RFQ-20260302-0002 HTTP/1.1" 200 -
+2026-03-02 17:24:42,895 - werkzeug - INFO - 127.0.0.1 - - [02/Mar/2026 17:24:42] "GET /RFX/admin/award/RFQ-20260302-0002 HTTP/1.1" 200 -
+2026-03-02 17:24:43,230 - werkzeug - INFO - 127.0.0.1 - - [02/Mar/2026 17:24:43] "GET /RFX/admin/api/award/selection-data/RFQ-20260302-0002 HTTP/1.1" 200 -
