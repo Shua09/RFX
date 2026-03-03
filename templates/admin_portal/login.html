@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Login · FAITE Procurement</title>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <style>
+        /* ═══════════════════════════════════════════════════════════════
+           THEME VARIABLES - DARK MODE (DEFAULT)
+           ═══════════════════════════════════════════════════════════════ */
+        :root {
+            --glass-bg: rgba(15, 23, 42, 0.9);
+            --glass-bg-light: rgba(30, 41, 59, 0.8);
+            --glass-border: rgba(255, 255, 255, 0.1);
+            --glass-border-hover: rgba(255, 255, 255, 0.18);
+            --text-primary: #f8fafc;
+            --text-secondary: rgba(248, 250, 252, 0.75);
+            --text-muted: rgba(248, 250, 252, 0.55);
+            --accent-gradient: linear-gradient(135deg, #0f2a5e 0%, #1e4d8c 50%, #60a5fa 100%);
+            --accent-blue: #60a5fa;
+            --accent-purple: #3b82f6;
+            --pill-bg: rgba(255, 255, 255, 0.08);
+            --pill-hover: rgba(255, 255, 255, 0.14);
+            --input-bg: rgba(0, 0, 0, 0.3);
+            --blur-amount: 20px;
+            --body-bg: #0f172a;
+            --shadow-color: rgba(0, 0, 0, 0.3);
+            --danger: #ef4444;
+            --danger-bg: rgba(239, 68, 68, 0.12);
+            --danger-border: rgba(239, 68, 68, 0.3);
+        }
+
+        /* ═══════════════════════════════════════════════════════════════
+           THEME VARIABLES - LIGHT MODE
+           ═══════════════════════════════════════════════════════════════ */
+        [data-theme="light"] {
+            --glass-bg: rgba(255, 255, 255, 0.85);
+            --glass-bg-light: rgba(248, 250, 252, 0.9);
+            --glass-border: rgba(0, 0, 0, 0.1);
+            --glass-border-hover: rgba(0, 0, 0, 0.18);
+            --text-primary: #1e293b;
+            --text-secondary: rgba(30, 41, 59, 0.8);
+            --text-muted: rgba(30, 41, 59, 0.55);
+            --pill-bg: rgba(0, 0, 0, 0.05);
+            --pill-hover: rgba(0, 0, 0, 0.1);
+            --input-bg: rgba(0, 0, 0, 0.04);
+            --body-bg: #f1f5f9;
+            --shadow-color: rgba(0, 0, 0, 0.1);
+            --danger: #dc2626;
+            --danger-bg: rgba(220, 38, 38, 0.08);
+            --danger-border: rgba(220, 38, 38, 0.25);
+        }
+
+        [data-theme="light"] .background-layer { filter: brightness(1.1) saturate(0.9); }
+        [data-theme="light"] .background-overlay {
+            background: linear-gradient(180deg, rgba(241,245,249,0.7) 0%, rgba(241,245,249,0.85) 50%, rgba(241,245,249,0.95) 100%);
+        }
+
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+
+        body {
+            font-family: 'Outfit', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: var(--body-bg);
+            color: var(--text-primary);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0;
+            padding: 20px;
+            transition: background 0.3s ease, color 0.3s ease;
+        }
+
+        .background-layer {
+            position: fixed; inset: 0; z-index: 0;
+            background: url('{{ url_for("static", filename="images/faite-bg-v2.png") }}') center/cover no-repeat;
+            filter: brightness(0.5) saturate(1.1);
+        }
+
+        .background-overlay {
+            position: fixed; inset: 0; z-index: 1;
+            background: linear-gradient(180deg, rgba(15,23,42,0.7) 0%, rgba(15,23,42,0.85) 50%, rgba(15,23,42,0.92) 100%);
+        }
+
+        /* Theme toggle */
+        .theme-toggle {
+            position: fixed;
+            top: 16px;
+            right: 16px;
+            z-index: 10;
+        }
+
+        .theme-toggle-btn {
+            width: 40px;
+            height: 40px;
+            border: 1px solid var(--glass-border);
+            background: var(--glass-bg);
+            backdrop-filter: blur(var(--blur-amount));
+            -webkit-backdrop-filter: blur(var(--blur-amount));
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: background 0.2s ease, border-color 0.2s ease;
+            font-size: 18px;
+            color: var(--text-primary);
+        }
+        .theme-toggle-btn:hover { background: var(--pill-hover); border-color: var(--glass-border-hover); }
+
+        [data-theme="dark"] .theme-toggle-btn .sun-icon { display: none; }
+        [data-theme="dark"] .theme-toggle-btn .moon-icon { display: block; }
+        [data-theme="light"] .theme-toggle-btn .sun-icon { display: block; }
+        [data-theme="light"] .theme-toggle-btn .moon-icon { display: none; }
+
+        /* Login card */
+        .login-card {
+            position: relative;
+            z-index: 2;
+            background: var(--glass-bg);
+            backdrop-filter: blur(var(--blur-amount));
+            -webkit-backdrop-filter: blur(var(--blur-amount));
+            border: 1px solid var(--glass-border);
+            border-radius: 24px;
+            padding: 44px 40px;
+            max-width: 440px;
+            width: 100%;
+            box-shadow: 0 25px 50px -12px var(--shadow-color);
+            text-align: center;
+            animation: cardFadeIn 0.5s ease forwards;
+        }
+
+        @keyframes cardFadeIn {
+            from { opacity: 0; transform: translateY(16px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .brand-icon {
+            width: 56px;
+            height: 56px;
+            background: var(--accent-gradient);
+            border-radius: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 20px;
+            font-size: 24px;
+            font-weight: 700;
+            color: #fff;
+            box-shadow: 0 8px 24px rgba(96, 165, 250, 0.3);
+        }
+
+        h1 {
+            font-size: 26px;
+            font-weight: 600;
+            margin-bottom: 6px;
+        }
+
+        .subtitle {
+            font-size: 14px;
+            color: var(--text-muted);
+            margin-bottom: 30px;
+        }
+
+        /* Alert */
+        .alert-error {
+            background: var(--danger-bg);
+            border: 1px solid var(--danger-border);
+            color: var(--danger);
+            padding: 12px 16px;
+            border-radius: 12px;
+            font-size: 13px;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            text-align: left;
+        }
+        .alert-error i { font-size: 16px; flex-shrink: 0; }
+
+        /* Form */
+        .form-group {
+            margin-bottom: 18px;
+            text-align: left;
+        }
+
+        .form-group label {
+            display: block;
+            font-size: 12px;
+            font-weight: 500;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 8px;
+        }
+
+        .input-wrapper {
+            position: relative;
+        }
+
+        .input-wrapper i {
+            position: absolute;
+            left: 14px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--text-muted);
+            font-size: 16px;
+            pointer-events: none;
+        }
+
+        .form-input {
+            width: 100%;
+            padding: 14px 14px 14px 42px;
+            background: var(--input-bg);
+            border: 1px solid var(--glass-border);
+            border-radius: 12px;
+            color: var(--text-primary);
+            font-family: 'Outfit', sans-serif;
+            font-size: 15px;
+            outline: none;
+            transition: border-color 0.2s ease, box-shadow 0.2s ease;
+        }
+        .form-input:focus {
+            border-color: var(--accent-blue);
+            box-shadow: 0 0 0 3px rgba(96, 165, 250, 0.15);
+        }
+        .form-input::placeholder {
+            color: var(--text-muted);
+        }
+
+        /* Submit button */
+        .btn-login {
+            width: 100%;
+            padding: 14px 24px;
+            background: var(--accent-gradient);
+            border: none;
+            border-radius: 12px;
+            color: #fff;
+            font-family: 'Outfit', sans-serif;
+            font-size: 15px;
+            font-weight: 600;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+            box-shadow: 0 4px 16px rgba(96, 165, 250, 0.25);
+            margin-top: 24px;
+        }
+        .btn-login:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 24px rgba(96, 165, 250, 0.4);
+        }
+        .btn-login:active {
+            transform: translateY(0);
+        }
+
+        .footer-text {
+            margin-top: 24px;
+            font-size: 12px;
+            color: var(--text-muted);
+        }
+
+        @media (max-width: 480px) {
+            .login-card { padding: 32px 24px; }
+            h1 { font-size: 22px; }
+        }
+    </style>
+</head>
+<body>
+    <div class="background-layer"></div>
+    <div class="background-overlay"></div>
+
+    <div class="theme-toggle">
+        <button class="theme-toggle-btn" type="button" onclick="toggleTheme()" title="Toggle Theme">
+            <span class="sun-icon"><i class="bi bi-sun-fill"></i></span>
+            <span class="moon-icon"><i class="bi bi-moon-fill"></i></span>
+        </button>
+    </div>
+
+    <div class="login-card">
+        <div class="brand-icon"><i class="bi bi-shield-lock-fill"></i></div>
+        <h1>Admin Portal</h1>
+        <p class="subtitle">Enter your credentials to access the admin dashboard</p>
+
+        {% if error %}
+        <div class="alert-error">
+            <i class="bi bi-exclamation-circle-fill"></i>
+            <span>{{ error }}</span>
+        </div>
+        {% endif %}
+
+        <form method="POST">
+            <div class="form-group">
+                <label for="username">Username</label>
+                <div class="input-wrapper">
+                    <i class="bi bi-person-fill"></i>
+                    <input type="text" class="form-input" id="username" name="username" placeholder="Enter your username" required>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="password">Password</label>
+                <div class="input-wrapper">
+                    <i class="bi bi-lock-fill"></i>
+                    <input type="password" class="form-input" id="password" name="password" placeholder="Enter your password" required>
+                </div>
+            </div>
+            <button type="submit" class="btn-login">
+                <i class="bi bi-box-arrow-in-right"></i> Login
+            </button>
+        </form>
+
+        <p class="footer-text">FAITE Procurement System · Admin Access</p>
+    </div>
+
+    <script>
+        function toggleTheme() {
+            const html = document.documentElement;
+            const next = html.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+            html.setAttribute('data-theme', next);
+        }
+    </script>
+</body>
+</html>

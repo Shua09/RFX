@@ -1,0 +1,425 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login - FAITE AI Portal</title>
+
+    <!-- Match FAITE Portal Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+/* ═══════════════════════════════════════════════════════════════
+   FAITE THEME VARIABLES (mirrored from faite_portal.html)
+   ═══════════════════════════════════════════════════════════════ */
+:root {
+    --glass-bg: rgba(15, 23, 42, 0.9);
+    --glass-bg-light: rgba(30, 41, 59, 0.8);
+    --glass-border: rgba(255, 255, 255, 0.1);
+    --glass-border-hover: rgba(255, 255, 255, 0.18);
+    --text-primary: #f8fafc;
+    --text-secondary: rgba(248, 250, 252, 0.75);
+    --text-muted: rgba(248, 250, 252, 0.55);
+    --accent-gradient: linear-gradient(135deg, #0f2a5e 0%, #1e4d8c 50%, #60a5fa 100%);
+    --accent-blue: #60a5fa;
+    --accent-purple: #3b82f6;
+    --pill-bg: rgba(255, 255, 255, 0.08);
+    --pill-hover: rgba(255, 255, 255, 0.14);
+    --input-bg: rgba(15, 23, 42, 0.95);
+    --blur-amount: 20px;
+    --body-bg: #0f172a;
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   BASE STYLES
+   ═══════════════════════════════════════════════════════════════ */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Outfit', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    background: var(--body-bg);
+    color: var(--text-primary);
+    line-height: 1.6;
+    min-height: 100vh;
+    overflow: hidden;
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   ANIMATED BACKGROUND (FAITE STYLE)
+   ═══════════════════════════════════════════════════════════════ */
+
+.background-layer {
+    position: fixed;
+    inset: 0;
+    z-index: -2; /* keep it behind everything */
+    background:
+        url('{{ url_for("static", filename="images/faite-bg-v2.png") }}')
+        center / cover no-repeat;
+    filter: brightness(0.5) saturate(1.1);
+}
+
+.background-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(180deg, rgba(15, 23, 42, 0.7) 0%, rgba(15, 23, 42, 0.85) 50%, rgba(15, 23, 42, 0.95) 100%);
+    z-index: -1;
+}
+
+@keyframes gradientShift {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   LOGIN LAYOUT
+   ═══════════════════════════════════════════════════════════════ */
+.login-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    padding: 20px;
+    position: relative;
+    z-index: 1;
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   GLASSMORPHISM LOGIN CARD
+   ═══════════════════════════════════════════════════════════════ */
+.login-card {
+    background: var(--glass-bg);
+    backdrop-filter: blur(var(--blur-amount));
+    -webkit-backdrop-filter: blur(var(--blur-amount));
+    border: 1px solid var(--glass-border);
+    border-radius: 16px;
+    padding: 48px 40px;
+    width: 100%;
+    max-width: 420px;
+    animation: slideUp 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+@keyframes slideUp {
+    from {
+        opacity: 0;
+        transform: translateY(24px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   LOGO / BRAND
+   ═══════════════════════════════════════════════════════════════ */
+.logo {
+    text-align: center;
+    margin-bottom: 36px;
+}
+
+.logo-brand {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+}
+
+.logo-icon {
+    width: 48px;
+    height: 48px;
+    background: var(--accent-gradient);
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+}
+
+.logo-icon img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+}
+
+.logo-text {
+    font-size: 28px;
+    font-weight: 700;
+    background: var(--accent-gradient);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.logo-subtitle {
+    font-size: 13px;
+    color: var(--text-muted);
+    margin-top: 8px;
+    letter-spacing: 0.5px;
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   FORM ELEMENTS
+   ═══════════════════════════════════════════════════════════════ */
+.form-group {
+    margin-bottom: 16px;
+    position: relative;
+}
+
+.form-group .input-icon {
+    position: absolute;
+    left: 14px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: var(--text-muted);
+    font-size: 14px;
+    pointer-events: none;
+    transition: color 0.3s ease;
+}
+
+.form-control {
+    width: 100%;
+    padding: 13px 16px 13px 42px;
+    border: 1px solid var(--glass-border);
+    border-radius: 10px;
+    font-size: 14px;
+    font-family: 'Outfit', sans-serif;
+    transition: all 0.3s ease;
+    background: var(--input-bg);
+    color: var(--text-primary);
+}
+
+.form-control:focus {
+    outline: none;
+    border-color: var(--accent-purple);
+    box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.15);
+}
+
+.form-control:focus + .input-icon,
+.form-control:focus ~ .input-icon {
+    color: var(--accent-blue);
+}
+
+.form-control::placeholder {
+    color: var(--text-muted);
+    font-family: 'Outfit', sans-serif;
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   LOGIN BUTTON (matches FAITE accent gradient)
+   ═══════════════════════════════════════════════════════════════ */
+.btn-login {
+    width: 100%;
+    padding: 13px;
+    background: var(--accent-gradient);
+    color: white;
+    border: none;
+    border-radius: 10px;
+    font-size: 15px;
+    font-weight: 600;
+    font-family: 'Outfit', sans-serif;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    margin-top: 8px;
+    position: relative;
+    overflow: hidden;
+}
+
+.btn-login:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 6px 24px rgba(15, 42, 94, 0.5);
+}
+
+.btn-login:active {
+    transform: translateY(0);
+}
+
+.btn-login.loading {
+    pointer-events: none;
+    opacity: 0.8;
+}
+
+.btn-login.loading::after {
+    content: '';
+    position: absolute;
+    right: 16px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 18px;
+    height: 18px;
+    border: 2px solid rgba(255,255,255,0.3);
+    border-top-color: white;
+    border-radius: 50%;
+    animation: spin 0.6s linear infinite;
+}
+
+@keyframes spin {
+    to { transform: translateY(-50%) rotate(360deg); }
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   FLASH / ALERT MESSAGES
+   ═══════════════════════════════════════════════════════════════ */
+.alert {
+    text-align: center;
+    color: #f87171;
+    font-size: 13px;
+    padding: 10px 16px;
+    margin-top: 12px;
+    background: rgba(248, 113, 113, 0.08);
+    border: 1px solid rgba(248, 113, 113, 0.2);
+    border-radius: 8px;
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   FORGOT PASSWORD
+   ═══════════════════════════════════════════════════════════════ */
+.forgot-password {
+    text-align: center;
+    margin-top: 16px;
+}
+
+.forgot-password a {
+    color: var(--accent-blue);
+    text-decoration: none;
+    font-size: 13px;
+    transition: color 0.3s ease;
+}
+
+.forgot-password a:hover {
+    color: #93c5fd;
+    text-decoration: underline;
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   DIVIDER
+   ═══════════════════════════════════════════════════════════════ */
+.divider {
+    display: flex;
+    align-items: center;
+    text-align: center;
+    margin: 28px 0;
+    color: var(--text-muted);
+    font-size: 12px;
+}
+
+.divider::before,
+.divider::after {
+    content: '';
+    flex: 1;
+    border-bottom: 1px solid var(--glass-border);
+}
+
+.divider span {
+    padding: 0 14px;
+    white-space: nowrap;
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   MICROSOFT SIGN-IN (glass style)
+   ═══════════════════════════════════════════════════════════════ */
+.btn-microsoft {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    width: 100%;
+    padding: 12px;
+    background: var(--pill-bg);
+    color: var(--text-primary);
+    text-decoration: none;
+    border-radius: 10px;
+    font-size: 14px;
+    font-weight: 500;
+    font-family: 'Outfit', sans-serif;
+    transition: all 0.3s ease;
+    border: 1px solid var(--glass-border);
+    cursor: pointer;
+}
+
+.btn-microsoft:hover {
+    background: var(--pill-hover);
+    border-color: var(--glass-border-hover);
+    transform: translateY(-1px);
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.3);
+}
+
+.microsoft-icon {
+    width: 18px;
+    height: 18px;
+    display: inline-block;
+    flex-shrink: 0;
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   RESPONSIVE
+   ═══════════════════════════════════════════════════════════════ */
+@media (max-width: 480px) {
+    .login-card {
+        padding: 36px 24px;
+    }
+
+    .logo-text {
+        font-size: 24px;
+    }
+
+    .logo-icon {
+        width: 40px;
+        height: 40px;
+    }
+}
+    </style>
+</head>
+<body>
+
+<!-- Animated Background (matches FAITE portal) -->
+<div class="background-layer"></div>
+<div class="background-overlay"></div>
+<script>
+  // Get or create session ID
+  let sessionId = sessionStorage.getItem('procurement_session_id') || '';
+  
+  window.watsonAssistantChatOptions = {
+    integrationID: "e83d2bf9-a776-479e-bed7-ac4f10bab3f2",
+    region: "eu-gb",
+    serviceInstanceID: "9185b88a-39b5-43a3-b3fd-3fd11d42c0a3",
+    
+    // Pass session ID in context
+    context: {
+      global: {
+        system: {
+          user_defined: {
+            session_id: sessionId
+          }
+        }
+      }
+    },
+    
+    onLoad: function(instance) {
+      console.log('Watson Assistant loaded with session:', sessionId);
+      
+      // Store the instance globally if needed
+      window.watsonInstance = instance;
+      
+      // Simple render
+      instance.render();
+    }
+  };
+  
+  // Load the script
+  setTimeout(function(){
+    const script = document.createElement('script');
+    script.src = "https://web-chat.global.assistant.watson.appdomain.cloud/versions/latest/WatsonAssistantChatEntry.js";
+    document.head.appendChild(script);
+  }, 0);
+</script>
+</body>
+</html>

@@ -1,0 +1,1019 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bid Comparison · RFQ {{ rfq_id }}</title>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <style>
+        /* ═══════════════════════════════════════════════════════════════
+           THEME VARIABLES 
+           ═══════════════════════════════════════════════════════════════ */
+        :root {
+            --glass-bg: rgba(15, 23, 42, 0.9);
+            --glass-bg-light: rgba(30, 41, 59, 0.8);
+            --glass-border: rgba(255, 255, 255, 0.1);
+            --glass-border-hover: rgba(255, 255, 255, 0.18);
+            --text-primary: #f8fafc;
+            --text-secondary: rgba(248, 250, 252, 0.75);
+            --text-muted: rgba(248, 250, 252, 0.55);
+            --accent-gradient: linear-gradient(135deg, #0f2a5e 0%, #1e4d8c 50%, #60a5fa 100%);
+            --accent-blue: #60a5fa;
+            --accent-purple: #3b82f6;
+            --pill-bg: rgba(255, 255, 255, 0.08);
+            --pill-hover: rgba(255, 255, 255, 0.14);
+            --input-bg: rgba(15, 23, 42, 0.95);
+            --blur-amount: 20px;
+            --body-bg: #0f172a;
+            --shadow-color: rgba(0, 0, 0, 0.3);
+            --success: #10b981;
+            --warning: #f59e0b;
+            --danger: #ef4444;
+            --info: #3b82f6;
+            --gold: #fbbf24;
+            --silver: #94a3b8;
+            --bronze: #b45309;
+        }
+
+        [data-theme="light"] {
+            --glass-bg: rgba(255, 255, 255, 0.85);
+            --glass-bg-light: rgba(248, 250, 252, 0.9);
+            --glass-border: rgba(0, 0, 0, 0.1);
+            --glass-border-hover: rgba(0, 0, 0, 0.18);
+            --text-primary: #1e293b;
+            --text-secondary: rgba(30, 41, 59, 0.8);
+            --text-muted: rgba(30, 41, 59, 0.55);
+            --pill-bg: rgba(0, 0, 0, 0.05);
+            --pill-hover: rgba(0, 0, 0, 0.1);
+            --input-bg: rgba(255, 255, 255, 0.95);
+            --body-bg: #f1f5f9;
+            --shadow-color: rgba(0, 0, 0, 0.1);
+            --success: #059669;
+            --warning: #d97706;
+            --danger: #dc2626;
+            --info: #2563eb;
+            --gold: #b45309;
+            --silver: #4b5563;
+            --bronze: #92400e;
+        }
+
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+
+        body {
+            font-family: 'Outfit', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: var(--body-bg);
+            color: var(--text-primary);
+            min-height: 100vh;
+            overflow-x: hidden;
+            transition: background 0.3s ease, color 0.3s ease;
+        }
+
+        .background-layer {
+            position: fixed;
+            inset: 0;
+            z-index: 0;
+            background: url('{{ url_for("static", filename="images/faite-bg-v2.png") }}') center/cover no-repeat fixed;
+            filter: brightness(0.5) saturate(1.1);
+        }
+        [data-theme="light"] .background-layer { filter: brightness(1.1) saturate(0.9); }
+
+        .background-overlay {
+            position: fixed;
+            inset: 0;
+            z-index: 1;
+            background: linear-gradient(
+                180deg,
+                rgba(15, 23, 42, 0.7) 0%,
+                rgba(15, 23, 42, 0.85) 50%,
+                rgba(15, 23, 42, 0.92) 100%
+            );
+        }
+        [data-theme="light"] .background-overlay {
+            background: linear-gradient(
+                180deg,
+                rgba(241, 245, 249, 0.7) 0%,
+                rgba(241, 245, 249, 0.85) 50%,
+                rgba(241, 245, 249, 0.95) 100%
+            );
+        }
+
+        .page {
+            position: relative;
+            z-index: 2;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* Top nav */
+        .top-nav {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 12px 20px;
+            background: var(--glass-bg);
+            backdrop-filter: blur(var(--blur-amount));
+            -webkit-backdrop-filter: blur(var(--blur-amount));
+            border-bottom: 1px solid var(--glass-border);
+            position: sticky;
+            top: 0;
+            z-index: 5;
+        }
+
+        .nav-left { display: flex; align-items: center; gap: 12px; }
+        .brand { display: flex; align-items: center; gap: 10px; }
+        .brand-icon {
+            width: 32px; height: 32px;
+            background: var(--accent-gradient);
+            border-radius: 8px;
+            display: flex; align-items: center; justify-content: center;
+            color: #fff;
+            font-weight: 700;
+            font-family: "JetBrains Mono", monospace;
+            font-size: 14px;
+        }
+        .brand-name { font-weight: 600; font-size: 18px; letter-spacing: -0.3px; }
+        .nav-center { font-size: 14px; color: var(--text-secondary); }
+        .nav-right { display: flex; align-items: center; gap: 8px; }
+
+        .nav-btn {
+            padding: 8px 16px;
+            border: 1px solid var(--glass-border);
+            background: transparent;
+            color: var(--text-primary);
+            font-family: inherit;
+            font-size: 13px;
+            font-weight: 500;
+            border-radius: 20px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            transition: all 0.2s ease;
+            user-select: none;
+            text-decoration: none;
+        }
+        .nav-btn:hover {
+            background: var(--pill-hover);
+            border-color: var(--glass-border-hover);
+        }
+
+        .theme-toggle-btn {
+            width: 40px; height: 40px;
+            border: none;
+            background: transparent;
+            color: var(--text-primary);
+            cursor: pointer;
+            border-radius: 8px;
+            display: flex; align-items: center; justify-content: center;
+            transition: background 0.2s ease, color 0.2s ease;
+        }
+        .theme-toggle-btn:hover { background: var(--pill-hover); }
+
+        /* Main content */
+        .container {
+            max-width: 1400px;
+            width: 100%;
+            margin: 18px auto 40px;
+            padding: 0 18px;
+        }
+
+        .glass-card {
+            background: var(--glass-bg);
+            backdrop-filter: blur(var(--blur-amount));
+            -webkit-backdrop-filter: blur(var(--blur-amount));
+            border: 1px solid var(--glass-border);
+            border-radius: 16px;
+            padding: 18px;
+            box-shadow: 0 8px 32px var(--shadow-color);
+            margin-bottom: 16px;
+        }
+
+        .card-title {
+            font-size: 14px;
+            font-weight: 600;
+            margin-bottom: 12px;
+            color: var(--text-primary);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 10px;
+        }
+
+        .pill {
+            padding: 6px 12px;
+            background: var(--pill-bg);
+            border: 1px solid var(--glass-border);
+            border-radius: 20px;
+            font-size: 12px;
+            color: var(--text-secondary);
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .badge {
+            padding: 4px 8px;
+            border-radius: 12px;
+            font-size: 11px;
+            font-weight: 600;
+            display: inline-block;
+        }
+        .badge-success { background: rgba(16, 185, 129, 0.2); color: var(--success); border: 1px solid rgba(16, 185, 129, 0.3); }
+        .badge-warning { background: rgba(245, 158, 11, 0.2); color: var(--warning); border: 1px solid rgba(245, 158, 11, 0.3); }
+        .badge-danger { background: rgba(239, 68, 68, 0.2); color: var(--danger); border: 1px solid rgba(239, 68, 68, 0.3); }
+        .badge-info { background: rgba(59, 130, 246, 0.2); color: var(--info); border: 1px solid rgba(59, 130, 246, 0.3); }
+        .badge-gold { background: rgba(251, 191, 36, 0.2); color: var(--gold); border: 1px solid rgba(251, 191, 36, 0.3); }
+        .badge-silver { background: rgba(148, 163, 184, 0.2); color: var(--silver); border: 1px solid rgba(148, 163, 184, 0.3); }
+        .badge-bronze { background: rgba(180, 83, 9, 0.2); color: var(--bronze); border: 1px solid rgba(180, 83, 9, 0.3); }
+
+        /* Leaderboard */
+        .leaderboard {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 15px;
+            margin-bottom: 25px;
+        }
+
+        .top-card {
+            background: var(--glass-bg-light);
+            border: 1px solid var(--glass-border);
+            border-radius: 16px;
+            padding: 20px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        .top-card.gold {
+            background: linear-gradient(135deg, rgba(251, 191, 36, 0.2), rgba(251, 191, 36, 0.05));
+            border-color: var(--gold);
+        }
+        .top-card.silver {
+            background: linear-gradient(135deg, rgba(148, 163, 184, 0.2), rgba(148, 163, 184, 0.05));
+            border-color: var(--silver);
+        }
+        .top-card.bronze {
+            background: linear-gradient(135deg, rgba(180, 83, 9, 0.2), rgba(180, 83, 9, 0.05));
+            border-color: var(--bronze);
+        }
+        .top-rank {
+            font-size: 48px;
+            font-weight: 700;
+            opacity: 0.2;
+            position: absolute;
+            top: 10px;
+            right: 20px;
+            font-family: "JetBrains Mono", monospace;
+        }
+        .top-name {
+            font-size: 18px;
+            font-weight: 600;
+            margin: 10px 0 5px;
+        }
+        .top-score {
+            font-size: 36px;
+            font-weight: 700;
+            font-family: "JetBrains Mono", monospace;
+            margin: 10px 0;
+        }
+        .top-amount {
+            font-size: 14px;
+            color: var(--text-secondary);
+            margin-bottom: 10px;
+        }
+
+        /* Score grid for comparison */
+        .comparison-grid {
+            display: grid;
+            grid-template-columns: 200px repeat(auto-fit, minmax(180px, 1fr));
+            gap: 1px;
+            background: var(--glass-border);
+            border: 1px solid var(--glass-border);
+            border-radius: 12px;
+            overflow: hidden;
+            margin-bottom: 20px;
+        }
+        .comparison-header {
+            background: var(--glass-bg-light);
+            padding: 15px;
+            font-weight: 600;
+        }
+        .comparison-cell {
+            background: var(--glass-bg);
+            padding: 15px;
+            text-align: center;
+        }
+        .comparison-row {
+            display: contents;
+        }
+        .comparison-row > div {
+            background: var(--glass-bg);
+            padding: 12px;
+            border-bottom: 1px solid var(--glass-border);
+        }
+        .metric-name {
+            font-weight: 500;
+            color: var(--text-secondary);
+        }
+
+        /* Radar chart placeholder */
+        .radar-container {
+            height: 300px;
+            margin: 20px 0;
+        }
+
+        .strength-tag {
+            background: rgba(16, 185, 129, 0.1);
+            color: var(--success);
+            padding: 4px 10px;
+            border-radius: 20px;
+            font-size: 11px;
+            display: inline-block;
+            margin: 2px;
+        }
+        .weakness-tag {
+            background: rgba(239, 68, 68, 0.1);
+            color: var(--danger);
+            padding: 4px 10px;
+            border-radius: 20px;
+            font-size: 11px;
+            display: inline-block;
+            margin: 2px;
+        }
+
+        .notification {
+            position: fixed;
+            right: 18px;
+            bottom: 18px;
+            background: var(--glass-bg);
+            border: 1px solid var(--glass-border);
+            border-radius: 12px;
+            padding: 12px 14px;
+            box-shadow: 0 8px 32px var(--shadow-color);
+            backdrop-filter: blur(var(--blur-amount));
+            -webkit-backdrop-filter: blur(var(--blur-amount));
+            display: none;
+            max-width: 380px;
+            z-index: 50;
+        }
+    </style>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+    <div class="background-layer"></div>
+    <div class="background-overlay"></div>
+    
+    <div class="page">
+        <!-- Top Navigation -->
+        <div class="top-nav">
+            <div class="nav-left">
+                <div class="brand">
+                    <div class="brand-icon">B</div>
+                    <span class="brand-name">Bid Evaluator</span>
+                </div>
+                <div class="nav-center">
+                    <i class="bi bi-bar-chart"></i> Bid Comparison · {{ rfq_id }}
+                </div>
+            </div>
+            <div class="nav-right">
+                <a href="/RFX/admin/bids" class="nav-btn">
+                    <i class="bi bi-list-ul"></i> All Bids
+                </a>
+                <a href="/RFX/admin/rfq/{{ rfq_id }}" class="nav-btn">
+                    <i class="bi bi-eye"></i> View RFQ
+                </a>
+                <button class="theme-toggle-btn" onclick="toggleTheme()">
+                    <i class="bi bi-sun-fill" id="light-icon" style="display: none;"></i>
+                    <i class="bi bi-moon-fill" id="dark-icon"></i>
+                </button>
+            </div>
+        </div>
+
+        <!-- Main Content -->
+        <div class="container">
+            <!-- Header -->
+            <div class="glass-card">
+                <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 15px;">
+                    <div>
+                        <h2 style="margin-bottom: 5px;">RFQ Bid Evaluation</h2>
+                        <div style="display: flex; gap: 12px; align-items: center; flex-wrap: wrap;">
+                            <span class="pill" id="rfqId">{{ rfq_id }}</span>
+                            <span class="badge" id="rfqStatus">Loading...</span>
+                            <span class="muted" id="bidCount">Loading bids...</span>
+                        </div>
+                    </div>
+                    <div style="display: flex; gap: 8px;">
+                        <button class="btn-primary" onclick="evaluateAllBids()" id="evaluateAllBtn">
+                            <i class="bi bi-robot"></i> Evaluate All Bids
+                        </button>
+                        <button class="nav-btn" onclick="refreshData()">
+                            <i class="bi bi-arrow-repeat"></i> Refresh
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Loading State -->
+            <div id="loading" class="glass-card" style="text-align: center; padding: 60px;">
+                <div class="spinner-border" style="width: 3rem; height: 3rem;" role="status">
+                    <span class="visually-hidden">Loading...</span>
+                </div>
+                <p class="mt-3">Loading bid comparison data...</p>
+            </div>
+
+            <!-- Content (hidden initially) -->
+            <div id="content" style="display: none;">
+                <!-- Leaderboard / Top 3 -->
+                <div class="leaderboard" id="leaderboard"></div>
+
+                <!-- Summary Stats -->
+                <div class="glass-card">
+                    <div class="card-title">
+                        <span><i class="bi bi-pie-chart"></i> Evaluation Summary</span>
+                        <span class="pill" id="summaryDate"></span>
+                    </div>
+                    <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 15px;">
+                        <div class="stat-card" style="text-align: center;">
+                            <div class="stat-value" id="totalBids">0</div>
+                            <div class="stat-label">Total Bids</div>
+                        </div>
+                        <div class="stat-card" style="text-align: center;">
+                            <div class="stat-value" id="avgScore">0</div>
+                            <div class="stat-label">Average Score</div>
+                        </div>
+                        <div class="stat-card" style="text-align: center;">
+                            <div class="stat-value" id="lowestBid">0</div>
+                            <div class="stat-label">Lowest Price</div>
+                        </div>
+                        <div class="stat-card" style="text-align: center;">
+                            <div class="stat-value" id="budgetVariance">0</div>
+                            <div class="stat-label">vs Budget</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Radar Chart for Comparison -->
+                <div class="glass-card">
+                    <div class="card-title">
+                        <span><i class="bi bi-diagram-3"></i> Bidder Comparison</span>
+                    </div>
+                    <div class="radar-container">
+                        <canvas id="radarChart"></canvas>
+                    </div>
+                </div>
+
+                <!-- Detailed Comparison Table -->
+                <div class="glass-card" style="padding: 0; overflow: hidden;">
+                    <div class="card-title" style="padding: 18px 18px 0;">
+                        <span><i class="bi bi-table"></i> Detailed Bid Comparison</span>
+                    </div>
+                    <div style="overflow-x: auto;">
+                        <table style="min-width: 1200px;">
+                            <thead>
+                                <tr>
+                                    <th>Rank</th>
+                                    <th>Supplier</th>
+                                    <th>Amount</th>
+                                    <th>Overall</th>
+                                    <th>Price</th>
+                                    <th>Delivery</th>
+                                    <th>Quantity</th>
+                                    <th>Discount</th>
+                                    <th>Recommendation</th>
+                                    <th>Strengths/Weaknesses</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody id="comparisonTableBody"></tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <!-- AI Summary -->
+                <div class="glass-card">
+                    <div class="card-title">
+                        <span><i class="bi bi-stars"></i> AI Summary & Recommendation</span>
+                    </div>
+                    <div id="aiSummary">
+                        <p class="muted">Loading AI summary...</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Notification -->
+    <div id="notification" class="notification">
+        <strong id="notifTitle"></strong>
+        <p id="notifMessage"></p>
+    </div>
+
+    <script>
+        const rfqId = {{ rfq_id|tojson }};
+        let radarChart = null;
+
+        // Theme Toggle
+        function toggleTheme() {
+            const html = document.documentElement;
+            const currentTheme = html.getAttribute('data-theme');
+            const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+            html.setAttribute('data-theme', newTheme);
+            localStorage.setItem('theme', newTheme);
+            updateThemeIcons(newTheme);
+            if (radarChart) updateChartTheme();
+        }
+
+        function updateThemeIcons(theme) {
+            const lightIcon = document.getElementById('light-icon');
+            const darkIcon = document.getElementById('dark-icon');
+            if (theme === 'dark') {
+                lightIcon.style.display = 'none';
+                darkIcon.style.display = 'inline-block';
+            } else {
+                lightIcon.style.display = 'inline-block';
+                darkIcon.style.display = 'none';
+            }
+        }
+
+        // Load saved theme
+        const savedTheme = localStorage.getItem('theme') || 'dark';
+        document.documentElement.setAttribute('data-theme', savedTheme);
+        updateThemeIcons(savedTheme);
+
+        // Show notification
+        function showNotification(title, message, isError = false) {
+            const notif = document.getElementById('notification');
+            const titleEl = document.getElementById('notifTitle');
+            const msgEl = document.getElementById('notifMessage');
+            
+            titleEl.textContent = title;
+            msgEl.textContent = message;
+            titleEl.style.color = isError ? 'var(--danger)' : 'var(--success)';
+            
+            notif.style.display = 'block';
+            setTimeout(() => { notif.style.display = 'none'; }, 5000);
+        }
+
+        // Format currency
+        function formatCurrency(amount, currency = 'USD') {
+            if (amount === null || amount === undefined) return '—';
+            return new Intl.NumberFormat('en-US', { style: 'currency', currency: currency }).format(amount);
+        }
+
+        // Load comparison data
+        async function loadComparison() {
+            try {
+                document.getElementById('loading').style.display = 'block';
+                document.getElementById('content').style.display = 'none';
+
+                const response = await fetch(`/RFX/admin/api/rfq/${rfqId}/compare-bids`);
+                const data = await response.json();
+
+                if (data.status === 'success') {
+                    displayComparison(data);
+                } else {
+                    throw new Error(data.message || 'Failed to load comparison');
+                }
+
+                document.getElementById('loading').style.display = 'none';
+                document.getElementById('content').style.display = 'block';
+
+            } catch (error) {
+                console.error('Error:', error);
+                document.getElementById('loading').innerHTML = `
+                    <div style="color: var(--danger);">
+                        <i class="bi bi-exclamation-triangle" style="font-size: 3rem;"></i>
+                        <p>Error loading comparison: ${error.message}</p>
+                        <button class="nav-btn" onclick="loadComparison()" style="margin-top: 15px;">
+                            <i class="bi bi-arrow-repeat"></i> Try Again
+                        </button>
+                    </div>
+                `;
+            }
+        }
+
+        // Display comparison data
+        function displayComparison(data) {
+            const bids = data.ranked_bids || [];
+            
+            // Update status
+            document.getElementById('rfqStatus').textContent = bids[0]?.rfq_status || 'UNKNOWN';
+            document.getElementById('bidCount').textContent = `${bids.length} bids received`;
+
+            // Show leaderboard (top 3)
+            displayLeaderboard(bids.slice(0, 3));
+
+            // Calculate stats
+            const totalBids = bids.length;
+            const avgScore = bids.reduce((sum, b) => sum + (b.overall_score || 0), 0) / totalBids || 0;
+            const lowestBid = bids.length ? Math.min(...bids.map(b => b.amount)) : 0;
+            const budget = bids[0]?.rfq_budget || 0;
+            const budgetVariance = budget ? ((lowestBid - budget) / budget * 100).toFixed(1) : 0;
+
+            document.getElementById('totalBids').textContent = totalBids;
+            document.getElementById('avgScore').textContent = avgScore.toFixed(1);
+            document.getElementById('lowestBid').textContent = formatCurrency(lowestBid, bids[0]?.currency);
+            document.getElementById('budgetVariance').textContent = budgetVariance + '%';
+            document.getElementById('summaryDate').textContent = `Updated: ${new Date().toLocaleDateString()}`;
+
+            // Create radar chart
+            createRadarChart(bids);
+
+            // Display comparison table
+            displayComparisonTable(bids);
+
+            // Generate AI summary
+            generateAISummary(bids);
+        }
+
+        // Display leaderboard
+        function displayLeaderboard(topBids) {
+            const leaderboard = document.getElementById('leaderboard');
+            
+            if (topBids.length === 0) {
+                leaderboard.innerHTML = '<div class="glass-card">No bids to display</div>';
+                return;
+            }
+
+            const medals = ['gold', 'silver', 'bronze'];
+            leaderboard.innerHTML = topBids.map((bid, index) => {
+                const medal = medals[index];
+                return `
+                    <div class="top-card ${medal}">
+                        <div class="top-rank">#${index + 1}</div>
+                        <div class="top-name">${bid.supplier_name}</div>
+                        <div class="top-score">${bid.overall_score || '—'}</div>
+                        <div class="top-amount">${formatCurrency(bid.amount, bid.currency)}</div>
+                        <div class="badge ${medal === 'gold' ? 'badge-gold' : medal === 'silver' ? 'badge-silver' : 'badge-bronze'}">
+                            ${bid.recommendation || 'PENDING'}
+                        </div>
+                        <div style="margin-top: 10px;">
+                            <a href="/RFX/admin/bid/${bid.mapping_id}" class="nav-btn" style="padding: 4px 12px;">
+                                <i class="bi bi-eye"></i> View
+                            </a>
+                        </div>
+                    </div>
+                `;
+            }).join('');
+        }
+
+        // Create radar chart
+        function createRadarChart(bids) {
+            const ctx = document.getElementById('radarChart').getContext('2d');
+            
+            // Prepare data
+            const labels = ['Price', 'Delivery', 'Quantity', 'Discount'];
+            const datasets = bids.slice(0, 5).map((bid, index) => { // Show max 5 bids
+                const scores = bid.scores || {};
+                const colors = [
+                    'rgba(59, 130, 246, 0.8)',   // blue
+                    'rgba(16, 185, 129, 0.8)',   // green
+                    'rgba(245, 158, 11, 0.8)',    // orange
+                    'rgba(239, 68, 68, 0.8)',     // red
+                    'rgba(139, 92, 246, 0.8)'     // purple
+                ];
+                
+                return {
+                    label: bid.supplier_name,
+                    data: [
+                        scores.price || 0,
+                        scores.delivery || 0,
+                        scores.quantity || 0,
+                        scores.discount || 0
+                    ],
+                    backgroundColor: colors[index].replace('0.8', '0.1'),
+                    borderColor: colors[index],
+                    borderWidth: 2,
+                    pointBackgroundColor: colors[index]
+                };
+            });
+
+            if (radarChart) radarChart.destroy();
+
+            radarChart = new Chart(ctx, {
+                type: 'radar',
+                data: { labels, datasets },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: { position: 'top' }
+                    },
+                    scales: {
+                        r: {
+                            beginAtZero: true,
+                            max: 100,
+                            ticks: { stepSize: 20 },
+                            grid: { color: 'rgba(255,255,255,0.1)' }
+                        }
+                    }
+                }
+            });
+        }
+
+        // Display comparison table
+        function displayComparisonTable(bids) {
+            const tbody = document.getElementById('comparisonTableBody');
+            
+            tbody.innerHTML = bids.map((bid, index) => {
+                const scores = bid.scores || {};
+                const strengths = bid.strengths || [];
+                const weaknesses = bid.weaknesses || [];
+                
+                const rankClass = 
+                    index === 0 ? 'badge-gold' :
+                    index === 1 ? 'badge-silver' :
+                    index === 2 ? 'badge-bronze' : 'badge-info';
+                
+                const recClass = 
+                    bid.recommendation === 'HIGHLY RECOMMENDED' ? 'badge-success' :
+                    bid.recommendation === 'RECOMMENDED' ? 'badge-info' :
+                    bid.recommendation === 'CONSIDER WITH CAUTION' ? 'badge-warning' : 'badge-danger';
+
+                return `
+                    <tr>
+                        <td><span class="badge ${rankClass}">#${index + 1}</span></td>
+                        <td><strong>${bid.supplier_name}</strong></td>
+                        <td class="mono">${formatCurrency(bid.amount, bid.currency)}</td>
+                        <td class="mono"><strong>${bid.overall_score || '—'}</strong></td>
+                        <td class="mono">${scores.price || '—'}</td>
+                        <td class="mono">${scores.delivery || '—'}</td>
+                        <td class="mono">${scores.quantity || '—'}</td>
+                        <td class="mono">${scores.discount || '—'}</td>
+                        <td><span class="badge ${recClass}">${bid.recommendation || 'PENDING'}</span></td>
+                        <td>
+                            <div style="display: flex; flex-direction: column; gap: 4px;">
+                                ${strengths.slice(0, 2).map(s => `<span class="strength-tag">✓ ${s}</span>`).join('')}
+                                ${weaknesses.slice(0, 2).map(w => `<span class="weakness-tag">✗ ${w}</span>`).join('')}
+                            </div>
+                        </td>
+                        <td>
+                            <div class="action-buttons">
+                                <a href="/RFX/admin/bid/${bid.mapping_id}" class="btn-icon" title="View Details">
+                                    <i class="bi bi-eye"></i>
+                                </a>
+                                <button class="btn-icon" onclick="awardBid(${bid.mapping_id})" title="Award Bid">
+                                    <i class="bi bi-trophy"></i>
+                                </button>
+                            </div>
+                        </td>
+                    </tr>
+                `;
+            }).join('');
+        }
+
+        // Generate AI summary
+        async function generateAISummary(bids) {
+            const aiSummaryDiv = document.getElementById('aiSummary');
+            
+            if (bids.length === 0) {
+                aiSummaryDiv.innerHTML = '<p class="muted">No bids to analyze</p>';
+                return;
+            }
+
+            try {
+                // Show loading state
+                aiSummaryDiv.innerHTML = `
+                    <div style="text-align: center; padding: 20px;">
+                        <div class="spinner-border" style="width: 2rem; height: 2rem;" role="status">
+                            <span class="visually-hidden">Loading...</span>
+                        </div>
+                        <p class="mt-2">AI is analyzing bids and generating recommendations...</p>
+                    </div>
+                `;
+                
+                // Fetch AI-generated summary from backend
+                const response = await fetch(`/RFX/admin/api/rfq/${rfqId}/ai-summary`);
+                const data = await response.json();
+                
+                if (data.status === 'success' && data.summary) {
+                    // Display the AI-generated summary
+                    const summary = data.summary;
+                    let summaryHtml = '';
+                    
+                    // Top Performer
+                    if (summary.top_performer) {
+                        summaryHtml += `
+                            <div class="ai-insight" style="margin-bottom: 16px; padding: 16px; background: var(--pill-bg); border-radius: 12px; border-left: 4px solid var(--gold);">
+                                <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 8px;">
+                                    <span style="font-size: 24px;">🏆</span>
+                                    <strong style="font-size: 16px;">Top Performer: ${summary.top_performer.supplier_name}</strong>
+                                    <span class="badge badge-gold">Score: ${summary.top_performer.score}/100</span>
+                                </div>
+                                ${summary.top_performer.key_advantages ? 
+                                    `<p style="margin-left: 32px; color: var(--text-secondary);">${summary.top_performer.key_advantages}</p>` : ''}
+                                ${summary.top_performer.strengths && summary.top_performer.strengths.length > 0 ?
+                                    `<div style="margin-left: 32px; margin-top: 8px;">
+                                        ${summary.top_performer.strengths.map(s => `<span class="strength-tag">✓ ${s}</span>`).join('')}
+                                    </div>` : ''}
+                            </div>
+                        `;
+                    }
+                    
+                    // Best Price
+                    if (summary.best_price) {
+                        summaryHtml += `
+                            <div class="ai-insight" style="margin-bottom: 16px; padding: 16px; background: var(--pill-bg); border-radius: 12px; border-left: 4px solid var(--success);">
+                                <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 8px;">
+                                    <span style="font-size: 24px;">💰</span>
+                                    <strong>Best Price: ${summary.best_price.supplier_name}</strong>
+                                    <span class="badge badge-success">${formatCurrency(summary.best_price.amount, summary.best_price.currency)}</span>
+                                </div>
+                                ${summary.best_price.trade_offs ? 
+                                    `<p style="margin-left: 32px; color: var(--text-secondary);">${summary.best_price.trade_offs}</p>` : ''}
+                            </div>
+                        `;
+                    }
+                    
+                    // Trade-off Analysis
+                    if (summary.trade_off) {
+                        summaryHtml += `
+                            <div class="ai-insight" style="margin-bottom: 16px; padding: 16px; background: var(--pill-bg); border-radius: 12px; border-left: 4px solid var(--info);">
+                                <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 8px;">
+                                    <span style="font-size: 24px;">⚖️</span>
+                                    <strong>Trade-off Analysis</strong>
+                                </div>
+                                <p style="margin-left: 32px;">${summary.trade_off}</p>
+                            </div>
+                        `;
+                    }
+                    
+                    // Competitive Landscape
+                    if (summary.competitive_landscape) {
+                        summaryHtml += `
+                            <div class="ai-insight" style="margin-bottom: 16px; padding: 16px; background: var(--pill-bg); border-radius: 12px;">
+                                <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 8px;">
+                                    <span style="font-size: 24px;">📊</span>
+                                    <strong>Competitive Landscape</strong>
+                                </div>
+                                <p style="margin-left: 32px;">${summary.competitive_landscape}</p>
+                            </div>
+                        `;
+                    }
+                    
+                    // Risk Assessment
+                    if (summary.risk_assessment) {
+                        summaryHtml += `
+                            <div class="ai-insight" style="margin-bottom: 16px; padding: 16px; background: var(--pill-bg); border-radius: 12px;">
+                                <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 8px;">
+                                    <span style="font-size: 24px;">⚠️</span>
+                                    <strong>Risk Assessment</strong>
+                                </div>
+                                <p style="margin-left: 32px;">${summary.risk_assessment}</p>
+                            </div>
+                        `;
+                    }
+                    
+                    // Recommendation
+                    if (summary.recommendation) {
+                        const recClass = summary.recommendation.includes('HIGHLY') ? 'badge-success' : 
+                                        summary.recommendation.includes('RECOMMENDED') ? 'badge-info' : 
+                                        summary.recommendation.includes('CAUTION') ? 'badge-warning' : 'badge-danger';
+                        
+                        summaryHtml += `
+                            <div class="ai-insight" style="margin-bottom: 16px; padding: 16px; background: var(--pill-bg); border-radius: 12px; border-left: 4px solid var(--${recClass.replace('badge-', '')});">
+                                <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 8px;">
+                                    <span style="font-size: 24px;">🎯</span>
+                                    <strong>AI Recommendation</strong>
+                                    <span class="badge ${recClass}">${summary.recommendation}</span>
+                                </div>
+                                ${summary.recommendation_rationale ? 
+                                    `<p style="margin-left: 32px;">${summary.recommendation_rationale}</p>` : ''}
+                            </div>
+                        `;
+                    }
+                    
+                    // Negotiation Strategies
+                    if (summary.negotiation_strategies && summary.negotiation_strategies.length > 0) {
+                        summaryHtml += `
+                            <div class="ai-insight" style="margin-bottom: 16px; padding: 16px; background: var(--pill-bg); border-radius: 12px;">
+                                <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 8px;">
+                                    <span style="font-size: 24px;">🤝</span>
+                                    <strong>Negotiation Strategies</strong>
+                                </div>
+                                <ul style="margin-left: 32px; color: var(--text-secondary);">
+                                    ${summary.negotiation_strategies.map(s => `<li style="margin-bottom: 4px;">${s}</li>`).join('')}
+                                </ul>
+                            </div>
+                        `;
+                    }
+                    
+                    // Next Steps
+                    if (summary.next_steps && summary.next_steps.length > 0) {
+                        summaryHtml += `
+                            <div class="ai-insight" style="padding: 16px; background: var(--pill-bg); border-radius: 12px;">
+                                <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 8px;">
+                                    <span style="font-size: 24px;">📋</span>
+                                    <strong>Recommended Next Steps</strong>
+                                </div>
+                                <ol style="margin-left: 32px; color: var(--text-secondary);">
+                                    ${summary.next_steps.map(s => `<li style="margin-bottom: 4px;">${s}</li>`).join('')}
+                                </ol>
+                            </div>
+                        `;
+                    }
+                    
+                    aiSummaryDiv.innerHTML = summaryHtml;
+                } else {
+                    // Fallback to simple summary if API fails
+                    throw new Error(data.message || 'No AI summary available');
+                }
+            } catch (error) {
+                console.error('Error fetching AI summary:', error);
+                
+                // Fallback: Generate a simple static summary
+                const topBid = bids[0];
+                const lowestPrice = bids.reduce((min, b) => b.amount < min.amount ? b : min, bids[0]);
+                
+                let summary = `
+                    <div class="ai-insight" style="margin-bottom: 12px; padding: 12px; background: var(--pill-bg); border-radius: 8px;">
+                        <strong>🎯 Top Performer:</strong> ${topBid.supplier_name} with score ${topBid.overall_score}/100
+                        ${topBid.recommendation === 'HIGHLY RECOMMENDED' ? '⭐' : ''}
+                    </div>
+                    <div class="ai-insight" style="margin-bottom: 12px; padding: 12px; background: var(--pill-bg); border-radius: 8px;">
+                        <strong>💰 Best Price:</strong> ${lowestPrice.supplier_name} at ${formatCurrency(lowestPrice.amount, lowestPrice.currency)}
+                    </div>
+                `;
+
+                if (topBid.mapping_id !== lowestPrice.mapping_id) {
+                    summary += `
+                        <div class="ai-insight" style="padding: 12px; background: var(--pill-bg); border-radius: 8px;">
+                            <strong>⚖️ Trade-off:</strong> The highest-scoring bid is not the cheapest. 
+                            ${topBid.supplier_name} offers better overall value based on the evaluation criteria.
+                        </div>
+                    `;
+                }
+
+                aiSummaryDiv.innerHTML = summary;
+            }
+        }
+
+        // Evaluate all bids
+        async function evaluateAllBids() {
+            const btn = document.getElementById('evaluateAllBtn');
+            const originalText = btn.innerHTML;
+            
+            try {
+                btn.innerHTML = '<i class="bi bi-arrow-repeat"></i> Evaluating...';
+                btn.disabled = true;
+                
+                showNotification('AI Evaluation', 'Evaluating all bids...');
+                
+                // You might want to create a batch evaluation endpoint
+                // For now, we'll reload the comparison which will evaluate on demand
+                await loadComparison();
+                
+                showNotification('Success', 'All bids evaluated');
+            } catch (error) {
+                showNotification('Error', 'Failed to evaluate bids', true);
+            } finally {
+                btn.innerHTML = originalText;
+                btn.disabled = false;
+            }
+        }
+
+        // Award bid
+        async function awardBid(mappingId) {
+            if (!confirm('Are you sure you want to award this bid? This action cannot be undone.')) {
+                return;
+            }
+
+            try {
+                const response = await fetch(`/RFX/admin/api/bid/${mappingId}/award`, {
+                    method: 'POST'
+                });
+                
+                const data = await response.json();
+                
+                if (data.status === 'success') {
+                    showNotification('Success', 'Bid awarded successfully!');
+                    loadComparison(); // Reload to update status
+                } else {
+                    showNotification('Error', data.message, true);
+                }
+            } catch (error) {
+                showNotification('Error', 'Failed to award bid', true);
+            }
+        }
+
+        // Refresh data
+        function refreshData() {
+            showNotification('Refreshing', 'Loading latest data...');
+            loadComparison();
+        }
+
+        // Update chart theme
+        function updateChartTheme() {
+            if (radarChart) {
+                const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
+                radarChart.options.scales.r.grid.color = isDark ? 'rgba(255,255,255,0.1)' : 'rgba(0,0,0,0.1)';
+                radarChart.update();
+            }
+        }
+
+        // Initialize
+        document.addEventListener('DOMContentLoaded', loadComparison);
+    </script>
+</body>
+</html>

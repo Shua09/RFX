@@ -1,0 +1,1474 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FAITE – Awarding of Bidding</title>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <style>
+        /* ═══════════════════════════════════════════════════════════════
+           THEME VARIABLES - DARK MODE (DEFAULT) — Matches FAITE System
+           ═══════════════════════════════════════════════════════════════ */
+        :root {
+            --glass-bg: rgba(15, 23, 42, 0.9);
+            --glass-bg-light: rgba(30, 41, 59, 0.8);
+            --glass-border: rgba(255, 255, 255, 0.1);
+            --glass-border-hover: rgba(255, 255, 255, 0.18);
+            --text-primary: #f8fafc;
+            --text-secondary: rgba(248, 250, 252, 0.75);
+            --text-muted: rgba(248, 250, 252, 0.55);
+            --accent-gradient: linear-gradient(135deg, #0f2a5e 0%, #1e4d8c 50%, #60a5fa 100%);
+            --accent-blue: #60a5fa;
+            --accent-purple: #3b82f6;
+            --pill-bg: rgba(255, 255, 255, 0.08);
+            --pill-hover: rgba(255, 255, 255, 0.14);
+            --input-bg: rgba(15, 23, 42, 0.95);
+            --blur-amount: 20px;
+            --body-bg: #0f172a;
+            --shadow-color: rgba(0, 0, 0, 0.3);
+            --success: #4ade80;
+            --success-bg: rgba(74, 222, 128, 0.12);
+            --danger: #f87171;
+            --danger-bg: rgba(248, 113, 113, 0.12);
+            --warning: #fbbf24;
+            --warning-bg: rgba(251, 191, 36, 0.12);
+        }
+
+        /* ═══════════════════════════════════════════════════════════════
+           THEME VARIABLES - LIGHT MODE
+           ═══════════════════════════════════════════════════════════════ */
+        [data-theme="light"] {
+            --glass-bg: rgba(255, 255, 255, 0.85);
+            --glass-bg-light: rgba(248, 250, 252, 0.9);
+            --glass-border: rgba(0, 0, 0, 0.1);
+            --glass-border-hover: rgba(0, 0, 0, 0.18);
+            --text-primary: #1e293b;
+            --text-secondary: rgba(30, 41, 59, 0.8);
+            --text-muted: rgba(30, 41, 59, 0.55);
+            --pill-bg: rgba(0, 0, 0, 0.05);
+            --pill-hover: rgba(0, 0, 0, 0.1);
+            --input-bg: rgba(255, 255, 255, 0.95);
+            --body-bg: #f1f5f9;
+            --shadow-color: rgba(0, 0, 0, 0.1);
+        }
+
+        [data-theme="light"] .background-overlay {
+            background: linear-gradient(180deg, rgba(241, 245, 249, 0.7) 0%, rgba(241, 245, 249, 0.85) 50%, rgba(241, 245, 249, 0.95) 100%);
+        }
+
+        [data-theme="light"] .page-title {
+            background: linear-gradient(135deg, #1e293b 0%, #475569 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: 'Outfit', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: var(--body-bg);
+            color: var(--text-primary);
+            min-height: 100vh;
+            overflow-x: hidden;
+            transition: background 0.3s ease, color 0.3s ease;
+        }
+
+        .background-layer { position: fixed; inset: 0; z-index: 0; background: var(--body-bg); }
+
+        .background-overlay {
+            position: fixed; inset: 0; z-index: 1;
+            background: linear-gradient(180deg, rgba(15, 23, 42, 0.7) 0%, rgba(15, 23, 42, 0.85) 50%, rgba(15, 23, 42, 0.92) 100%);
+        }
+
+        .bg-glow { position: fixed; border-radius: 50%; filter: blur(100px); opacity: 0.3; z-index: 0; pointer-events: none; }
+        .bg-glow-1 { width: 400px; height: 400px; background: rgba(96, 165, 250, 0.12); top: -5%; left: 10%; }
+        .bg-glow-2 { width: 350px; height: 350px; background: rgba(59, 130, 246, 0.08); bottom: 10%; right: 5%; }
+        .bg-glow-3 { width: 250px; height: 250px; background: rgba(139, 92, 246, 0.06); top: 40%; left: 60%; }
+
+        .app-container { position: relative; z-index: 2; display: flex; flex-direction: column; min-height: 100vh; }
+
+        /* ═══ Top Navigation — FAITE standard ═══ */
+        .top-nav {
+            display: flex; align-items: center; justify-content: space-between;
+            padding: 12px 24px;
+            background: var(--glass-bg);
+            backdrop-filter: blur(var(--blur-amount));
+            -webkit-backdrop-filter: blur(var(--blur-amount));
+            border-bottom: 1px solid var(--glass-border);
+            position: sticky; top: 0; z-index: 50;
+        }
+
+        .nav-left { display: flex; align-items: center; gap: 12px; }
+
+        .brand { display: flex; align-items: center; gap: 10px; }
+
+        .brand-icon {
+            width: 36px; height: 36px;
+            background: var(--accent-gradient); border-radius: 10px;
+            display: flex; align-items: center; justify-content: center;
+            font-weight: 700; font-size: 14px; color: #fff;
+        }
+
+        .brand-name { font-weight: 600; font-size: 18px; letter-spacing: -0.3px; }
+
+        .nav-divider { width: 1px; height: 24px; background: var(--glass-border); margin: 0 4px; }
+        .nav-page-title { font-size: 14px; color: var(--text-secondary); font-weight: 500; }
+
+        .nav-right { display: flex; align-items: center; gap: 8px; }
+
+        .nav-btn {
+            padding: 8px 16px; border: 1px solid var(--glass-border); background: transparent;
+            color: var(--text-primary); font-family: inherit; font-size: 13px; font-weight: 500;
+            border-radius: 20px; cursor: pointer; display: flex; align-items: center; gap: 6px;
+            transition: all 0.2s ease;
+        }
+        .nav-btn:hover { background: var(--pill-hover); border-color: var(--glass-border-hover); }
+        .nav-btn svg { width: 16px; height: 16px; }
+
+        .nav-btn-primary { background: var(--accent-gradient); border: none; color: #fff; }
+        .nav-btn-primary:hover { opacity: 0.9; transform: translateY(-1px); box-shadow: 0 4px 16px rgba(96, 165, 250, 0.3); }
+
+        .theme-toggle-btn {
+            width: 36px; height: 36px; border: none; background: transparent;
+            color: var(--text-primary); cursor: pointer; border-radius: 8px;
+            display: flex; align-items: center; justify-content: center; transition: background 0.2s ease;
+        }
+        .theme-toggle-btn:hover { background: var(--pill-hover); }
+
+        [data-theme="dark"] .sun-icon { display: none; }
+        [data-theme="dark"] .moon-icon { display: block; }
+        [data-theme="light"] .sun-icon { display: block; }
+        [data-theme="light"] .moon-icon { display: none; }
+
+        /* ═══ Main Content ═══ */
+        .main-content { flex: 1; padding: 24px; max-width: 1320px; margin: 0 auto; width: 100%; }
+
+        .page-header {
+            margin-bottom: 24px; animation: fadeIn 0.5s ease-out;
+            display: flex; align-items: flex-start; justify-content: space-between;
+            flex-wrap: wrap; gap: 16px;
+        }
+
+        .page-header-actions { display: flex; align-items: center; gap: 8px; padding-top: 4px; }
+
+        .page-title {
+            font-size: clamp(24px, 4vw, 32px); font-weight: 600;
+            background: linear-gradient(135deg, #f8fafc 0%, #cbd5e1 100%);
+            -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+            margin-bottom: 4px;
+        }
+
+        .page-subtitle { font-size: 14px; color: var(--text-muted); font-weight: 400; }
+
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(15px); } to { opacity: 1; transform: translateY(0); } }
+
+        /* ═══ Summary Cards ═══ */
+        .summary-strip {
+            display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 12px; margin-bottom: 24px; animation: fadeIn 0.5s ease-out 0.1s both;
+        }
+
+        .summary-card {
+            background: var(--glass-bg); backdrop-filter: blur(var(--blur-amount));
+            -webkit-backdrop-filter: blur(var(--blur-amount));
+            border: 1px solid var(--glass-border); border-radius: 16px; padding: 18px 20px;
+            transition: all 0.2s ease;
+        }
+        .summary-card:hover { border-color: var(--glass-border-hover); transform: translateY(-2px); box-shadow: 0 8px 24px var(--shadow-color); }
+
+        .summary-label {
+            font-size: 11px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px;
+            color: var(--text-muted); margin-bottom: 8px; display: flex; align-items: center; gap: 6px;
+        }
+        .summary-label svg { width: 14px; height: 14px; opacity: 0.6; }
+
+        .summary-value { font-size: 24px; font-weight: 700; font-family: 'JetBrains Mono', monospace; }
+        .summary-value.blue { color: var(--accent-blue); }
+        .summary-value.green { color: var(--success); }
+        .summary-value.purple { color: var(--accent-purple); }
+        .summary-value.amber { color: var(--warning); }
+
+        /* ═══ Line Item Card ═══ */
+        .line-item-card {
+            background: var(--glass-bg); backdrop-filter: blur(var(--blur-amount));
+            -webkit-backdrop-filter: blur(var(--blur-amount));
+            border: 1px solid var(--glass-border); border-radius: 16px; overflow: hidden;
+            animation: fadeIn 0.5s ease-out 0.2s both;
+            margin-bottom: 16px;
+            transition: border-color 0.2s ease;
+        }
+        .line-item-card:hover { border-color: var(--glass-border-hover); }
+
+        .line-item-header {
+            display: flex; align-items: center; justify-content: space-between;
+            padding: 20px 24px;
+            flex-wrap: wrap; gap: 12px;
+            cursor: pointer;
+            user-select: none;
+            transition: background 0.2s ease;
+        }
+        .line-item-header:hover { background: var(--pill-hover); }
+
+        .line-meta { display: flex; align-items: center; gap: 14px; }
+
+        .line-number {
+            width: 40px; height: 40px; border-radius: 10px;
+            background: var(--accent-gradient); display: flex; align-items: center; justify-content: center;
+            font-weight: 700; font-size: 16px; color: #fff; flex-shrink: 0;
+        }
+
+        .line-info h3 { font-size: 16px; font-weight: 600; }
+        .line-info p { font-size: 12px; color: var(--text-muted); margin-top: 2px; }
+
+        .line-header-right { display: flex; align-items: center; gap: 12px; }
+
+        .line-badges { display: flex; gap: 8px; flex-wrap: wrap; }
+
+        .badge {
+            display: inline-flex; align-items: center; gap: 5px; padding: 5px 12px;
+            border-radius: 20px; font-size: 12px; font-weight: 500;
+            background: var(--pill-bg); border: 1px solid var(--glass-border); color: var(--text-secondary);
+        }
+        .badge svg { width: 12px; height: 12px; opacity: 0.7; }
+        .badge-blue { background: rgba(96, 165, 250, 0.1); color: var(--accent-blue); border-color: rgba(96, 165, 250, 0.2); }
+        .badge-purple { background: rgba(139, 92, 246, 0.1); color: #a78bfa; border-color: rgba(139, 92, 246, 0.2); }
+        .badge-amber { background: rgba(251, 191, 36, 0.1); color: var(--warning); border-color: rgba(251, 191, 36, 0.2); }
+        .badge-green { background: rgba(74, 222, 128, 0.1); color: var(--success); border-color: rgba(74, 222, 128, 0.2); }
+
+        .line-item-status {
+            font-size: 11px; font-weight: 600; padding: 4px 10px; border-radius: 20px;
+            text-transform: uppercase; letter-spacing: 0.3px;
+        }
+        .status-pending { background: var(--warning-bg); color: var(--warning); border: 1px solid rgba(251, 191, 36, 0.2); }
+        .status-complete { background: var(--success-bg); color: var(--success); border: 1px solid rgba(74, 222, 128, 0.2); }
+        .status-partial { background: rgba(96, 165, 250, 0.1); color: var(--accent-blue); border: 1px solid rgba(96, 165, 250, 0.2); }
+
+        .chevron-icon {
+            width: 20px; height: 20px; color: var(--text-muted);
+            transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            flex-shrink: 0;
+        }
+        .line-item-card.expanded .chevron-icon { transform: rotate(180deg); }
+
+        /* ═══ Collapsible Body ═══ */
+        .line-item-body {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .line-item-card.expanded .line-item-body {
+            max-height: 2000px;
+        }
+
+        /* ═══ Progress Bar ═══ */
+        .award-progress { padding: 16px 24px; border-top: 1px solid var(--glass-border); border-bottom: 1px solid var(--glass-border); background: rgba(0, 0, 0, 0.1); }
+        .progress-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px; }
+        .progress-label { font-size: 12px; font-weight: 500; color: var(--text-secondary); }
+        .progress-numbers { font-family: 'JetBrains Mono', monospace; font-size: 13px; font-weight: 500; color: var(--text-secondary); }
+
+        .progress-bar { width: 100%; height: 6px; background: var(--pill-bg); border-radius: 20px; overflow: hidden; }
+
+        .progress-fill {
+            height: 100%; border-radius: 20px; background: var(--accent-gradient);
+            transition: width 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .progress-fill.complete { background: linear-gradient(135deg, #059669, #4ade80); }
+        .progress-fill.over { background: linear-gradient(135deg, #dc2626, #f87171); }
+
+        /* ═══ Suppliers Table ═══ */
+        .suppliers-wrapper { padding: 20px 24px; overflow-x: auto; }
+        .suppliers-wrapper::-webkit-scrollbar { height: 6px; }
+        .suppliers-wrapper::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.1); border-radius: 3px; }
+
+        .suppliers-table { width: 100%; border-collapse: separate; border-spacing: 0 6px; min-width: 880px; }
+
+        .suppliers-table thead th {
+            font-size: 11px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px;
+            color: var(--text-muted); padding: 0 14px 10px; text-align: left; white-space: nowrap;
+        }
+        .suppliers-table thead th:first-child { padding-left: 18px; }
+
+        .supplier-row td {
+            padding: 14px; background: var(--pill-bg);
+            border-top: 1px solid transparent; border-bottom: 1px solid transparent;
+            vertical-align: middle; transition: all 0.2s ease;
+        }
+        .supplier-row td:first-child { border-left: 1px solid transparent; border-radius: 12px 0 0 12px; padding-left: 18px; }
+        .supplier-row td:last-child { border-right: 1px solid transparent; border-radius: 0 12px 12px 0; }
+        .supplier-row:hover td { background: var(--pill-hover); border-color: var(--glass-border); }
+        .supplier-row.selected td { background: rgba(96, 165, 250, 0.08); border-color: rgba(96, 165, 250, 0.15); }
+        .supplier-row.selected td:first-child { box-shadow: inset 3px 0 0 var(--accent-blue); }
+
+        /* Checkbox */
+        .custom-checkbox { position: relative; display: flex; align-items: center; justify-content: center; }
+        .custom-checkbox input { display: none; }
+
+        .checkbox-visual {
+            width: 22px; height: 22px; border-radius: 6px;
+            border: 2px solid rgba(255, 255, 255, 0.15); background: transparent;
+            cursor: pointer; display: flex; align-items: center; justify-content: center;
+            transition: all 0.2s ease;
+        }
+        .checkbox-visual:hover { border-color: var(--accent-blue); background: rgba(96, 165, 250, 0.08); }
+
+        .custom-checkbox input:checked + .checkbox-visual { background: var(--accent-blue); border-color: var(--accent-blue); }
+
+        .checkbox-visual svg { width: 14px; height: 14px; stroke: #fff; opacity: 0; transform: scale(0.5); transition: all 0.2s ease; }
+        .custom-checkbox input:checked + .checkbox-visual svg { opacity: 1; transform: scale(1); }
+
+        .supplier-name { font-weight: 600; font-size: 14px; }
+        .supplier-name small { display: block; font-weight: 400; font-size: 11px; color: var(--text-muted); margin-top: 2px; }
+
+        .price { font-family: 'JetBrains Mono', monospace; font-weight: 600; font-size: 14px; }
+        .price.lowest { color: var(--success); }
+
+        .price-tag {
+            font-size: 10px; font-family: 'Outfit', sans-serif; padding: 2px 8px; border-radius: 20px;
+            font-weight: 600; margin-left: 6px; background: var(--success-bg); color: var(--success);
+            border: 1px solid rgba(74, 222, 128, 0.2);
+        }
+
+        .match-score-wrapper { display: flex; align-items: center; gap: 8px; }
+        .match-ring { width: 36px; height: 36px; }
+        .match-ring svg { width: 36px; height: 36px; transform: rotate(-90deg); }
+        .match-ring-bg { fill: none; stroke: var(--pill-bg); stroke-width: 3; }
+        .match-ring-fill { fill: none; stroke-width: 3; stroke-linecap: round; transition: stroke-dashoffset 0.6s ease; }
+        .match-score-text { font-family: 'JetBrains Mono', monospace; font-weight: 600; font-size: 13px; }
+
+        .delivery-days { font-weight: 500; font-size: 14px; }
+        .delivery-days span { font-weight: 400; font-size: 12px; color: var(--text-muted); }
+
+        .qty-input-wrapper { display: flex; align-items: center; gap: 0; }
+
+        .qty-btn {
+            width: 30px; height: 34px; border: 1px solid var(--glass-border); background: transparent;
+            color: var(--text-secondary); cursor: pointer; display: flex; align-items: center; justify-content: center;
+            font-size: 16px; font-family: inherit; transition: all 0.2s ease;
+        }
+        .qty-btn:first-child { border-radius: 8px 0 0 8px; }
+        .qty-btn:last-child { border-radius: 0 8px 8px 0; }
+        .qty-btn:hover { background: var(--pill-hover); color: var(--accent-blue); border-color: var(--accent-blue); }
+        .qty-btn:disabled { opacity: 0.3; cursor: not-allowed; pointer-events: none; }
+
+        .qty-input {
+            width: 56px; height: 34px; border: 1px solid var(--glass-border);
+            border-left: none; border-right: none; background: var(--input-bg);
+            color: var(--text-primary); text-align: center;
+            font-family: 'JetBrains Mono', monospace; font-weight: 500; font-size: 13px;
+            outline: none; transition: all 0.2s ease;
+        }
+        .qty-input:focus { background: rgba(96, 165, 250, 0.06); }
+
+        .qty-max { font-size: 11px; color: var(--text-muted); margin-top: 4px; }
+
+        .total-amount { font-family: 'JetBrains Mono', monospace; font-weight: 700; font-size: 14px; color: var(--accent-blue); }
+
+        /* ═══ Footer ═══ */
+        .page-footer {
+            display: flex; justify-content: space-between; align-items: center;
+            margin-top: 20px; padding: 0 4px; flex-wrap: wrap; gap: 12px;
+            animation: fadeIn 0.5s ease-out 0.3s both;
+        }
+        .footer-info { display: flex; align-items: center; gap: 6px; font-size: 12px; color: var(--text-muted); }
+        .footer-info svg { width: 14px; height: 14px; opacity: 0.5; }
+
+        /* ═══ Notification — FAITE standard ═══ */
+        .notification {
+            position: fixed; bottom: 24px; right: 24px; padding: 14px 20px; border-radius: 12px;
+            background: var(--glass-bg); border: 1px solid var(--glass-border);
+            backdrop-filter: blur(var(--blur-amount)); -webkit-backdrop-filter: blur(var(--blur-amount));
+            font-size: 13px; font-weight: 500; display: flex; align-items: center; gap: 10px;
+            transform: translateY(80px); opacity: 0;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            z-index: 999; box-shadow: 0 8px 32px var(--shadow-color); max-width: 420px;
+        }
+        .notification.show { transform: translateY(0); opacity: 1; }
+        .notification.success { border-color: rgba(74, 222, 128, 0.25); }
+        .notification.warning { border-color: rgba(251, 191, 36, 0.25); }
+        .notification.error { border-color: rgba(248, 113, 113, 0.25); }
+        .notification svg { width: 18px; height: 18px; flex-shrink: 0; }
+
+        /* ═══ Confirmation Modal ═══ */
+        .modal-overlay {
+            position: fixed; inset: 0; z-index: 1000;
+            background: rgba(0, 0, 0, 0.6);
+            backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px);
+            display: flex; align-items: center; justify-content: center;
+            opacity: 0; pointer-events: none;
+            transition: opacity 0.3s ease;
+            padding: 20px;
+        }
+        .modal-overlay.active { opacity: 1; pointer-events: all; }
+
+        .modal {
+            background: var(--glass-bg);
+            border: 1px solid var(--glass-border);
+            border-radius: 20px;
+            width: 100%; max-width: 560px;
+            backdrop-filter: blur(30px); -webkit-backdrop-filter: blur(30px);
+            box-shadow: 0 24px 64px rgba(0, 0, 0, 0.4);
+            transform: translateY(20px) scale(0.97);
+            transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            max-height: 85vh;
+            display: flex; flex-direction: column;
+        }
+        .modal-overlay.active .modal { transform: translateY(0) scale(1); }
+
+        .modal-header {
+            display: flex; align-items: center; gap: 14px;
+            padding: 24px 28px 20px;
+            border-bottom: 1px solid var(--glass-border);
+        }
+
+        .modal-icon {
+            width: 48px; height: 48px; border-radius: 14px;
+            background: rgba(96, 165, 250, 0.12); border: 1px solid rgba(96, 165, 250, 0.2);
+            display: flex; align-items: center; justify-content: center; flex-shrink: 0;
+        }
+        .modal-icon svg { width: 24px; height: 24px; color: var(--accent-blue); }
+
+        .modal-title { font-size: 18px; font-weight: 600; }
+        .modal-subtitle { font-size: 13px; color: var(--text-muted); margin-top: 2px; }
+
+        .modal-body {
+            padding: 20px 28px;
+            overflow-y: auto;
+            flex: 1;
+        }
+
+        .modal-summary-item {
+            padding: 14px 16px; border-radius: 12px;
+            background: var(--pill-bg); border: 1px solid var(--glass-border);
+            margin-bottom: 10px;
+        }
+        .modal-summary-item:last-child { margin-bottom: 0; }
+
+        .modal-item-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 10px; }
+        .modal-item-name { font-weight: 600; font-size: 14px; }
+        .modal-item-qty { font-family: 'JetBrains Mono', monospace; font-size: 12px; color: var(--accent-blue); }
+
+        .modal-supplier-row {
+            display: flex; align-items: center; justify-content: space-between;
+            padding: 8px 0; border-top: 1px solid rgba(255,255,255,0.05);
+            font-size: 13px;
+        }
+        .modal-supplier-row:first-child { border-top: none; padding-top: 0; }
+
+        .modal-supplier-name { color: var(--text-secondary); font-weight: 500; }
+        .modal-supplier-detail { display: flex; gap: 16px; align-items: center; }
+        .modal-supplier-detail span {
+            font-family: 'JetBrains Mono', monospace; font-size: 12px; font-weight: 500;
+        }
+
+        .modal-total-bar {
+            display: flex; align-items: center; justify-content: space-between;
+            margin-top: 16px; padding: 16px 18px; border-radius: 12px;
+            background: rgba(96, 165, 250, 0.08); border: 1px solid rgba(96, 165, 250, 0.15);
+        }
+        .modal-total-label { font-size: 14px; font-weight: 600; }
+        .modal-total-value { font-family: 'JetBrains Mono', monospace; font-size: 20px; font-weight: 700; color: var(--accent-blue); }
+
+        .modal-footer {
+            display: flex; align-items: center; justify-content: flex-end; gap: 10px;
+            padding: 20px 28px; border-top: 1px solid var(--glass-border);
+        }
+
+        .modal-btn {
+            padding: 10px 24px; border-radius: 12px; font-family: inherit;
+            font-size: 14px; font-weight: 600; cursor: pointer;
+            transition: all 0.2s ease; display: flex; align-items: center; gap: 8px;
+        }
+        .modal-btn-cancel {
+            background: transparent; border: 1px solid var(--glass-border); color: var(--text-secondary);
+        }
+        .modal-btn-cancel:hover { background: var(--pill-hover); border-color: var(--glass-border-hover); color: var(--text-primary); }
+
+        .modal-btn-confirm {
+            background: var(--accent-gradient); border: none; color: #fff;
+        }
+        .modal-btn-confirm:hover { opacity: 0.9; transform: translateY(-1px); box-shadow: 0 4px 16px rgba(96, 165, 250, 0.3); }
+
+        .modal-btn svg { width: 16px; height: 16px; }
+
+        /* ═══ Items Counter Badge ═══ */
+        .items-counter {
+            display: flex; align-items: center; gap: 8px;
+            font-size: 13px; color: var(--text-muted); margin-bottom: 16px;
+            animation: fadeIn 0.5s ease-out 0.15s both;
+        }
+        .items-counter strong { color: var(--text-secondary); }
+
+        @media (max-width: 768px) {
+            .main-content { padding: 16px; }
+            .line-item-header { padding: 16px; }
+            .suppliers-wrapper { padding: 12px; }
+            .top-nav { padding: 10px 16px; }
+            .nav-page-title, .nav-divider { display: none; }
+            .modal { max-width: 100%; }
+            .modal-header, .modal-body, .modal-footer { padding-left: 20px; padding-right: 20px; }
+            .line-badges { display: none; }
+        }
+    </style>
+</head>
+<body>
+
+<div class="background-layer"></div>
+<div class="background-overlay"></div>
+<div class="bg-glow bg-glow-1"></div>
+<div class="bg-glow bg-glow-2"></div>
+<div class="bg-glow bg-glow-3"></div>
+
+<div class="app-container">
+
+    <!-- Top Nav -->
+    <nav class="top-nav">
+        <div class="nav-left">
+            <div class="brand">
+                <div class="brand-icon">F</div>
+                <span class="brand-name">FAITE</span>
+            </div>
+            <div class="nav-divider"></div>
+            <span class="nav-page-title">Awarding of Bidding</span>
+        </div>
+        <div class="nav-right">
+            <button class="theme-toggle-btn" onclick="toggleTheme()" title="Toggle theme">
+                <svg class="sun-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
+                <svg class="moon-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+            </button>
+        </div>
+    </nav>
+
+    <div class="main-content">
+        <div class="page-header">
+            <div class="page-header-left">
+                <h1 class="page-title">Awarding of Bidding</h1>
+                <p class="page-subtitle">Review supplier bids and allocate award quantities for each line item</p>
+            </div>
+            <div class="page-header-actions" style="display: flex; align-items: center; gap: 8px; flex-wrap: wrap;">
+    <!-- Customer email will be dynamically added here by JavaScript -->
+    <button class="nav-btn" onclick="resetAll()">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M1 4v6h6"/><path d="M3.51 15a9 9 0 1 0 2.13-9.36L1 10"/></svg>
+        Reset All
+    </button>
+    <button class="nav-btn nav-btn-primary" onclick="submitAward()">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+        Submit Award
+    </button>
+</div>
+        </div>
+
+        <!-- Summary -->
+        <div class="summary-strip">
+            <div class="summary-card">
+                <div class="summary-label"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="4"/></svg>Total Items</div>
+                <div class="summary-value blue" id="summaryItems">0</div>
+            </div>
+            <div class="summary-card">
+                <div class="summary-label"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>Items Awarded</div>
+                <div class="summary-value green" id="summaryAwarded">0</div>
+            </div>
+            <div class="summary-card">
+                <div class="summary-label"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>Pending</div>
+                <div class="summary-value purple" id="summaryPending">0</div>
+            </div>
+            <div class="summary-card">
+                <div class="summary-label"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>Grand Total</div>
+                <div class="summary-value amber" id="summaryTotalCost">₱0.00</div>
+            </div>
+        </div>
+
+        <!-- Line Items Container -->
+        <div id="lineItemsContainer"></div>
+
+        <div class="page-footer">
+            <div class="footer-info">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg>
+                Click each item to expand and view suppliers. Select suppliers and enter award quantities.
+            </div>
+            <div class="footer-info" style="font-weight:500;">FAITE Procurement Module v2.0</div>
+        </div>
+    </div>
+</div>
+
+<div class="notification" id="notification"></div>
+
+<!-- Confirmation Modal -->
+<div class="modal-overlay" id="confirmModal">
+    <div class="modal">
+        <div class="modal-header">
+            <div class="modal-icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+            </div>
+            <div>
+                <div class="modal-title">Confirm Award Submission</div>
+                <div class="modal-subtitle">Review the award allocation before submitting</div>
+            </div>
+        </div>
+        <div class="modal-body" id="modalBody">
+            <!-- Dynamic content -->
+        </div>
+        <div class="modal-footer">
+            <button class="modal-btn modal-btn-cancel" onclick="closeModal()">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+                Cancel
+            </button>
+            <button class="modal-btn modal-btn-confirm" onclick="confirmSubmit()">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+                Confirm &amp; Submit
+            </button>
+        </div>
+    </div>
+</div>
+
+<script>
+
+    // ═══ State Management ═══
+    let lineItems = [];
+    let rfqInfo = {};
+    let customerEmail = '';
+    let rfqId = ''; // Will be set from URL or passed parameter
+
+    // Track expanded state
+    const expandedItems = new Set();
+
+    // ═══ Get RFQ ID from URL ═══
+    function getRfqIdFromUrl() {
+        // Try to get from URL path (e.g., /award/123)
+        const pathParts = window.location.pathname.split('/');
+        const lastPart = pathParts[pathParts.length - 1];
+        
+        // Check if it looks like an RFQ ID (you might have a pattern like RFQ-2024-001)
+        if (lastPart && lastPart !== 'awarding_of_biddingv3.html') {
+            return lastPart;
+        }
+        
+        // Fallback to query parameter ?rfq_id=RFQ-001
+        const urlParams = new URLSearchParams(window.location.search);
+        return urlParams.get('rfq_id') || 'RFQ-001'; // Default for demo
+    }
+
+    // ═══ Load Data from API ═══
+    async function loadAwardData() {
+        rfqId = getRfqIdFromUrl();
+        
+        // Show loading state
+        showNotification('Loading award data...', 'info');
+        
+        try {
+            const response = await fetch(`/RFX/admin/api/award/selection-data/${rfqId}`);
+            const data = await response.json();
+            
+            if (data.status === 'success') {
+                // Map the API response to our lineItems structure
+                rfqInfo = data.rfq_info;
+                lineItems = data.line_items.map(item => ({
+                    line_number: item.line_number,
+                    category: item.category,
+                    brand: item.brand,
+                    description: item.description || `${item.category} - ${item.brand}`,
+                    requested_quantity: item.requested_quantity,
+                    remaining_quantity: item.remaining_quantity,
+                    suppliers: item.suppliers.map(s => ({
+                        mapping_id: s.mapping_id,
+                        supplier_id: s.supplier_id,
+                        company_name: s.company_name,
+                        contact_person: s.contact_person,
+                        unit_price: s.unit_price,
+                        quantity_offered: s.quantity_offered,
+                        max_award_quantity: s.max_award_quantity,
+                        delivery_days: s.delivery_days,
+                        match_score: s.match_score,
+                        selected: false,
+                        award_quantity: 0
+                    }))
+                }));
+                
+                // Update UI with real data
+                renderAll();
+                updateGlobalSummary();
+                
+                showNotification('Data loaded successfully', 'success');
+            } else {
+                showNotification(`Error loading data: ${data.message}`, 'error');
+                // Fallback to sample data for demo
+                loadSampleData();
+            }
+        } catch (error) {
+            console.error('Error fetching award data:', error);
+            showNotification('Failed to load award data. Using sample data.', 'error');
+            // Fallback to sample data
+            loadSampleData();
+        }
+    }
+
+    // ═══ Load Sample Data (Fallback) ═══
+    function loadSampleData() {
+        lineItems = [
+            {
+                line_number: 1, category: "Electronics", brand: "Sony", description: "4K TV",
+                requested_quantity: 100, remaining_quantity: 100,
+                suppliers: [
+                    { mapping_id: 101, supplier_id: 1001, company_name: "ABC Corp", unit_price: 500.00, quantity_offered: 100, selected: false, award_quantity: 0, max_award_quantity: 100, delivery_days: 14, match_score: 95 },
+                    { mapping_id: 102, supplier_id: 1002, company_name: "XYZ Ltd", unit_price: 520.00, quantity_offered: 80, selected: false, award_quantity: 0, max_award_quantity: 80, delivery_days: 10, match_score: 88 },
+                    { mapping_id: 103, supplier_id: 1003, company_name: "Global Tech", unit_price: 480.00, quantity_offered: 100, selected: false, award_quantity: 0, max_award_quantity: 100, delivery_days: 21, match_score: 92 }
+                ]
+            },
+            {
+                line_number: 2, category: "Electronics", brand: "Samsung", description: "Wireless Earbuds",
+                requested_quantity: 200, remaining_quantity: 200,
+                suppliers: [
+                    { mapping_id: 201, supplier_id: 2001, company_name: "SoundWave Inc", unit_price: 45.00, quantity_offered: 200, selected: false, award_quantity: 0, max_award_quantity: 200, delivery_days: 7, match_score: 91 },
+                    { mapping_id: 202, supplier_id: 1001, company_name: "ABC Corp", unit_price: 50.00, quantity_offered: 150, selected: false, award_quantity: 0, max_award_quantity: 150, delivery_days: 10, match_score: 85 },
+                    { mapping_id: 203, supplier_id: 2003, company_name: "TechParts PH", unit_price: 42.50, quantity_offered: 120, selected: false, award_quantity: 0, max_award_quantity: 120, delivery_days: 14, match_score: 78 }
+                ]
+            }
+        ];
+        rfqInfo = {
+            rfq_id: rfqId,
+            currency: 'PHP',
+            department: 'Procurement',
+            total_budget: 1000000
+        };
+        renderAll();
+        updateGlobalSummary();
+        showNotification('Using sample data', 'warning');
+    }
+
+    // ═══ Get Customer Email (Prompt if not set) ═══
+    function getCustomerEmail() {
+    // First try to get from the input field
+    const emailInput = document.getElementById('customer-email-input');
+    if (emailInput && emailInput.value && emailInput.value.includes('@')) {
+        customerEmail = emailInput.value; // Update the global variable
+        localStorage.setItem('customer_email', customerEmail);
+        return customerEmail;
+    }
+    
+    // Then try global variable
+    if (customerEmail && customerEmail.includes('@')) {
+        return customerEmail;
+    }
+    
+    // Then try localStorage
+    const saved = localStorage.getItem('customer_email');
+    if (saved && saved.includes('@')) {
+        customerEmail = saved;
+        // Update the input field if it exists
+        if (emailInput) {
+            emailInput.value = saved;
+        }
+        return saved;
+    }
+    
+    // Finally prompt user
+    const email = prompt('Please enter customer email for confirmation:', '');
+    if (email && email.includes('@')) {
+        customerEmail = email;
+        localStorage.setItem('customer_email', email);
+        // Update the input field if it exists
+        if (emailInput) {
+            emailInput.value = email;
+        }
+        return email;
+    }
+    
+    showNotification('Valid customer email is required', 'error');
+    return null;
+}
+
+    // ═══ Validate Selections with API ═══
+    async function validateSelections(selections) {
+        try {
+            const response = await fetch('/RFX/admin/api/award/validate-selections', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({
+                    rfq_id: rfqId,
+                    selections: selections
+                })
+            });
+            
+            const data = await response.json();
+            return data;
+        } catch (error) {
+            console.error('Error validating selections:', error);
+            // If API fails, do basic client-side validation
+            return validateSelectionsLocally(selections);
+        }
+    }
+
+    // ═══ Local Validation Fallback ═══
+    function validateSelectionsLocally(selections) {
+        const errors = [];
+        const warnings = [];
+        
+        // Group by line number
+        const byLine = {};
+        selections.forEach(sel => {
+            if (!byLine[sel.line_number]) byLine[sel.line_number] = [];
+            byLine[sel.line_number].push(sel);
+        });
+        
+        // Check each line
+        for (const [lineNum, lineSelections] of Object.entries(byLine)) {
+            const item = lineItems.find(i => i.line_number === parseInt(lineNum));
+            if (!item) continue;
+            
+            const totalSelected = lineSelections.reduce((sum, s) => sum + s.award_quantity, 0);
+            
+            if (totalSelected > item.remaining_quantity) {
+                errors.push(`Line ${lineNum}: Total selected (${totalSelected}) exceeds available (${item.remaining_quantity})`);
+            } else if (totalSelected < item.remaining_quantity && totalSelected > 0) {
+                warnings.push(`Line ${lineNum}: Selected (${totalSelected}) is less than available (${item.remaining_quantity})`);
+            }
+        }
+        
+        return {
+            valid: errors.length === 0,
+            errors: errors,
+            warnings: warnings
+        };
+    }
+
+    // ═══ Submit Award to API ═══
+    async function submitAwardToAPI(selections) {
+    // Get the latest email from input field
+    const emailInput = document.getElementById('customer-email-input');
+    let email = '';
+    
+    if (emailInput && emailInput.value) {
+        email = emailInput.value;
+        customerEmail = email; // Update global
+        localStorage.setItem('customer_email', email);
+    } else {
+        email = getCustomerEmail(); // This will prompt if needed
+    }
+    
+    if (!email) {
+        showNotification('Valid customer email is required', 'error');
+        return false;
+    }
+    
+    // Validate email format
+    if (!email.includes('@') || !email.includes('.')) {
+        showNotification('Please enter a valid email address', 'error');
+        return false;
+    }
+    
+    // Show loading
+    showNotification('Submitting award proposal...', 'info');
+    
+    try {
+        const response = await fetch('/RFX/admin/api/award/create-from-selections', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+                rfq_id: rfqId,
+                selections: selections,
+                customer_email: email,  // Use the email we just captured
+                notes: `Award submitted via UI on ${new Date().toLocaleString()}`
+            })
+        });
+        
+        const data = await response.json();
+        
+        if (data.status === 'success') {
+            showNotification(`✅ Award proposal created! ${data.email_sent ? 'Email sent to customer.' : 'Email sending failed.'}`, 'success');
+            
+            // Store proposal info
+            localStorage.setItem('last_proposal', JSON.stringify({
+                proposal_id: data.proposal_id,
+                access_token: data.access_token,
+                expires_at: data.expires_at
+            }));
+            
+            return true;
+        } else {
+            showNotification(`Error: ${data.message}`, 'error');
+            if (data.errors) {
+                data.errors.forEach(err => showNotification(err, 'error'));
+            }
+            return false;
+        }
+    } catch (error) {
+        console.error('Error submitting award:', error);
+        showNotification('Failed to submit award. Please try again.', 'error');
+        return false;
+    }
+}
+
+    // ═══ Modified submitAward function ═══
+    async function submitAward() {
+        // Gather all selections
+        const selections = [];
+        
+        lineItems.forEach(item => {
+            item.suppliers.forEach(supplier => {
+                if (supplier.selected && supplier.award_quantity > 0) {
+                    selections.push({
+                        line_number: item.line_number,
+                        supplier_id: supplier.supplier_id,
+                        mapping_id: supplier.mapping_id,
+                        award_quantity: supplier.award_quantity,
+                        unit_price: supplier.unit_price
+                    });
+                }
+            });
+        });
+
+        if (selections.length === 0) {
+            showNotification('Please select at least one supplier and enter award quantities.', 'error');
+            return;
+        }
+
+        // Validate selections
+        const validation = await validateSelections(selections);
+        
+        if (!validation.valid) {
+            validation.errors.forEach(err => showNotification(err, 'error'));
+            return;
+        }
+        
+        if (validation.warnings && validation.warnings.length > 0) {
+            validation.warnings.forEach(warn => showNotification(warn, 'warning'));
+        }
+
+        // Check if all items are fully awarded
+        const allFullyAwarded = lineItems.every(item => {
+            const totalAwarded = item.suppliers.reduce((sum, s) => sum + s.award_quantity, 0);
+            return totalAwarded >= item.requested_quantity;
+        });
+
+        if (!allFullyAwarded) {
+            const incomplete = lineItems.filter(item => {
+                const total = item.suppliers.reduce((sum, s) => sum + s.award_quantity, 0);
+                return total < item.requested_quantity;
+            });
+            showNotification(`${incomplete.length} item(s) not fully awarded.`, 'warning');
+        }
+
+        // Show confirmation modal with selections
+        showConfirmModal(selections);
+    }
+
+    // ═══ Modified confirmSubmit function ═══
+    async function confirmSubmit() {
+        closeModal();
+        
+        // Gather selections again
+        const selections = [];
+        lineItems.forEach(item => {
+            item.suppliers.forEach(supplier => {
+                if (supplier.selected && supplier.award_quantity > 0) {
+                    selections.push({
+                        line_number: item.line_number,
+                        supplier_id: supplier.supplier_id,
+                        mapping_id: supplier.mapping_id,
+                        award_quantity: supplier.award_quantity,
+                        unit_price: supplier.unit_price
+                    });
+                }
+            });
+        });
+
+        // Submit to API
+        const success = await submitAwardToAPI(selections);
+        
+        if (success) {
+            // Optionally redirect to proposals page
+            // window.location.href = '/admin/award/proposals';
+        }
+    }
+
+    // ═══ Modified showConfirmModal to use selections ═══
+    function showConfirmModal(selections) {
+        const body = document.getElementById('modalBody');
+        let grandTotal = 0;
+        let html = '';
+
+        // Group selections by line number
+        const byLine = {};
+        selections.forEach(sel => {
+            if (!byLine[sel.line_number]) byLine[sel.line_number] = [];
+            byLine[sel.line_number].push(sel);
+        });
+
+        // Build modal content
+        for (const [lineNum, lineSelections] of Object.entries(byLine)) {
+            const item = lineItems.find(i => i.line_number === parseInt(lineNum));
+            if (!item) continue;
+            
+            const lineTotal = lineSelections.reduce((sum, s) => {
+                const supplier = item.suppliers.find(sp => sp.supplier_id === s.supplier_id);
+                return sum + (supplier ? supplier.unit_price * s.award_quantity : 0);
+            }, 0);
+            grandTotal += lineTotal;
+
+            html += `<div class="modal-summary-item">
+                <div class="modal-item-header">
+                    <span class="modal-item-name">Line #${lineNum} — ${item.description}</span>
+                    <span class="modal-item-qty">${lineSelections.reduce((sum, s) => sum + s.award_quantity, 0)} / ${item.requested_quantity} units</span>
+                </div>`;
+            
+            lineSelections.forEach(sel => {
+                const supplier = item.suppliers.find(s => s.supplier_id === sel.supplier_id);
+                if (supplier) {
+                    html += `<div class="modal-supplier-row">
+                        <span class="modal-supplier-name">${supplier.company_name}</span>
+                        <div class="modal-supplier-detail">
+                            <span>${sel.award_quantity} units</span>
+                            <span style="color:var(--accent-blue)">₱${(supplier.unit_price * sel.award_quantity).toLocaleString('en', { minimumFractionDigits: 2 })}</span>
+                        </div>
+                    </div>`;
+                }
+            });
+            html += `</div>`;
+        }
+
+        html += `<div class="modal-total-bar">
+            <span class="modal-total-label">Grand Total</span>
+            <span class="modal-total-value">₱${grandTotal.toLocaleString('en', { minimumFractionDigits: 2 })}</span>
+        </div>`;
+
+        body.innerHTML = html;
+        document.getElementById('confirmModal').classList.add('active');
+    }
+
+    // ═══ Add customer email input to UI ═══
+    function addCustomerEmailInput() {
+    const headerActions = document.querySelector('.page-header-actions');
+    if (headerActions && !document.getElementById('customer-email-input')) {
+        // Get saved email from localStorage
+        const savedEmail = localStorage.getItem('customer_email') || '';
+        if (savedEmail) {
+            customerEmail = savedEmail;
+        }
+        
+        const emailDiv = document.createElement('div');
+        emailDiv.style.display = 'inline-flex';
+        emailDiv.style.alignItems = 'center';
+        emailDiv.style.marginRight = '10px';
+        emailDiv.innerHTML = `
+            <input type="email" 
+                   id="customer-email-input" 
+                   placeholder="Customer Email" 
+                   value="${savedEmail}"
+                   style="padding: 8px 12px; border-radius: 8px; border: 1px solid var(--glass-border); background: var(--input-bg); color: var(--text-primary); width: 220px;">
+        `;
+        headerActions.insertBefore(emailDiv, headerActions.firstChild);
+        
+        // Update customerEmail when input changes
+        document.getElementById('customer-email-input').addEventListener('input', (e) => {
+            customerEmail = e.target.value;
+            if (customerEmail && customerEmail.includes('@')) {
+                localStorage.setItem('customer_email', customerEmail);
+            }
+        });
+        
+        // Also update on blur (when user leaves the field)
+        document.getElementById('customer-email-input').addEventListener('blur', (e) => {
+            if (e.target.value && e.target.value.includes('@')) {
+                localStorage.setItem('customer_email', e.target.value);
+            }
+        });
+    }
+}
+
+
+    // ═══ Initialize ═══
+    document.addEventListener('DOMContentLoaded', () => {
+        // Load data from API
+        loadAwardData();
+        
+        // Add customer email input
+        setTimeout(addCustomerEmailInput, 500); // Wait for DOM to render
+        
+        // Bind events
+        bindLineItemsEvents();
+    });
+
+    function getScoreColor(score) {
+        if (score >= 90) return '#4ade80';
+        if (score >= 80) return '#fbbf24';
+        return '#f87171';
+    }
+
+    function getItemStatus(item) {
+        const awarded = item.suppliers.reduce((a, s) => a + s.award_quantity, 0);
+        if (awarded === 0) return 'pending';
+        if (awarded >= item.requested_quantity) return 'complete';
+        return 'partial';
+    }
+
+    function getStatusLabel(status) {
+        if (status === 'complete') return 'Fully Awarded';
+        if (status === 'partial') return 'Partial';
+        return 'Pending';
+    }
+
+    function toggleTheme() {
+        const html = document.documentElement;
+        html.setAttribute('data-theme', html.getAttribute('data-theme') === 'dark' ? 'light' : 'dark');
+    }
+    function toggleItem(lineNum) {
+        const card = document.querySelector(`.line-item-card[data-line-number="${lineNum}"]`);
+        if (!card) return;
+
+        if (card.classList.contains('expanded')) {
+            card.classList.remove('expanded');
+            expandedItems.delete(lineNum);
+        } else {
+            card.classList.add('expanded');
+            expandedItems.add(lineNum);
+        }
+    }
+
+    function renderAll() {
+        const container = document.getElementById('lineItemsContainer');
+        container.innerHTML = '';
+
+        lineItems.forEach((item, idx) => {
+            const isExpanded = expandedItems.has(item.line_number);
+            const status = getItemStatus(item);
+            const statusLabel = getStatusLabel(status);
+            const lowestPrice = Math.min(...item.suppliers.map(s => s.unit_price));
+            const awarded = item.suppliers.reduce((a, s) => a + s.award_quantity, 0);
+            const pct = (awarded / item.requested_quantity) * 100;
+
+            const statusClass = status === 'complete' ? 'status-complete' : status === 'partial' ? 'status-partial' : 'status-pending';
+
+            const card = document.createElement('div');
+            card.className = `line-item-card${isExpanded ? ' expanded' : ''}`;
+            card.dataset.itemIdx = String(idx);
+            card.dataset.lineNumber = String(item.line_number);
+            card.style.animationDelay = `${0.2 + idx * 0.05}s`;
+
+            // Build supplier rows (no inline handlers; use event delegation)
+            let supplierRows = '';
+            item.suppliers.forEach((s, i) => {
+                const isLowest = s.unit_price === lowestPrice;
+                const sc = getScoreColor(s.match_score);
+                const r = 14, circ = 2 * Math.PI * r, off = circ - (s.match_score / 100) * circ;
+
+                const qtyDisabled = !s.selected;
+                const minusDisabled = qtyDisabled || s.award_quantity <= 0;
+                const plusDisabled = qtyDisabled || s.award_quantity >= s.max_award_quantity;
+
+                supplierRows += `
+                <tr class="supplier-row${s.selected ? ' selected' : ''}" data-item-idx="${idx}" data-supplier-idx="${i}">
+                    <td>
+                        <label class="custom-checkbox">
+                            <input type="checkbox" class="supplier-select" ${s.selected ? 'checked' : ''}>
+                            <div class="checkbox-visual">
+                                <svg viewBox="0 0 14 14" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                    <polyline points="2.5 7 5.5 10 11.5 4"/>
+                                </svg>
+                            </div>
+                        </label>
+                    </td>
+                    <td><div class="supplier-name">${s.company_name}<small>Supplier ${i+1} of ${item.suppliers.length}</small></div></td>
+                    <td><span class="price${isLowest ? ' lowest' : ''}">₱${s.unit_price.toLocaleString('en',{minimumFractionDigits:2})}</span>${isLowest ? '<span class="price-tag">LOWEST</span>' : ''}</td>
+                    <td style="font-weight:600;font-family:'JetBrains Mono',monospace;font-size:13px">${s.quantity_offered}</td>
+                    <td>
+                        <div class="match-score-wrapper">
+                            <div class="match-ring">
+                                <svg viewBox="0 0 36 36">
+                                    <circle class="match-ring-bg" cx="18" cy="18" r="${r}"/>
+                                    <circle class="match-ring-fill" cx="18" cy="18" r="${r}" stroke="${sc}" stroke-dasharray="${circ}" stroke-dashoffset="${off}"/>
+                                </svg>
+                            </div>
+                            <span class="match-score-text" style="color:${sc}">${s.match_score}%</span>
+                        </div>
+                    </td>
+                    <td><div class="delivery-days">${s.delivery_days} <span>days</span></div></td>
+                    <td>
+                        <div class="qty-input-wrapper">
+                            <button class="qty-btn" data-delta="-1" ${minusDisabled ? 'disabled' : ''}>−</button>
+                            <input type="number" class="qty-input"
+                                   value="${s.award_quantity}" min="0" max="${s.max_award_quantity}"
+                                   ${qtyDisabled ? 'disabled' : ''}>
+                            <button class="qty-btn" data-delta="1" ${plusDisabled ? 'disabled' : ''}>+</button>
+                        </div>
+                        <div class="qty-max">Max: ${s.max_award_quantity}</div>
+                    </td>
+                    <td><div class="total-amount">${s.award_quantity > 0 ? '₱' + (s.unit_price * s.award_quantity).toLocaleString('en',{minimumFractionDigits:2}) : '—'}</div></td>
+                </tr>`;
+            });
+
+            card.innerHTML = `
+                <div class="line-item-header" data-line-number="${item.line_number}" data-item-idx="${idx}">
+                    <div class="line-meta">
+                        <div class="line-number">${item.line_number}</div>
+                        <div class="line-info">
+                            <h3>${item.description}</h3>
+                            <p>Line #${item.line_number} — ${item.suppliers.length} supplier(s) bidding — Qty: ${item.requested_quantity}</p>
+                        </div>
+                    </div>
+                    <div class="line-header-right">
+                        <div class="line-badges">
+                            <span class="badge badge-blue"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="4"/></svg>${item.category}</span>
+                            <span class="badge badge-purple"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="8"/></svg>${item.brand}</span>
+                            <span class="badge badge-amber"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2v20M2 12h20"/></svg>Qty: ${item.requested_quantity}</span>
+                        </div>
+                        <span class="line-item-status ${statusClass}">${statusLabel}</span>
+                        <svg class="chevron-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+                    </div>
+                </div>
+                <div class="line-item-body">
+                    <div class="award-progress">
+                        <div class="progress-header">
+                            <span class="progress-label">Award Allocation</span>
+                            <span class="progress-numbers">${awarded} / ${item.requested_quantity} units</span>
+                        </div>
+                        <div class="progress-bar">
+                            <div class="progress-fill${pct>=100 ? ' complete' : pct>100 ? ' over' : ''}" style="width:${Math.min(pct,100)}%"></div>
+                        </div>
+                    </div>
+                    <div class="suppliers-wrapper">
+                        <table class="suppliers-table">
+                            <thead><tr>
+                                <th style="width:50px">Select</th><th>Supplier</th><th>Unit Price</th>
+                                <th>Offered Qty</th><th>Match Score</th><th>Delivery</th><th>Award Qty</th><th>Total</th>
+                            </tr></thead>
+                            <tbody>${supplierRows}</tbody>
+                        </table>
+                    </div>
+                </div>`;
+
+            container.appendChild(card);
+        });
+
+        updateGlobalSummary();
+    }
+    function clamp(n, min, max) {
+        return Math.max(min, Math.min(max, n));
+    }
+
+    function getAwardedQty(item) {
+        return item.suppliers.reduce((a, s) => a + s.award_quantity, 0);
+    }
+
+    function updateSupplierRowUI(itemIdx, supplierIdx) {
+        const row = document.querySelector(`.supplier-row[data-item-idx="${itemIdx}"][data-supplier-idx="${supplierIdx}"]`);
+        if (!row) return;
+
+        const s = lineItems[itemIdx].suppliers[supplierIdx];
+
+        row.classList.toggle('selected', !!s.selected);
+
+        const checkbox = row.querySelector('input.supplier-select');
+        if (checkbox) checkbox.checked = !!s.selected;
+
+        const qtyInput = row.querySelector('input.qty-input');
+        const btnMinus = row.querySelector('button.qty-btn[data-delta="-1"]');
+        const btnPlus = row.querySelector('button.qty-btn[data-delta="1"]');
+        const total = row.querySelector('.total-amount');
+
+        if (qtyInput) {
+            qtyInput.disabled = !s.selected;
+            qtyInput.value = String(s.award_quantity);
+            qtyInput.max = String(s.max_award_quantity);
+        }
+
+        if (btnMinus) btnMinus.disabled = !s.selected || s.award_quantity <= 0;
+        if (btnPlus) btnPlus.disabled = !s.selected || s.award_quantity >= s.max_award_quantity;
+
+        if (total) {
+            total.textContent = s.award_quantity > 0
+                ? '₱' + (s.unit_price * s.award_quantity).toLocaleString('en', { minimumFractionDigits: 2 })
+                : '—';
+        }
+    }
+
+    function updateItemUI(itemIdx) {
+        const card = document.querySelector(`.line-item-card[data-item-idx="${itemIdx}"]`);
+        if (!card) return;
+
+        const item = lineItems[itemIdx];
+        const awarded = getAwardedQty(item);
+        const pct = (awarded / item.requested_quantity) * 100;
+
+        const status = getItemStatus(item);
+        const statusLabel = getStatusLabel(status);
+        const statusClass = status === 'complete' ? 'status-complete' : status === 'partial' ? 'status-partial' : 'status-pending';
+
+        const statusEl = card.querySelector('.line-item-status');
+        if (statusEl) {
+            statusEl.textContent = statusLabel;
+            statusEl.classList.remove('status-complete', 'status-partial', 'status-pending');
+            statusEl.classList.add(statusClass);
+        }
+
+        const nums = card.querySelector('.progress-numbers');
+        if (nums) nums.textContent = `${awarded} / ${item.requested_quantity} units`;
+
+        const fill = card.querySelector('.progress-fill');
+        if (fill) {
+            fill.style.width = `${Math.min(pct, 100)}%`;
+            fill.classList.toggle('complete', pct >= 100);
+            fill.classList.toggle('over', pct > 100);
+        }
+    }
+
+    function toggleSupplier(itemIdx, supplierIdx, checked) {
+        const s = lineItems[itemIdx].suppliers[supplierIdx];
+        s.selected = checked;
+
+        if (!checked) {
+            s.award_quantity = 0;
+        }
+
+        updateSupplierRowUI(itemIdx, supplierIdx);
+        updateItemUI(itemIdx);
+        updateGlobalSummary();
+    }
+
+    function bindLineItemsEvents() {
+        const container = document.getElementById('lineItemsContainer');
+        if (!container || container.__bound) return;
+        container.__bound = true;
+
+        // Clicks (expand + qty buttons)
+        container.addEventListener('click', (e) => {
+            const qtyBtn = e.target.closest('button.qty-btn');
+            if (qtyBtn) {
+                const row = qtyBtn.closest('.supplier-row');
+                if (!row) return;
+                const itemIdx = parseInt(row.dataset.itemIdx, 10);
+                const supplierIdx = parseInt(row.dataset.supplierIdx, 10);
+                const delta = parseInt(qtyBtn.dataset.delta, 10);
+                adjustQty(itemIdx, supplierIdx, delta);
+                e.stopPropagation();
+                return;
+            }
+
+            const header = e.target.closest('.line-item-header');
+            if (header && container.contains(header)) {
+                const lineNum = parseInt(header.dataset.lineNumber, 10);
+                toggleItem(lineNum);
+            }
+        });
+
+        // Checkbox + input changes
+        container.addEventListener('change', (e) => {
+            const checkbox = e.target.closest('input.supplier-select');
+            if (checkbox) {
+                const row = checkbox.closest('.supplier-row');
+                if (!row) return;
+                const itemIdx = parseInt(row.dataset.itemIdx, 10);
+                const supplierIdx = parseInt(row.dataset.supplierIdx, 10);
+                toggleSupplier(itemIdx, supplierIdx, checkbox.checked);
+                return;
+            }
+
+            const qtyInput = e.target.closest('input.qty-input');
+            if (qtyInput) {
+                const row = qtyInput.closest('.supplier-row');
+                if (!row) return;
+                const itemIdx = parseInt(row.dataset.itemIdx, 10);
+                const supplierIdx = parseInt(row.dataset.supplierIdx, 10);
+                setQty(itemIdx, supplierIdx, qtyInput.value);
+                return;
+            }
+        });
+
+        // Prevent header toggle when interacting with number input (some browsers trigger click bubbling)
+        container.addEventListener('mousedown', (e) => {
+            if (e.target.closest('.qty-input-wrapper')) {
+                e.stopPropagation();
+            }
+        }, true);
+    }
+
+    function adjustQty(itemIdx, supplierIdx, delta) {
+        const item = lineItems[itemIdx];
+        const s = item.suppliers[supplierIdx];
+        const nq = Math.max(0, Math.min(s.max_award_quantity, s.award_quantity + delta));
+        const ot = item.suppliers.reduce((a, x, j) => j !== supplierIdx ? a + x.award_quantity : a, 0);
+        if (ot + nq > item.requested_quantity) {
+            showNotification('Award quantity exceeds requested quantity for this item!', 'warning');
+            return;
+        }
+        s.award_quantity = nq;
+        updateSupplierRowUI(itemIdx, supplierIdx);
+        updateItemUI(itemIdx);
+        updateGlobalSummary();
+    }
+
+    function setQty(itemIdx, supplierIdx, value) {
+        const item = lineItems[itemIdx];
+        const s = item.suppliers[supplierIdx];
+        let q = Math.max(0, Math.min(s.max_award_quantity, parseInt(value) || 0));
+        const ot = item.suppliers.reduce((a, x, j) => j !== supplierIdx ? a + x.award_quantity : a, 0);
+        if (ot + q > item.requested_quantity) {
+            q = item.requested_quantity - ot;
+            showNotification(`Capped to ${q} — cannot exceed requested quantity.`, 'warning');
+        }
+        s.award_quantity = q;
+        updateSupplierRowUI(itemIdx, supplierIdx);
+        updateItemUI(itemIdx);
+        updateGlobalSummary();
+    }
+
+    function updateGlobalSummary() {
+        const totalItems = lineItems.length;
+        let awardedItems = 0;
+        let grandTotal = 0;
+
+        lineItems.forEach(item => {
+            const awarded = item.suppliers.reduce((a, s) => a + s.award_quantity, 0);
+            if (awarded >= item.requested_quantity) awardedItems++;
+            grandTotal += item.suppliers.reduce((a, s) => a + s.unit_price * s.award_quantity, 0);
+        });
+
+        document.getElementById('summaryItems').textContent = totalItems;
+        document.getElementById('summaryAwarded').textContent = awardedItems;
+        document.getElementById('summaryPending').textContent = totalItems - awardedItems;
+        document.getElementById('summaryTotalCost').textContent = '₱' + grandTotal.toLocaleString('en', { minimumFractionDigits: 2 });
+    }
+
+    function resetAll() {
+        lineItems.forEach(item => {
+            item.suppliers.forEach(s => { s.selected = false; s.award_quantity = 0; });
+        });
+        renderAll();
+        showNotification('All selections have been reset.', 'success');
+    }
+
+
+    function closeModal() {
+        document.getElementById('confirmModal').classList.remove('active');
+    }
+
+    
+
+    // Close modal on overlay click
+    document.getElementById('confirmModal').addEventListener('click', function(e) {
+        if (e.target === this) closeModal();
+    });
+
+    // Close modal on Escape key
+    document.addEventListener('keydown', function(e) {
+        if (e.key === 'Escape') closeModal();
+    });
+
+    function showNotification(msg, type = 'success') {
+        const el = document.getElementById('notification');
+        const ic = {
+            success: '<svg viewBox="0 0 24 24" fill="none" stroke="#4ade80" stroke-width="2" stroke-linecap="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>',
+            warning: '<svg viewBox="0 0 24 24" fill="none" stroke="#fbbf24" stroke-width="2" stroke-linecap="round"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>',
+            error: '<svg viewBox="0 0 24 24" fill="none" stroke="#f87171" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="10"/><line x1="15" y1="9" x2="9" y2="15"/><line x1="9" y1="9" x2="15" y2="15"/></svg>'
+        };
+        el.className = `notification ${type}`;
+        el.innerHTML = `${ic[type] || ''} ${msg}`;
+        el.classList.add('show');
+        setTimeout(() => el.classList.remove('show'), 4000);
+    }
+
+    // Initial render
+    renderAll();
+    bindLineItemsEvents();
+</script>
+</body>
+</html>

@@ -1,0 +1,349 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bid Submitted - FAITE</title>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <style>
+        /* ═══════════════════════════════════════════════════════════════
+           THEME VARIABLES - DARK MODE (DEFAULT)
+           ═══════════════════════════════════════════════════════════════ */
+        :root {
+            --glass-bg: rgba(15, 23, 42, 0.9);
+            --glass-bg-light: rgba(30, 41, 59, 0.8);
+            --glass-border: rgba(255, 255, 255, 0.1);
+            --glass-border-hover: rgba(255, 255, 255, 0.18);
+            --text-primary: #f8fafc;
+            --text-secondary: rgba(248, 250, 252, 0.75);
+            --text-muted: rgba(248, 250, 252, 0.55);
+            --accent-gradient: linear-gradient(135deg, #0f2a5e 0%, #1e4d8c 50%, #60a5fa 100%);
+            --accent-blue: #60a5fa;
+            --accent-purple: #3b82f6;
+            --success-gradient: linear-gradient(135deg, #059669 0%, #10b981 50%, #34d399 100%);
+            --pill-bg: rgba(255, 255, 255, 0.08);
+            --pill-hover: rgba(255, 255, 255, 0.14);
+            --input-bg: rgba(15, 23, 42, 0.95);
+            --blur-amount: 20px;
+            --body-bg: #0f172a;
+            --shadow-color: rgba(0, 0, 0, 0.3);
+            --details-bg: rgba(0, 0, 0, 0.2);
+        }
+
+        /* ═══════════════════════════════════════════════════════════════
+           THEME VARIABLES - LIGHT MODE
+           ═══════════════════════════════════════════════════════════════ */
+        [data-theme="light"] {
+            --glass-bg: rgba(255, 255, 255, 0.85);
+            --glass-bg-light: rgba(248, 250, 252, 0.9);
+            --glass-border: rgba(0, 0, 0, 0.1);
+            --glass-border-hover: rgba(0, 0, 0, 0.18);
+            --text-primary: #1e293b;
+            --text-secondary: rgba(30, 41, 59, 0.8);
+            --text-muted: rgba(30, 41, 59, 0.55);
+            --pill-bg: rgba(0, 0, 0, 0.05);
+            --pill-hover: rgba(0, 0, 0, 0.1);
+            --input-bg: rgba(255, 255, 255, 0.95);
+            --body-bg: #f1f5f9;
+            --shadow-color: rgba(0, 0, 0, 0.1);
+            --details-bg: rgba(0, 0, 0, 0.04);
+        }
+
+        [data-theme="light"] .background-layer {
+            filter: brightness(1.1) saturate(0.9);
+        }
+
+        [data-theme="light"] .background-overlay {
+            background: linear-gradient(180deg, rgba(241,245,249,0.7) 0%, rgba(241,245,249,0.85) 50%, rgba(241,245,249,0.95) 100%);
+        }
+
+        [data-theme="light"] h1 {
+            background: linear-gradient(135deg, #047857 0%, #059669 50%, #10b981 100%);
+            -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+        }
+
+        [data-theme="light"] .success-icon {
+            background: linear-gradient(135deg, #047857 0%, #059669 50%, #10b981 100%);
+            -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+        }
+
+        [data-theme="light"] .status-badge {
+            background: rgba(16, 185, 129, 0.12);
+            color: #059669;
+        }
+
+        [data-theme="light"] .rfq-id {
+            background: rgba(16, 185, 129, 0.08);
+            border-color: rgba(16, 185, 129, 0.2);
+            color: #059669;
+        }
+
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+
+        body {
+            font-family: 'Outfit', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: var(--body-bg);
+            color: var(--text-primary);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0;
+            padding: 20px;
+            transition: background 0.3s ease, color 0.3s ease;
+        }
+
+        body.in-iframe { background: transparent; }
+        body.in-iframe .background-layer,
+        body.in-iframe .background-overlay { display: none; }
+
+        .background-layer {
+            position: fixed; inset: 0; z-index: 0;
+            background: url('{{ url_for("static", filename="images/faite-bg-v2.png") }}') center/cover no-repeat;
+            filter: brightness(0.5) saturate(1.1);
+        }
+
+        .background-overlay {
+            position: fixed; inset: 0; z-index: 1;
+            background: linear-gradient(180deg, rgba(15,23,42,0.7) 0%, rgba(15,23,42,0.85) 50%, rgba(15,23,42,0.92) 100%);
+        }
+
+        .confirmation-card {
+            position: relative; z-index: 2;
+            background: var(--glass-bg);
+            backdrop-filter: blur(var(--blur-amount));
+            -webkit-backdrop-filter: blur(var(--blur-amount));
+            border: 1px solid var(--glass-border);
+            border-radius: 24px;
+            padding: 40px;
+            max-width: 600px;
+            width: 100%;
+            box-shadow: 0 25px 50px -12px var(--shadow-color);
+            text-align: center;
+            animation: cardFadeIn 0.5s ease forwards;
+        }
+
+        @keyframes cardFadeIn {
+            from { opacity: 0; transform: translateY(16px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .success-icon {
+            font-size: 80px;
+            margin-bottom: 20px;
+            background: var(--success-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            display: inline-block;
+        }
+
+        h1 {
+            font-size: 32px;
+            margin-bottom: 16px;
+            background: var(--success-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            font-weight: 700;
+        }
+
+        .rfq-id {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 16px;
+            background: rgba(16, 185, 129, 0.1);
+            padding: 8px 16px;
+            border-radius: 40px;
+            display: inline-block;
+            margin-bottom: 16px;
+            border: 1px solid rgba(16, 185, 129, 0.3);
+        }
+
+        .status-badge {
+            background: rgba(16, 185, 129, 0.2);
+            color: #10b981;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 13px;
+            font-weight: 500;
+            display: inline-block;
+            margin-bottom: 20px;
+        }
+
+        .amount {
+            font-size: 32px;
+            font-weight: 700;
+            background: var(--accent-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin: 20px 0;
+            font-family: 'JetBrains Mono', monospace;
+        }
+
+        .details-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            text-align: left;
+            margin: 30px 0;
+            padding: 20px;
+            background: var(--details-bg);
+            border-radius: 16px;
+            border: 1px solid var(--glass-border);
+        }
+
+        .detail-item { margin-bottom: 4px; }
+
+        .detail-label {
+            font-size: 11px;
+            font-weight: 500;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 4px;
+        }
+
+        .detail-value {
+            font-size: 16px;
+            font-weight: 600;
+            font-family: 'JetBrains Mono', monospace;
+            color: var(--text-primary);
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 14px 32px;
+            background: var(--accent-gradient);
+            border: none;
+            border-radius: 40px;
+            color: white;
+            text-decoration: none;
+            font-family: 'Outfit', sans-serif;
+            font-weight: 500;
+            font-size: 15px;
+            cursor: pointer;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+            margin-top: 20px;
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px -5px rgba(96, 165, 250, 0.5);
+        }
+
+        .btn:active { transform: translateY(0); }
+
+        .note {
+            margin-top: 20px;
+            font-size: 14px;
+            color: var(--text-secondary);
+            line-height: 1.5;
+        }
+
+        /* Theme toggle */
+        .theme-toggle { position: fixed; top: 16px; right: 16px; z-index: 10; }
+        body.in-iframe .theme-toggle { display: none; }
+
+        .theme-toggle-btn {
+            width: 40px; height: 40px;
+            border: 1px solid var(--glass-border);
+            background: var(--glass-bg);
+            backdrop-filter: blur(var(--blur-amount));
+            -webkit-backdrop-filter: blur(var(--blur-amount));
+            color: var(--text-primary);
+            cursor: pointer; border-radius: 10px;
+            display: flex; align-items: center; justify-content: center;
+            transition: background 0.2s ease, border-color 0.2s ease;
+            font-size: 18px;
+        }
+
+        .theme-toggle-btn:hover { background: var(--pill-hover); border-color: var(--glass-border-hover); }
+
+        [data-theme="dark"] .theme-toggle-btn .sun-icon { display: none; }
+        [data-theme="dark"] .theme-toggle-btn .moon-icon { display: block; }
+        [data-theme="light"] .theme-toggle-btn .sun-icon { display: block; }
+        [data-theme="light"] .theme-toggle-btn .moon-icon { display: none; }
+
+        @media (max-width: 480px) {
+            .confirmation-card { padding: 28px 20px; }
+            h1 { font-size: 26px; }
+            .amount { font-size: 24px; }
+            .details-grid { grid-template-columns: 1fr; gap: 12px; }
+            .detail-value { font-size: 14px; }
+        }
+    </style>
+</head>
+<body>
+    <div class="background-layer"></div>
+    <div class="background-overlay"></div>
+
+    <div class="theme-toggle">
+        <button class="theme-toggle-btn" type="button" onclick="toggleTheme()" title="Toggle Theme">
+            <span class="sun-icon">☀️</span>
+            <span class="moon-icon">🌙</span>
+        </button>
+    </div>
+
+    <div class="confirmation-card">
+        <div class="success-icon">✓</div>
+        <h1>Bid Submitted Successfully!</h1>
+        
+        <div class="rfq-id">RFQ: {{ confirmation.rfq_id }}</div>
+        <div class="status-badge">{{ confirmation.status }}</div>
+
+        <div class="amount">
+            {{ confirmation.currency }} {{ "{:,.2f}".format(confirmation.total_amount) }}
+        </div>
+
+        <div class="details-grid">
+            <div class="detail-item">
+                <div class="detail-label">Company</div>
+                <div class="detail-value">{{ confirmation.company_name }}</div>
+            </div>
+            <div class="detail-item">
+                <div class="detail-label">Submitted</div>
+                <div class="detail-value">{{ confirmation.submitted_at }}</div>
+            </div>
+            <div class="detail-item">
+                <div class="detail-label">Required Date</div>
+                <div class="detail-value">{{ confirmation.required_date or 'Not specified' }}</div>
+            </div>
+            <div class="detail-item">
+                <div class="detail-label">Delivery Deadline</div>
+                <div class="detail-value">{{ confirmation.delivery_deadline or 'Not specified' }}</div>
+            </div>
+        </div>
+
+        <button class="btn" onclick="window.close()">Close Window</button>
+        
+        <div class="note">
+            A confirmation has been sent to your email. You can close this window.
+        </div>
+    </div>
+
+    <script>
+        if (window !== window.parent) { document.body.classList.add('in-iframe'); }
+
+        function toggleTheme() {
+            const html = document.documentElement;
+            const next = html.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+            html.setAttribute('data-theme', next);
+        }
+
+        window.addEventListener('message', function(e) {
+            if (e.data && e.data.type === 'theme-change') {
+                document.documentElement.setAttribute('data-theme', e.data.theme);
+            }
+        });
+
+        function notifyHeight() {
+            if (window !== window.parent) {
+                window.parent.postMessage({ type: 'iframe-height', height: document.documentElement.scrollHeight }, '*');
+            }
+        }
+        window.addEventListener('load', notifyHeight);
+        window.addEventListener('resize', notifyHeight);
+    </script>
+</body>
+</html>

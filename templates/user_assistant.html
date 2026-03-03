@@ -1,0 +1,534 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HR Policy Assistant</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+        .fade-in {
+            animation: fadeIn 0.5s ease-in;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .typing-dots {
+            display: inline-block;
+        }
+        .typing-dots span {
+            animation: typing 1.4s infinite;
+        }
+        .typing-dots span:nth-child(2) {
+            animation-delay: 0.2s;
+        }
+        .typing-dots span:nth-child(3) {
+            animation-delay: 0.4s;
+        }
+        @keyframes typing {
+            0%, 60%, 100% { opacity: 0.3; }
+            30% { opacity: 1; }
+        }
+    </style>
+</head>
+<body class="bg-gradient-to-br from-blue-50 to-indigo-100 min-h-screen">
+    <!-- Header -->
+    <header class="bg-white shadow-sm border-b">
+        <div class="max-w-4xl mx-auto px-4 py-6">
+            <div class="flex items-center justify-between">
+                <div class="flex items-center space-x-3">
+                    <div class="bg-blue-600 p-2 rounded-lg">
+                        <i class="fas fa-headset text-white text-xl"></i>
+                    </div>
+                    <div>
+                        <h1 class="text-2xl font-bold text-gray-900">HR Policy Assistant</h1>
+                        <p class="text-gray-600 text-sm">Get instant answers to your HR policy questions</p>
+                    </div>
+                </div>
+                <div class="hidden md:flex items-center space-x-2 text-sm text-gray-500">
+                    <i class="fas fa-shield-alt"></i>
+                    <span>Confidential & Secure</span>
+                </div>
+            </div>
+            
+            <!-- Conversation Header -->
+            <div class="flex items-center justify-between mt-4 pt-4 border-t border-gray-200">
+                <div class="flex items-center space-x-2">
+                    <i class="fas fa-comments text-blue-600"></i>
+                    <span class="text-sm text-gray-600" id="conversationStatus">New conversation</span>
+                </div>
+                <button id="clearConversation" class="text-sm text-gray-500 hover:text-gray-700 flex items-center">
+                    <i class="fas fa-eraser mr-1"></i>
+                    Clear Chat
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="max-w-4xl mx-auto px-4 py-8">
+        <!-- Welcome Card -->
+        <div class="bg-white rounded-2xl shadow-lg p-6 mb-8 fade-in">
+            <div class="flex items-start space-x-4">
+                <div class="bg-green-100 p-3 rounded-full">
+                    <i class="fas fa-lightbulb text-green-600 text-xl"></i>
+                </div>
+                <div>
+                    <h2 class="text-xl font-semibold text-gray-900 mb-2">How can I help you today?</h2>
+                    <p class="text-gray-600">Ask me anything about our HR policies, including topics like:</p>
+                    <div class="flex flex-wrap gap-2 mt-3">
+                        <span class="bg-blue-100 text-blue-800 px-3 py-1 rounded-full text-sm">Leave policies</span>
+                        <span class="bg-blue-100 text-blue-800 px-3 py-1 rounded-full text-sm">Benefits</span>
+                        <span class="bg-blue-100 text-blue-800 px-3 py-1 rounded-full text-sm">Code of conduct</span>
+                        <span class="bg-blue-100 text-blue-800 px-3 py-1 rounded-full text-sm">Remote work</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Chat Container -->
+        <div class="bg-white rounded-2xl shadow-lg overflow-hidden mb-6">
+            <!-- Messages Container -->
+            <div id="messages" class="h-96 overflow-y-auto p-6 space-y-6">
+                <!-- Welcome message -->
+                <div class="flex items-start space-x-3">
+                    <div class="bg-blue-600 p-2 rounded-full">
+                        <i class="fas fa-robot text-white text-sm"></i>
+                    </div>
+                    <div class="bg-blue-50 rounded-2xl rounded-tl-none px-4 py-3 max-w-[80%]">
+                        <p class="text-gray-800">Hello! I'm your HR Assistant. I can help answer questions about company policies, benefits, procedures, and more. What would you like to know?</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Input Area -->
+            <div class="border-t p-6 bg-gray-50">
+                <form id="askForm" class="space-y-4">
+                    <div class="flex space-x-4">
+                        <div class="flex-1">
+                            <input 
+                                type="text" 
+                                id="question" 
+                                name="question" 
+                                placeholder="Ask a question about HR policies..." 
+                                class="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200"
+                                maxlength="1000"
+                                required
+                            >
+                            <div class="text-xs text-gray-500 mt-1 text-right">
+                                <span id="charCount">0</span>/1000 characters
+                            </div>
+                        </div>
+                        <button 
+                            type="submit" 
+                            id="submitBtn"
+                            class="bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-xl font-medium transition-all duration-200 transform hover:scale-105 focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 disabled:opacity-50 disabled:cursor-not-allowed disabled:transform-none"
+                        >
+                            <i class="fas fa-paper-plane mr-2"></i>
+                            Ask
+                        </button>
+                    </div>
+                    <div class="text-center">
+                        <p class="text-sm text-gray-500">Examples: 
+                            <button type="button" data-example="What is our maternity leave policy?" class="text-blue-600 hover:text-blue-800 mx-1">Maternity leave</button> • 
+                            <button type="button" data-example="How many sick days do we get per year?" class="text-blue-600 hover:text-blue-800 mx-1">Sick days</button> • 
+                            <button type="button" data-example="What is the remote work policy?" class="text-blue-600 hover:text-blue-800 mx-1">Remote work</button>
+                        </p>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <!-- Features Grid -->
+        <div class="grid md:grid-cols-3 gap-6 mb-8">
+            <div class="bg-white rounded-xl shadow-sm p-6 text-center">
+                <div class="bg-green-100 w-12 h-12 rounded-full flex items-center justify-center mx-auto mb-3">
+                    <i class="fas fa-bolt text-green-600"></i>
+                </div>
+                <h3 class="font-semibold text-gray-900 mb-2">Instant Answers</h3>
+                <p class="text-gray-600 text-sm">Get immediate responses to your HR questions 24/7</p>
+            </div>
+            <div class="bg-white rounded-xl shadow-sm p-6 text-center">
+                <div class="bg-purple-100 w-12 h-12 rounded-full flex items-center justify-center mx-auto mb-3">
+                    <i class="fas fa-file-alt text-purple-600"></i>
+                </div>
+                <h3 class="font-semibold text-gray-900 mb-2">Policy Based</h3>
+                <p class="text-gray-600 text-sm">Answers sourced directly from official HR documents</p>
+            </div>
+            <div class="bg-white rounded-xl shadow-sm p-6 text-center">
+                <div class="bg-orange-100 w-12 h-12 rounded-full flex items-center justify-center mx-auto mb-3">
+                    <i class="fas fa-shield-alt text-orange-600"></i>
+                </div>
+                <h3 class="font-semibold text-gray-900 mb-2">Confidential</h3>
+                <p class="text-gray-600 text-sm">Your conversations are private and secure</p>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-white border-t mt-12">
+        <div class="max-w-4xl mx-auto px-4 py-6">
+            <div class="flex flex-col md:flex-row justify-between items-center">
+                <div class="text-gray-600 text-sm mb-4 md:mb-0">
+                    <p>© 2024 HR Policy Assistant. For official HR consultation, please contact the HR department.</p>
+                </div>
+                <div class="flex space-x-4">
+                    <button id="clearChat" class="text-gray-500 hover:text-gray-700 text-sm flex items-center">
+                        <i class="fas fa-eraser mr-1"></i>
+                        Clear Chat
+                    </button>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        class HRAssistant {
+            constructor() {
+                this.messagesContainer = document.getElementById('messages');
+                this.askForm = document.getElementById('askForm');
+                this.questionInput = document.getElementById('question');
+                this.submitBtn = document.getElementById('submitBtn');
+                this.charCount = document.getElementById('charCount');
+                this.clearChatBtn = document.getElementById('clearConversation');
+                this.clearFooterBtn = document.getElementById('clearChat');
+                this.conversationStatus = document.getElementById('conversationStatus');
+                
+                this.conversationId = null;
+                this.messageCount = 0;
+                
+                this.initEventListeners();
+                this.loadInitialState();
+            }
+            
+            loadInitialState() {
+                // Check if we have a conversation in session storage
+                const savedState = sessionStorage.getItem('hrAssistantState');
+                if (savedState) {
+                    const state = JSON.parse(savedState);
+                    this.conversationId = state.conversationId;
+                    this.messageCount = state.messageCount;
+                    this.updateConversationStatus();
+                }
+            }
+            
+            saveState() {
+                const state = {
+                    conversationId: this.conversationId,
+                    messageCount: this.messageCount
+                };
+                sessionStorage.setItem('hrAssistantState', JSON.stringify(state));
+            }
+            
+            updateConversationStatus() {
+                if (this.messageCount > 0) {
+                    this.conversationStatus.textContent = `Conversation (${this.messageCount} messages)`;
+                    this.conversationStatus.className = 'text-sm text-green-600 font-medium';
+                } else {
+                    this.conversationStatus.textContent = 'New conversation';
+                    this.conversationStatus.className = 'text-sm text-gray-600';
+                }
+            }
+            
+            initEventListeners() {
+                this.askForm.addEventListener('submit', (e) => this.handleSubmit(e));
+                this.questionInput.addEventListener('input', () => this.updateCharCount());
+                this.clearChatBtn.addEventListener('click', () => this.clearConversation());
+                this.clearFooterBtn.addEventListener('click', () => this.clearConversation());
+                
+                // Example question buttons
+                document.querySelectorAll('[data-example]').forEach(btn => {
+                    btn.addEventListener('click', (e) => {
+                        this.questionInput.value = e.target.dataset.example;
+                        this.updateCharCount();
+                        this.questionInput.focus();
+                    });
+                });
+                
+                // Handle follow-up suggestions
+                this.messagesContainer.addEventListener('click', (e) => {
+                    if (e.target.classList.contains('follow-up-question')) {
+                        this.questionInput.value = e.target.textContent;
+                        this.updateCharCount();
+                        this.questionInput.focus();
+                    }
+                });
+            }
+            
+            updateCharCount() {
+                const count = this.questionInput.value.length;
+                this.charCount.textContent = count;
+                this.charCount.className = `text-xs mt-1 text-right ${count > 900 ? 'text-red-500' : 'text-gray-500'}`;
+            }
+            
+            async handleSubmit(e) {
+                e.preventDefault();
+                
+                const question = this.questionInput.value.trim();
+                if (!question) return;
+                
+                this.addMessage(question, 'user');
+                this.questionInput.value = '';
+                this.updateCharCount();
+                this.setLoading(true);
+                
+                try {
+                    // FIXED: Correct API endpoint URL
+                    const response = await fetch('/AskInno/askInno/ask', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                        },
+                        body: JSON.stringify({ question })
+                    });
+                    
+                    const data = await response.json();
+                    
+                    if (response.ok) {
+                        this.conversationId = data.conversation_id;
+                        this.messageCount = data.history_length;
+                        this.updateConversationStatus();
+                        this.saveState();
+                        
+                        this.addMessage(data.answer, 'assistant', data.sources, data.processing_time);
+                        
+                        // Add follow-up suggestions for certain types of answers
+                        this.addFollowUpSuggestions(data.answer, question);
+                    } else {
+                        throw new Error(data.error || 'Something went wrong');
+                    }
+                } catch (error) {
+                    this.addMessage(
+                        `I'm sorry, I encountered an error while processing your question. Please try again in a moment.`, 
+                        'assistant', 
+                        [], 
+                        0,
+                        true
+                    );
+                    console.error('Error:', error);
+                } finally {
+                    this.setLoading(false);
+                }
+            }
+            
+            addFollowUpSuggestions(answer, originalQuestion) {
+                // Analyze the answer and suggest follow-up questions
+                const suggestions = this.generateFollowUpSuggestions(answer, originalQuestion);
+                
+                if (suggestions.length > 0) {
+                    const suggestionsDiv = document.createElement('div');
+                    suggestionsDiv.className = 'mt-4 p-3 bg-blue-50 rounded-lg border border-blue-200';
+                    suggestionsDiv.innerHTML = `
+                        <p class="text-sm font-medium text-blue-800 mb-2">Related questions you might ask:</p>
+                        <div class="flex flex-wrap gap-2">
+                            ${suggestions.map(q => 
+                                `<button type="button" class="follow-up-question bg-white text-blue-700 px-3 py-1 rounded-lg text-sm border border-blue-300 hover:bg-blue-100 transition-colors">
+                                    ${q}
+                                </button>`
+                            ).join('')}
+                        </div>
+                    `;
+                    
+                    this.messagesContainer.appendChild(suggestionsDiv);
+                    this.scrollToBottom();
+                }
+            }
+            
+            generateFollowUpSuggestions(answer, originalQuestion) {
+                const suggestions = [];
+                const lowerAnswer = answer.toLowerCase();
+                const lowerQuestion = originalQuestion.toLowerCase();
+                
+                // Policy-specific follow-ups
+                if (lowerAnswer.includes('leave') || lowerQuestion.includes('leave')) {
+                    suggestions.push(
+                        "How do I request leave?",
+                        "What documentation is required for leave?",
+                        "Is leave paid or unpaid?"
+                    );
+                }
+                
+                if (lowerAnswer.includes('remote') || lowerQuestion.includes('remote')) {
+                    suggestions.push(
+                        "What equipment is provided for remote work?",
+                        "Are there core hours for remote workers?",
+                        "How is productivity measured for remote employees?"
+                    );
+                }
+                
+                if (lowerAnswer.includes('benefit') || lowerQuestion.includes('benefit')) {
+                    suggestions.push(
+                        "When do benefits start?",
+                        "Can I change my benefits?",
+                        "Are there family coverage options?"
+                    );
+                }
+                
+                // General follow-ups
+                suggestions.push(
+                    "Can you provide more details?",
+                    "What are the exceptions to this policy?",
+                    "Who should I contact for more information?"
+                );
+                
+                return suggestions.slice(0, 3); // Return top 3 suggestions
+            }
+            
+            async clearConversation() {
+                if (confirm('Are you sure you want to clear this conversation? All message history will be lost.')) {
+                    try {
+                        // FIXED: Correct API endpoint URL
+                        const response = await fetch('/AskInno/askInno/conversation/clear', {
+                            method: 'POST',
+                            headers: {
+                                'Content-Type': 'application/json',
+                            }
+                        });
+                        
+                        if (response.ok) {
+                            // Clear UI
+                            const welcomeMessage = this.messagesContainer.firstElementChild;
+                            this.messagesContainer.innerHTML = '';
+                            this.messagesContainer.appendChild(welcomeMessage);
+                            
+                            // Reset state
+                            this.conversationId = null;
+                            this.messageCount = 0;
+                            this.updateConversationStatus();
+                            this.saveState();
+                            
+                            this.showNotification('Conversation cleared successfully', 'success');
+                        }
+                    } catch (error) {
+                        console.error('Error clearing conversation:', error);
+                        this.showNotification('Error clearing conversation', 'error');
+                    }
+                }
+            }
+            
+            showNotification(message, type = 'info') {
+                const notification = document.createElement('div');
+                notification.className = `fixed top-4 right-4 p-4 rounded-lg shadow-lg z-50 transform transition-transform duration-300 ${
+                    type === 'success' ? 'bg-green-500 text-white' : 
+                    type === 'error' ? 'bg-red-500 text-white' : 
+                    'bg-blue-500 text-white'
+                }`;
+                notification.textContent = message;
+                
+                document.body.appendChild(notification);
+                
+                setTimeout(() => {
+                    notification.remove();
+                }, 3000);
+            }
+            
+            addMessage(content, sender, sources = [], processingTime = 0, isError = false) {
+                const messageDiv = document.createElement('div');
+                messageDiv.className = `flex items-start space-x-3 fade-in ${sender === 'user' ? 'flex-row-reverse space-x-reverse' : ''}`;
+                
+                const avatar = sender === 'user' 
+                    ? `<div class="bg-gray-600 p-2 rounded-full flex-shrink-0">
+                         <i class="fas fa-user text-white text-sm"></i>
+                       </div>`
+                    : `<div class="bg-blue-600 p-2 rounded-full flex-shrink-0">
+                         <i class="fas fa-robot text-white text-sm"></i>
+                       </div>`;
+                
+                const messageBubble = sender === 'user'
+                    ? `<div class="bg-gray-100 rounded-2xl rounded-tr-none px-4 py-3 max-w-[80%]">
+                         <p class="text-gray-800">${this.escapeHtml(content)}</p>
+                       </div>`
+                    : `<div class="bg-blue-50 rounded-2xl rounded-tl-none px-4 py-3 max-w-[80%] ${isError ? 'border border-red-200 bg-red-50' : ''}">
+                         <p class="text-gray-800 whitespace-pre-wrap">${this.escapeHtml(content)}</p>
+                         ${sources.length > 0 ? this.renderSources(sources) : ''}
+                         ${processingTime > 0 ? `<p class="text-xs text-gray-500 mt-2">Answered in ${processingTime}s</p>` : ''}
+                       </div>`;
+                
+                messageDiv.innerHTML = avatar + messageBubble;
+                this.messagesContainer.appendChild(messageDiv);
+                this.scrollToBottom();
+            }
+            
+            renderSources(sources) {
+                return `
+                    <div class="mt-4 pt-3 border-t border-gray-200">
+                        <p class="text-sm font-medium text-gray-700 mb-2">Sources:</p>
+                        <div class="space-y-2">
+                            ${sources.map(source => `
+                                <div class="flex justify-between items-center text-xs">
+                                    <span class="text-gray-600">${this.escapeHtml(source.section)}</span>
+                                    <span class="bg-green-100 text-green-800 px-2 py-1 rounded-full">
+                                        ${Math.round(source.similarity * 100)}% match
+                                    </span>
+                                </div>
+                            `).join('')}
+                        </div>
+                    </div>
+                `;
+            }
+            
+            setLoading(loading) {
+                this.submitBtn.disabled = loading;
+                this.submitBtn.innerHTML = loading 
+                    ? '<i class="fas fa-spinner fa-spin mr-2"></i>Thinking...'
+                    : '<i class="fas fa-paper-plane mr-2"></i>Ask';
+                
+                if (loading) {
+                    this.addTypingIndicator();
+                } else {
+                    this.removeTypingIndicator();
+                }
+            }
+            
+            addTypingIndicator() {
+                const typingDiv = document.createElement('div');
+                typingDiv.id = 'typing-indicator';
+                typingDiv.className = 'flex items-start space-x-3 fade-in';
+                typingDiv.innerHTML = `
+                    <div class="bg-blue-600 p-2 rounded-full">
+                        <i class="fas fa-robot text-white text-sm"></i>
+                    </div>
+                    <div class="bg-blue-50 rounded-2xl rounded-tl-none px-4 py-3">
+                        <div class="typing-dots">
+                            <span>●</span><span>●</span><span>●</span>
+                        </div>
+                    </div>
+                `;
+                this.messagesContainer.appendChild(typingDiv);
+                this.scrollToBottom();
+            }
+            
+            removeTypingIndicator() {
+                const typingIndicator = document.getElementById('typing-indicator');
+                if (typingIndicator) {
+                    typingIndicator.remove();
+                }
+            }
+            
+            scrollToBottom() {
+                this.messagesContainer.scrollTop = this.messagesContainer.scrollHeight;
+            }
+            
+            escapeHtml(unsafe) {
+                return unsafe
+                    .replace(/&/g, "&amp;")
+                    .replace(/</g, "&lt;")
+                    .replace(/>/g, "&gt;")
+                    .replace(/"/g, "&quot;")
+                    .replace(/'/g, "&#039;")
+                    .replace(/\n/g, '<br>');
+            }
+        }
+        
+        // Initialize the HR Assistant when the page loads
+        document.addEventListener('DOMContentLoaded', () => {
+            new HRAssistant();
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,1033 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>RFQ Bid Form - FAITE</title>
+
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+  <style>
+    /* ═══════════════════════════════════════════════════════════════
+       THEME VARIABLES
+       ═══════════════════════════════════════════════════════════════ */
+    :root {
+      --glass-bg: rgba(15, 23, 42, 0.9);
+      --glass-bg-light: rgba(30, 41, 59, 0.8);
+      --glass-border: rgba(255, 255, 255, 0.1);
+      --glass-border-hover: rgba(255, 255, 255, 0.18);
+      --text-primary: #f8fafc;
+      --text-secondary: rgba(248, 250, 252, 0.75);
+      --text-muted: rgba(248, 250, 252, 0.55);
+      --accent-gradient: linear-gradient(135deg, #0f2a5e 0%, #1e4d8c 50%, #60a5fa 100%);
+      --accent-blue: #60a5fa;
+      --accent-purple: #3b82f6;
+      --pill-bg: rgba(255, 255, 255, 0.08);
+      --pill-hover: rgba(255, 255, 255, 0.14);
+      --input-bg: rgba(15, 23, 42, 0.95);
+      --blur-amount: 20px;
+      --body-bg: #0f172a;
+      --shadow-color: rgba(0, 0, 0, 0.3);
+      --success-color: #10b981;
+      --warning-color: #f59e0b;
+      --danger-color: #ef4444;
+    }
+
+    [data-theme="light"] {
+      --glass-bg: rgba(255, 255, 255, 0.85);
+      --glass-bg-light: rgba(248, 250, 252, 0.9);
+      --glass-border: rgba(0, 0, 0, 0.1);
+      --glass-border-hover: rgba(0, 0, 0, 0.18);
+      --text-primary: #1e293b;
+      --text-secondary: rgba(30, 41, 59, 0.8);
+      --text-muted: rgba(30, 41, 59, 0.55);
+      --pill-bg: rgba(0, 0, 0, 0.05);
+      --pill-hover: rgba(0, 0, 0, 0.1);
+      --input-bg: rgba(255, 255, 255, 0.95);
+      --body-bg: #f1f5f9;
+      --shadow-color: rgba(0, 0, 0, 0.1);
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: 'Outfit', -apple-system, BlinkMacSystemFont, sans-serif;
+      background: var(--body-bg);
+      color: var(--text-primary);
+      min-height: 100vh;
+      overflow-x: hidden;
+      transition: background 0.3s ease, color 0.3s ease;
+    }
+
+    /* Background */
+    .background-layer {
+      position: fixed; inset: 0; z-index: 0;
+      background: url('{{ url_for("static", filename="images/faite-bg-v2.png") }}') center/cover no-repeat;
+      filter: brightness(0.5) saturate(1.1);
+    }
+    [data-theme="light"] .background-layer { filter: brightness(1.1) saturate(0.9); }
+
+    .background-overlay {
+      position: fixed; inset: 0; z-index: 1;
+      background: linear-gradient(180deg, rgba(15,23,42,0.7) 0%, rgba(15,23,42,0.85) 50%, rgba(15,23,42,0.92) 100%);
+    }
+    [data-theme="light"] .background-overlay {
+      background: linear-gradient(180deg, rgba(241,245,249,0.7) 0%, rgba(241,245,249,0.85) 50%, rgba(241,245,249,0.95) 100%);
+    }
+
+    .page {
+      position: relative; z-index: 2;
+      min-height: 100vh; display: flex; flex-direction: column;
+    }
+
+    /* ═══════════════════════════════════════════════════════════════
+       TOP NAV
+       ═══════════════════════════════════════════════════════════════ */
+    .top-nav {
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 12px 20px;
+      background: var(--glass-bg);
+      backdrop-filter: blur(var(--blur-amount));
+      -webkit-backdrop-filter: blur(var(--blur-amount));
+      border-bottom: 1px solid var(--glass-border);
+    }
+    .nav-left { display: flex; align-items: center; gap: 12px; }
+    .nav-right { display: flex; align-items: center; gap: 8px; }
+
+    /* ═══════════════════════════════════════════════════════════════
+       HERO BAR — Floating glass bar (like sample2 topbar)
+       ═══════════════════════════════════════════════════════════════ */
+    .brand { display: flex; align-items: center; gap: 10px; }
+    .brand-icon {
+      width: 36px; height: 36px;
+      background: var(--accent-gradient);
+      border-radius: 10px;
+      display: flex; align-items: center; justify-content: center;
+      color: #fff; font-weight: 700;
+      font-family: "JetBrains Mono", monospace; font-size: 14px;
+      box-shadow: 0 4px 12px rgba(96,165,250,0.25);
+    }
+    .brand-name { font-weight: 600; font-size: 17px; letter-spacing: -0.3px; }
+
+    .theme-toggle-btn {
+      width: 36px; height: 36px;
+      border: 1px solid var(--glass-border);
+      background: transparent;
+      color: var(--text-primary);
+      cursor: pointer; border-radius: 10px;
+      display: flex; align-items: center; justify-content: center;
+      transition: background 0.2s ease;
+    }
+    .theme-toggle-btn:hover { background: var(--pill-hover); }
+    .theme-toggle-btn svg { width: 18px; height: 18px; }
+    .hero-container {
+      margin-top: 14px;
+    }
+    .hero-bar {
+       width: 100%;    
+      max-width: none;   
+      margin: 0;
+      padding: 14px 20px;
+      display: flex; align-items: center; justify-content: space-between;
+      gap: 16px; flex-wrap: wrap;
+      background: linear-gradient(180deg, var(--glass-bg), rgba(15,23,42,0.75));
+      backdrop-filter: blur(var(--blur-amount));
+      -webkit-backdrop-filter: blur(var(--blur-amount));
+      border: 1px solid var(--glass-border);
+      border-radius: 18px;
+      box-shadow: 0 18px 50px var(--shadow-color);
+      position: sticky; top: 14px; z-index: 4;
+    }
+    [data-theme="light"] .hero-bar {
+      background: linear-gradient(180deg, rgba(255,255,255,0.85), rgba(248,250,252,0.75));
+    }
+
+    .hero-left {
+      display: flex; align-items: center; gap: 14px; flex-wrap: wrap;
+    }
+
+    .hero-title {
+      font-size: 15px; font-weight: 600;
+      display: flex; align-items: center; gap: 8px;
+    }
+    .hero-title svg { width: 18px; height: 18px; color: var(--accent-blue); flex-shrink: 0; }
+
+    .hero-rfq-code {
+      font-family: "JetBrains Mono", monospace;
+      font-size: 13px; color: var(--accent-blue);
+      background: rgba(96,165,250,0.1);
+      padding: 4px 10px; border-radius: 6px;
+      border: 1px solid rgba(96,165,250,0.2);
+    }
+
+    .hero-right { display: flex; align-items: center; gap: 10px; }
+
+    /* Submit button - see trophy yellow section below */
+
+    /* ═══════════════════════════════════════════════════════════════
+       MAIN CONTENT
+       ═══════════════════════════════════════════════════════════════ */
+    .container {
+      max-width: 1500px; width: 100%;
+      margin: 18px auto 40px; padding: 0 18px;
+    }
+
+    .glass-card {
+      background: var(--glass-bg);
+      backdrop-filter: blur(var(--blur-amount));
+      -webkit-backdrop-filter: blur(var(--blur-amount));
+      border: 1px solid var(--glass-border);
+      border-radius: 16px; padding: 18px;
+      box-shadow: 0 8px 32px var(--shadow-color);
+      margin-bottom: 16px;
+      animation: cardIn 0.35s ease both;
+    }
+
+    @keyframes cardIn {
+      from { opacity: 0; transform: translateY(8px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .card-title {
+      font-size: 14px; font-weight: 600;
+      margin-bottom: 12px; color: var(--text-primary);
+      display: flex; align-items: center;
+      justify-content: space-between; gap: 10px;
+    }
+    .card-title-left {
+      display: flex; align-items: center; gap: 8px;
+    }
+    .card-title-left svg { width: 16px; height: 16px; color: var(--accent-blue); flex-shrink: 0; }
+
+    .pill {
+      padding: 6px 12px;
+      background: var(--pill-bg);
+      border: 1px solid var(--glass-border);
+      border-radius: 20px; font-size: 12px;
+      color: var(--text-secondary);
+      display: inline-flex; align-items: center; gap: 8px;
+    }
+
+    .grid3 {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 12px;
+    }
+    @media (max-width: 900px) { .grid3 { grid-template-columns: 1fr; } }
+
+    label {
+      display: block; font-size: 11px; font-weight: 500;
+      color: var(--text-muted); text-transform: uppercase;
+      letter-spacing: 0.5px; margin-bottom: 6px;
+    }
+
+    input, select, textarea {
+      width: 100%; padding: 10px 12px;
+      background: var(--pill-bg);
+      border: 1px solid var(--glass-border);
+      border-radius: 10px; color: var(--text-primary);
+      font-family: inherit; font-size: 13px;
+      transition: border-color 0.2s ease, box-shadow 0.2s ease;
+      outline: none;
+    }
+    input:hover, select:hover, textarea:hover { border-color: var(--glass-border-hover); }
+    input:focus, select:focus, textarea:focus {
+      border-color: var(--accent-blue);
+      box-shadow: 0 0 0 2px rgba(96,165,250,0.2);
+    }
+
+    textarea.specText { min-height: 44px; resize: vertical; }
+
+    .mono { font-family: "JetBrains Mono", monospace; }
+    .muted { color: var(--text-muted); font-size: 12px; }
+
+    /* Quotation blocks */
+    .quoteHeader {
+      display: flex; align-items: center;
+      justify-content: space-between; gap: 12px;
+      margin-bottom: 12px; flex-wrap: wrap;
+    }
+
+    .quoteMeta {
+      display: flex; gap: 8px;
+      flex-wrap: wrap; align-items: center;
+    }
+
+    .quoteActions {
+      display: flex; gap: 8px; align-items: center;
+    }
+
+    .btnSmall {
+      padding: 8px 12px; border-radius: 18px;
+      border: 1px solid var(--glass-border);
+      background: transparent; color: var(--text-primary);
+      font-size: 13px; font-family: inherit;
+      cursor: pointer; transition: all 0.2s ease;
+      display: inline-flex; align-items: center;
+      gap: 6px; user-select: none;
+    }
+    .btnSmall:hover {
+      background: var(--pill-hover);
+      border-color: var(--glass-border-hover);
+      transform: translateY(-1px);
+    }
+    .btnSmall svg { width: 14px; height: 14px; }
+
+    /* btnPrimary - see trophy yellow section below */
+
+    .btnDanger {
+      border-color: rgba(239,68,68,0.35);
+      color: #f87171;
+    }
+    .btnDanger:hover {
+      background: rgba(239,68,68,0.1);
+      border-color: rgba(239,68,68,0.5);
+    }
+
+    /* Status badge variants */
+    .status-exact {
+      background: rgba(16,185,129,0.15); color: var(--success-color);
+      border-color: rgba(16,185,129,0.25);
+    }
+    .status-partial {
+      background: rgba(245,158,11,0.15); color: var(--warning-color);
+      border-color: rgba(245,158,11,0.25);
+    }
+    .status-non_matching {
+      background: rgba(239,68,68,0.15); color: var(--danger-color);
+      border-color: rgba(239,68,68,0.25);
+    }
+
+    /* Table */
+    .tableWrap {
+      overflow: auto;
+      border: 1px solid var(--glass-border);
+      border-radius: 12px;
+    }
+    table {
+      width: 100%; border-collapse: collapse;
+      min-width: 980px; font-size: 12px;
+    }
+    th, td {
+      padding: 10px 12px; text-align: left;
+      border-bottom: 1px solid var(--glass-border);
+      vertical-align: top;
+    }
+    th {
+      color: var(--text-muted); font-weight: 600;
+      background: rgba(255,255,255,0.02);
+      position: sticky; top: 0; z-index: 1;
+    }
+    tr:last-child td { border-bottom: none; }
+
+    .num {
+      text-align: right; font-variant-numeric: tabular-nums;
+      font-family: "JetBrains Mono", monospace;
+    }
+
+    /* Notification */
+    .notification {
+      position: fixed; right: 18px; bottom: 18px;
+      background: var(--glass-bg);
+      border: 1px solid var(--glass-border);
+      border-radius: 12px; padding: 14px 16px;
+      box-shadow: 0 8px 32px var(--shadow-color);
+      backdrop-filter: blur(var(--blur-amount));
+      -webkit-backdrop-filter: blur(var(--blur-amount));
+      display: none; max-width: 380px; z-index: 50;
+      animation: notifIn 0.3s ease;
+    }
+    @keyframes notifIn {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    .notification .notif-header {
+      display: flex; align-items: center; gap: 8px; margin-bottom: 4px;
+    }
+    .notification .notif-header svg { width: 16px; height: 16px; color: var(--accent-blue); }
+    .notification strong { font-size: 13px; }
+    .notification p { font-size: 13px; color: var(--text-secondary); margin: 0; }
+
+    /* Non-quotable warning accent */
+    .card-warning { border-left: 4px solid var(--warning-color); }
+
+    /* Static/readonly supplier fields */
+    .static-field {
+      background: transparent !important;
+      border: 1px solid rgba(255,255,255,0.05) !important;
+      color: var(--text-secondary) !important;
+      cursor: default !important;
+      pointer-events: none;
+      opacity: 0.85;
+    }
+    [data-theme="light"] .static-field {
+      border: 1px solid rgba(0,0,0,0.06) !important;
+    }
+    .static-field:hover, .static-field:focus {
+      border-color: rgba(255,255,255,0.05) !important;
+      box-shadow: none !important;
+    }
+
+    /* Trophy Yellow Accent — quotation action buttons only */
+    .btnSmall:not(.btnDanger) {
+      border-color: rgba(245,166,35,0.4);
+      color: #fbbf24;
+    }
+    .btnSmall:not(.btnDanger):hover {
+      background: rgba(245,166,35,0.12);
+      border-color: rgba(245,166,35,0.6);
+      transform: translateY(-1px);
+    }
+    .btnSmall:not(.btnDanger) svg {
+      color: #fbbf24;
+    }
+    .btnPrimary {
+      background: linear-gradient(135deg, #d4931a 0%, #f5a623 50%, #fbbf24 100%) !important;
+      border: none; color: #1e293b !important;
+      font-weight: 600;
+    }
+    .btnPrimary:hover { opacity: 0.92; }
+
+    /* Submit button — keep original blue */
+    .btn-submit {
+      padding: 10px 24px;
+      background: var(--accent-gradient);
+      border: none; border-radius: 10px;
+      color: #fff; font-family: inherit;
+      font-size: 14px; font-weight: 600;
+      cursor: pointer; display: flex;
+      align-items: center; gap: 8px;
+      transition: all 0.25s ease;
+      box-shadow: 0 4px 16px rgba(96,165,250,0.25);
+    }
+    .btn-submit:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 6px 24px rgba(96,165,250,0.35);
+    }
+    .btn-submit:active { transform: translateY(0); }
+    .btn-submit:disabled {
+      opacity: 0.6; cursor: not-allowed;
+      transform: none; box-shadow: none;
+    }
+    .btn-submit svg { width: 16px; height: 16px; }
+    @media (max-width: 640px) {
+      .hero-bar { flex-direction: column; align-items: flex-start; }
+      .hero-right { width: 100%; }
+      .btn-submit { width: 100%; justify-content: center; }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="background-layer"></div>
+  <div class="background-overlay"></div>
+
+  <div class="page">
+    <!-- Top nav -->
+    <div class="top-nav">
+      <div class="nav-left">
+        <div class="brand">
+          <div class="brand-icon">F</div>
+          <div class="brand-name">FAITE</div>
+        </div>
+      </div>
+      <div class="nav-right">
+        <button class="theme-toggle-btn" type="button" onclick="toggleTheme()" title="Toggle Theme" id="themeBtn">
+          <svg class="sun-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/>
+          </svg>
+          <svg class="moon-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
+          </svg>
+        </button>
+      </div>
+    </div>
+
+    <!-- Floating Hero Bar — only RFQ info + Submit -->
+    <div class="container hero-container">
+    <div class="hero-bar">
+      <div class="hero-left">
+        <div class="hero-title">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/>
+          </svg>
+          RFQ Bidder Form
+        </div>
+        <span class="hero-rfq-code" id="rfqCodeText">Loading...</span>
+      </div>
+      <div class="hero-right">
+        <button class="btn-submit" type="button" onclick="submitBid()" id="submitBtn">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M22 2L11 13"/><path d="M22 2L15 22L11 13L2 9L22 2Z"/>
+          </svg>
+          Submit Bid
+        </button>
+      </div>
+    </div>
+    </div>
+
+    <div class="container">
+      <!-- Supplier Info -->
+      <div class="glass-card">
+        <div class="card-title">
+          <div class="card-title-left">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/>
+            </svg>
+            <span>Supplier Info</span>
+          </div>
+          <span class="pill">Match Score: <span class="mono" id="matchScore">0%</span></span>
+        </div>
+
+        <div class="grid3">
+          <div>
+            <label>Contact Person</label>
+            <input id="contact_person" value="" placeholder="Your contact person" readonly class="static-field">
+          </div>
+          <div>
+            <label>Email</label>
+            <input id="email" value="" placeholder="Your email" readonly class="static-field">
+          </div>
+          <div>
+            <label>RFQ Code</label>
+            <input id="rfq_code" class="mono static-field" value="" readonly>
+          </div>
+        </div>
+
+        <div class="muted" style="margin-top:10px;">
+          Specs textbox format example: <span class="mono">ram:16GB; storage:512GB SSD; processor:Intel i7</span>
+        </div>
+      </div>
+
+      <!-- Quotations -->
+      <div class="glass-card">
+        <div class="card-title">
+          <div class="card-title-left">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <rect x="1" y="4" width="22" height="16" rx="2" ry="2"/><line x1="1" y1="10" x2="23" y2="10"/>
+            </svg>
+            <span>Quotations</span>
+          </div>
+          <span class="pill">Total Items: <span class="mono" id="totalItems">0</span></span>
+        </div>
+
+        <div id="quotationList"></div>
+
+        <div style="margin-top:14px;" class="muted">
+          You can offer multiple models per original request (Add Offered Product).
+        </div>
+      </div>
+
+      <!-- Non-Quotable Items -->
+      <div id="nonQuotableItems" style="margin-top: 20px;"></div>
+
+      <!-- Summary -->
+      <div class="glass-card">
+        <div class="card-title">
+          <div class="card-title-left">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/>
+            </svg>
+            <span>Summary</span>
+          </div>
+          <span class="pill">total_quotation_amount: <span class="mono" id="summaryTotal">0.00</span></span>
+        </div>
+
+        <div class="grid3">
+          <div>
+            <label>Currency</label>
+            <select id="currency">
+              <option>USD</option>
+              <option>PHP</option>
+              <option>EUR</option>
+            </select>
+          </div>
+          <div>
+            <label>Valid Until</label>
+            <input id="valid_until" type="date">
+          </div>
+          <div>
+            <label>Delivery Terms</label>
+            <input id="delivery_terms" value="" placeholder="e.g., FOB Origin">
+          </div>
+        </div>
+
+        <div class="grid3" style="margin-top:12px;">
+          <div>
+            <label>Payment Terms</label>
+            <input id="payment_terms" value="" placeholder="e.g., Net 30">
+          </div>
+          <div style="grid-column: span 2;">
+            <label>Notes</label>
+            <input id="notes" value="" placeholder="Additional notes">
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Notification -->
+    <div class="notification" id="notif">
+      <div class="notif-header">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/>
+        </svg>
+        <strong id="notifTitle">Submitted</strong>
+      </div>
+      <p id="notifMsg">Payload created. Check console.</p>
+    </div>
+  </div>
+
+  <script>
+    // ═══════════════════════════════════════════════════════════════
+    // THEME TOGGLE
+    // ═══════════════════════════════════════════════════════════════
+    function syncThemeIcons() {
+      const theme = document.documentElement.getAttribute("data-theme") || "dark";
+      const sun = document.querySelector(".sun-icon");
+      const moon = document.querySelector(".moon-icon");
+      if (!sun || !moon) return;
+      sun.style.display = theme === "light" ? "block" : "none";
+      moon.style.display = theme === "dark" ? "block" : "none";
+    }
+
+    function toggleTheme() {
+      const html = document.documentElement;
+      const next = html.getAttribute("data-theme") === "dark" ? "light" : "dark";
+      html.setAttribute("data-theme", next);
+      syncThemeIcons();
+    }
+    syncThemeIcons();
+
+    // ═══════════════════════════════════════════════════════════════
+    // STATE
+    // ═══════════════════════════════════════════════════════════════
+    const state = {
+      quotations: [],
+      cannot_quote_items: [],
+      match_score: 0
+    };
+
+    // ═══════════════════════════════════════════════════════════════
+    // HELPERS
+    // ═══════════════════════════════════════════════════════════════
+    function money(n) {
+      return Number(n || 0).toFixed(2);
+    }
+
+    function parseSpecs(text) {
+      const out = {};
+      const raw = String(text || "").trim();
+      if (!raw) return out;
+      const parts = raw.split(/[\n;,]+/).map(s => s.trim()).filter(Boolean);
+      for (const p of parts) {
+        const m = p.split(/[:=]/);
+        if (m.length >= 2) {
+          const key = m.shift().trim();
+          const val = m.join(":").trim();
+          if (key) out[key.toLowerCase()] = val;
+        }
+      }
+      return out;
+    }
+
+    function specsToOneLine(obj) {
+      if (!obj || typeof obj !== "object") return "";
+      return Object.entries(obj).map(([k,v]) => `${k}:${v}`).join("; ");
+    }
+
+    function showNotif(title, msg) {
+      const box = document.getElementById("notif");
+      document.getElementById("notifTitle").textContent = title;
+      document.getElementById("notifMsg").textContent = msg;
+      box.style.display = "block";
+      clearTimeout(window.__notifTimer);
+      window.__notifTimer = setTimeout(() => box.style.display = "none", 3000);
+    }
+
+    function escapeHtml(str) {
+      return String(str ?? "")
+        .replaceAll("&","&amp;")
+        .replaceAll("<","&lt;")
+        .replaceAll(">","&gt;")
+        .replaceAll('"',"&quot;")
+        .replaceAll("'","&#039;");
+    }
+
+    // SVG icon helpers (no emojis)
+    const ICONS = {
+      plus: `<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>`,
+      trash: `<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="3 6 5 6 21 6"/><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/></svg>`,
+      check: `<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>`,
+      alert: `<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>`,
+      x: `<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>`,
+      clipboard: `<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"/><rect x="8" y="2" width="8" height="4" rx="1" ry="1"/></svg>`,
+    };
+
+    // ═══════════════════════════════════════════════════════════════
+    // COMPUTE TOTALS
+    // ═══════════════════════════════════════════════════════════════
+    function computeQuotationTotalPrice(q) {
+      return (q.offered_products || []).reduce((sum, p) => {
+        const lineGross = Number(p.quantity || 0) * Number(p.unit_price || 0);
+        const disc = Number(p.discount_percent || 0);
+        return sum + lineGross * (1 - disc / 100);
+      }, 0);
+    }
+
+    function computeQuotationTotalQty(q) {
+      return (q.offered_products || []).reduce((sum, p) => sum + Number(p.quantity || 0), 0);
+    }
+
+    function computeSummaryTotal() {
+      return state.quotations.reduce((sum, q) => sum + computeQuotationTotalPrice(q), 0);
+    }
+
+    // ═══════════════════════════════════════════════════════════════
+    // UPDATE FUNCTIONS (no full re-render — fixes typing bug)
+    // ═══════════════════════════════════════════════════════════════
+    function updateOffered(qi, pi, key, val) {
+      const p = state.quotations[qi].offered_products[pi];
+      if (["quantity","unit_price","delivery_time_days","warranty_months","discount_percent"].includes(key)) {
+        p[key] = Number(val || 0);
+      } else {
+        p[key] = val;
+      }
+      // Only update computed totals, NOT re-render the whole DOM
+      updateTotalsDisplay(qi);
+    }
+
+    function updateOfferedSpecs(qi, pi, text) {
+      const p = state.quotations[qi].offered_products[pi];
+      p.specifications = parseSpecs(text);
+      // No re-render needed — specs are only read on submit
+    }
+
+    function updateTotalsDisplay(qi) {
+      const q = state.quotations[qi];
+      const totalPrice = computeQuotationTotalPrice(q);
+      const totalQty = computeQuotationTotalQty(q);
+
+      // Update the quotation card totals
+      const qtyEl = document.getElementById(`qQty_${qi}`);
+      const totalEl = document.getElementById(`qTotal_${qi}`);
+      if (qtyEl) qtyEl.textContent = totalQty;
+      if (totalEl) totalEl.textContent = money(totalPrice);
+
+      // Update line total for each offered product
+      q.offered_products.forEach((p, pi) => {
+      const lineTotalEl = document.getElementById(`lineTotal_${qi}_${pi}`);
+      if (lineTotalEl) {
+        const lineGross = Number(p.quantity || 0) * Number(p.unit_price || 0);
+        const disc = Number(p.discount_percent || 0);
+        lineTotalEl.textContent = money(lineGross * (1 - disc / 100));
+      }
+    });
+
+      // Update summary total
+      document.getElementById("summaryTotal").textContent = money(computeSummaryTotal());
+    }
+
+    function addOfferedProduct(qi) {
+      state.quotations[qi].offered_products.push({
+        model: "",
+        specifications: {},
+        quantity: 0,
+        unit_price: 0,
+        delivery_time_days: 0,
+        warranty_months: 0,
+        discount_percent: 0
+      });
+      render(); // Full re-render is fine here — user isn't mid-typing
+    }
+
+    function removeOffered(qi, pi) {
+      state.quotations[qi].offered_products.splice(pi, 1);
+      render(); // Full re-render is fine here too
+    }
+
+    // ═══════════════════════════════════════════════════════════════
+    // UI RENDER
+    // ═══════════════════════════════════════════════════════════════
+    function render() {
+      const root = document.getElementById("quotationList");
+      root.innerHTML = "";
+
+      state.quotations.forEach((q, qi) => {
+        const card = document.createElement("div");
+        card.className = "glass-card";
+        card.style.marginBottom = "14px";
+
+        const totalPrice = computeQuotationTotalPrice(q);
+        const totalQty = computeQuotationTotalQty(q);
+
+        const matchBadges = {
+          'exact': `<span class="pill status-exact">${ICONS.check} Exact Match</span>`,
+          'partial': `<span class="pill status-partial">${ICONS.alert} Partial Match</span>`,
+          'non_matching': `<span class="pill status-non_matching">${ICONS.x} Non-Matching</span>`
+        };
+        const matchStatusBadge = matchBadges[q.match_status] || '';
+
+        card.innerHTML = `
+          <div class="quoteHeader">
+            <div>
+              <div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap;">
+                <span class="pill">Line <span class="mono">${q.line_number}</span></span>
+                ${matchStatusBadge}
+                <span class="pill">Requested: <span class="mono">${q.original_request.brand || 'Any'}</span> &bull; ${q.original_request.category} &bull; Qty <span class="mono">${q.original_request.quantity}</span></span>
+              </div>
+              <div class="muted" style="margin-top:8px;">
+                Total Offered Qty: <span class="mono" id="qQty_${qi}">${totalQty}</span> &bull; Total Price: <span class="mono" id="qTotal_${qi}">${money(totalPrice)}</span>
+              </div>
+            </div>
+            <div class="quoteActions">
+              <button class="btnSmall" type="button" onclick="addOfferedProduct(${qi})">${ICONS.plus} Add Offered Product</button>
+            </div>
+          </div>
+
+          <div class="tableWrap">
+            <table>
+              <thead>
+                <tr>
+                  <th style="min-width:180px;">Model</th>
+                  <th style="min-width:320px;">Specifications</th>
+                  <th style="min-width:110px;">Qty</th>
+                  <th style="min-width:140px;">Unit Price</th>
+                  <th style="min-width:140px;">Total Price</th>
+                  <th style="min-width:150px;">Delivery (Days)</th>
+                  <th style="min-width:160px;">Warranty (Months)</th>
+                  <th style="min-width:120px;">Discount (%)</th>
+                  <th style="min-width:120px;">Action</th>
+                </tr>
+              </thead>
+              <tbody>
+                ${q.offered_products.map((p, pi) => {
+                  const lineGross = Number(p.quantity || 0) * Number(p.unit_price || 0);
+                  const lineDisc = Number(p.discount_percent || 0);
+                  const lineTotal = lineGross * (1 - lineDisc / 100);
+                  return `
+                    <tr>
+                      <td>
+                        <input value="${escapeHtml(p.model)}" oninput="updateOffered(${qi}, ${pi}, 'model', this.value)" placeholder="Model name">
+                      </td>
+                      <td>
+                        <textarea class="specText" placeholder="ram:16GB; storage:512GB SSD; processor:Intel i7"
+                          oninput="updateOfferedSpecs(${qi}, ${pi}, this.value)">${escapeHtml(specsToOneLine(p.specifications))}</textarea>
+                      </td>
+                      <td>
+                        <input class="num" type="number" min="0" value="${p.quantity}" oninput="updateOffered(${qi}, ${pi}, 'quantity', this.value)">
+                      </td>
+                      <td>
+                        <input class="num" type="number" min="0" step="0.01" value="${p.unit_price}" oninput="updateOffered(${qi}, ${pi}, 'unit_price', this.value)">
+                      </td>
+                      <td class="num mono" id="lineTotal_${qi}_${pi}">${money(lineTotal)}</td>
+                      <td>
+                        <input class="num" type="number" min="0" value="${p.delivery_time_days}" oninput="updateOffered(${qi}, ${pi}, 'delivery_time_days', this.value)">
+                      </td>
+                      <td>
+                        <input class="num" type="number" min="0" value="${p.warranty_months}" oninput="updateOffered(${qi}, ${pi}, 'warranty_months', this.value)">
+                      </td>
+                      <td>
+                        <input class="num" type="number" min="0" max="100" step="0.1" value="${p.discount_percent || 0}" oninput="updateOffered(${qi}, ${pi}, 'discount_percent', this.value)" placeholder="0">
+                      </td>
+                      <td>
+                        <button class="btnSmall btnDanger" type="button" onclick="removeOffered(${qi}, ${pi})">${ICONS.trash} Remove</button>
+                      </td>
+                    </tr>
+                  `;
+                }).join("")}
+              </tbody>
+            </table>
+          </div>
+        `;
+
+        root.appendChild(card);
+      });
+
+      document.getElementById("summaryTotal").textContent = money(computeSummaryTotal());
+    }
+
+    function renderNonQuotableItems() {
+      const container = document.getElementById('nonQuotableItems');
+      if (!container) return;
+      container.style.display = 'none'; // Hide since all items can be quoted
+    }
+
+    // ═══════════════════════════════════════════════════════════════
+    // API CALLS
+    // ═══════════════════════════════════════════════════════════════
+    async function initializeBidForm() {
+  try {
+    showNotif('Loading', 'Fetching RFQ details...');
+
+    const response = await fetch('/RFX/supplier/api/rfq-details');
+    const data = await response.json();
+
+    if (data.status === 'success') {
+      document.getElementById('contact_person').value = data.supplier_info.contact_person || '';
+      document.getElementById('email').value = data.supplier_info.email || '';
+      document.getElementById('rfq_code').value = data.rfq_info.rfq_id || '';
+      document.getElementById('rfqCodeText').textContent = data.rfq_info.rfq_id || 'RFQ';
+      document.getElementById('matchScore').textContent = (data.match_info?.match_score || 0) + '%';
+      
+      // Update total items count
+      document.getElementById('totalItems').textContent = data.item_count || 0;
+
+      const currencySelect = document.getElementById('currency');
+      if (currencySelect && data.rfq_info.currency) {
+        currencySelect.value = data.rfq_info.currency;
+      }
+
+      const validUntil = document.getElementById('valid_until');
+      const thirtyDaysFromNow = new Date();
+      thirtyDaysFromNow.setDate(thirtyDaysFromNow.getDate() + 30);
+      validUntil.value = thirtyDaysFromNow.toISOString().split('T')[0];
+
+      // Use line_items from the response
+      state.quotations = (data.line_items || []).map(item => ({
+        line_number: item.line_number,
+        original_request: {
+          brand: item.original_request?.brand || 'Any Brand',
+          category: item.original_request?.category || '',
+          model: item.original_request?.model || '',
+          part_number: item.original_request?.part_number || '',
+          quantity: item.original_request?.quantity || 0,
+          description: item.original_request?.description || '',
+          specifications: item.original_request?.specifications || {}
+        },
+        can_quote: item.can_quote !== false,
+        match_status: item.match_status || 'none',
+        // If there's an existing bid, pre-fill the offered products
+        offered_products: (item.offered_products || []).map(p => ({
+          model: p.model || "",
+          specifications: p.specifications || {},
+          quantity: p.quantity || 0,
+          unit_price: p.unit_price || 0,
+          total_price: p.total_price || 0,
+          delivery_time_days: p.delivery_time_days || 0,
+          warranty_months: p.warranty_months || 0,
+          discount_percent: p.discount_percent || 0
+        }))
+      }));
+
+      state.match_score = data.match_info?.match_score || 0;
+      state.cannot_quote_items = []; // All items can be quoted
+
+      render();
+      renderNonQuotableItems();
+
+      showNotif('Success', `You can bid on all ${data.item_count} items`);
+    } else {
+      showNotif('Error', data.message || 'Failed to load RFQ details');
+    }
+  } catch (error) {
+    console.error('Error initializing form:', error);
+    showNotif('Error', 'Failed to load RFQ details. Please refresh the page.');
+  }
+}
+
+    async function submitBid() {
+  const hasOffers = state.quotations.some(q => q.offered_products && q.offered_products.length > 0);
+  if (!hasOffers) {
+    showNotif('Validation Error', 'Please add at least one offered product before submitting.');
+    return;
+  }
+
+  const quotationsOut = state.quotations.map(q => {
+    const offered = (q.offered_products || []).map(p => {
+      const qty = Number(p.quantity || 0);
+      const unit = Number(p.unit_price || 0);
+      return {
+        product_name: p.model || "", // Add product_name field
+        brand: q.original_request.brand || "", // Add brand from original request
+        model: p.model || "",
+        specifications: p.specifications || {},
+        quantity: qty,
+        unit_price: Number(unit.toFixed(2)),
+        // Don't send total_price, let backend calculate it
+        delivery_time_days: Number(p.delivery_time_days || 0),
+        warranty: Number(p.warranty_months || 0), // Change to warranty to match backend
+        notes: "" // Add empty notes field
+      };
+    });
+
+    return {
+      line_number: Number(q.line_number || 0),
+      original_request: {
+        brand: q.original_request.brand || "",
+        category: q.original_request.category || "",
+        model: q.original_request.model || "",
+        part_number: q.original_request.part_number || "",
+        quantity: Number(q.original_request.quantity || 0),
+        description: q.original_request.description || ""
+      },
+      match_status: q.match_status || "unknown",
+      offered_products: offered
+    };
+  });
+
+  const payload = {
+    supplier_info: {
+      contact_person: document.getElementById("contact_person").value || "",
+      email: document.getElementById("email").value || "",
+      submitted_at: new Date().toISOString()
+    },
+    quotations: quotationsOut,
+    summary: {
+      currency: document.getElementById("currency").value || "USD",
+      valid_until: document.getElementById("valid_until").value || "",
+      delivery_terms: document.getElementById("delivery_terms").value || "",
+      payment_terms: document.getElementById("payment_terms").value || "",
+      notes: document.getElementById("notes").value || ""
+    }
+  };
+
+  console.log("Submitting payload:", JSON.stringify(payload, null, 2));
+
+  try {
+    const btn = document.getElementById('submitBtn');
+    btn.disabled = true;
+    btn.innerHTML = `<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10" stroke-dasharray="31.4" stroke-dashoffset="10"><animateTransform attributeName="transform" type="rotate" from="0 12 12" to="360 12 12" dur="0.8s" repeatCount="indefinite"/></circle></svg> Submitting...`;
+
+    const response = await fetch('/RFX/supplier/api/submit-bid', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(payload)
+    });
+
+    const result = await response.json();
+
+    if (result.status === 'success') {
+      showNotif('Success!', 'Your bid has been submitted successfully.');
+      btn.innerHTML = `${ICONS.check} Submitted`;
+      btn.style.background = 'linear-gradient(135deg, #059669, #10b981)';
+
+      setTimeout(() => {
+        window.location.href = `/RFX/supplier/confirmation?mapping_id=${getMappingIdFromUrl()}`;
+      }, 1500);
+    } else {
+      btn.disabled = false;
+      btn.innerHTML = `<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 2L11 13"/><path d="M22 2L15 22L11 13L2 9L22 2Z"/></svg> Submit Bid`;
+      showNotif('Error', result.message || result.error || 'Failed to submit bid');
+    }
+  } catch (error) {
+    console.error('Error submitting bid:', error);
+    const btn = document.getElementById('submitBtn');
+    btn.disabled = false;
+    btn.innerHTML = `<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 2L11 13"/><path d="M22 2L15 22L11 13L2 9L22 2Z"/></svg> Submit Bid`;
+    showNotif('Error', 'Network error. Please try again.');
+  }
+}
+
+// Helper function to get mapping_id from URL
+function getMappingIdFromUrl() {
+  const urlParams = new URLSearchParams(window.location.search);
+  return urlParams.get('mapping_id') || '';
+}
+
+    // Initialize
+    document.addEventListener('DOMContentLoaded', () => {
+      initializeBidForm();
+    });
+  </script>
+</body>
+</html>
